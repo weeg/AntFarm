@@ -1,14 +1,30 @@
-package modell;
+﻿package modell;
 
+import skeleton.Logger;
+
+/**
+ * A pályaszéle objektum. 
+ *
+ */
 public class DeadEnd extends Entity {
 
-	// Utkozes egy hangyaval
+	/**
+	 * Ütközés hangyával, megöli a hangyát.
+	 * @param ant A hangya, amivel ütközik.
+	 */
 	public void collide(Ant ant) {
-		
+		Logger.enter(this, "collide", Logger.getObjectName(ant));
+		ant.kill();
+		Logger.exit(this);
 	}
 	
-	// Utkozes egy hangyaszsunnel
+	/**
+	 * Ütközés hangyászsünnel, pihenni küldi a hangyászt.
+	 * @param anteater A hangyászsün, amivel ütközik,.
+	 */
 	public void collide(Anteater anteater) {
-		
+		Logger.enter(this, "collide", Logger.getObjectName(anteater));
+		anteater.goRest();
+		Logger.exit(this);
 	}
 }

@@ -1,9 +1,21 @@
-package modell;
+﻿package modell;
 
+import skeleton.Logger;
+
+/**
+ * Az élelemszag objektum.
+ */
 public class FoodOdor extends Odor {
-
-	// Torli magat a mezorol
+	
+	public FoodOdor() {
+		Logger.attach("FoodOdor", this);
+	}
+	/**
+	 * Törli magát a mezőről.
+	 */
 	public void evaporate() {
-		
+		Logger.enter(this, "evaporate");
+		this.getPosition().removeOdor(this);
+		Logger.exit(this);
 	}
 }

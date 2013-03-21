@@ -1,4 +1,4 @@
-package modell;
+﻿package modell;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ public class Ant extends Entity implements Active {
 	/** Az irany, amerre a hangya megy */
 	private Direction direction;
 	
-	/** A tiszt�s, amin van a hangya */
+	/** A tiszt‡s, amin van a hangya */
 	private Glade glade;
 	
 	/** Azok a mezok, amiken vegigment a hangya */
@@ -124,5 +124,14 @@ public class Ant extends Entity implements Active {
 
 	public void setGlade(Glade glade) {
 		this.glade = glade;
-	}	
+	}
+	
+	/**
+	 * Beállítja a hangyánál a mérgezést.
+	 */
+	public void poison() {
+		Logger.enter(this, "poison");
+		this.poisened = true;
+		Logger.exit(this);
+	}
 }

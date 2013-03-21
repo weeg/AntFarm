@@ -1,17 +1,35 @@
-package modell;
+﻿package modell;
 
+import skeleton.Logger;
+/**
+ * A méreg objektum.
+ */
 public class Poison extends Entity implements Active {
 	
-	// A hatralevo ido, amig meg a palyan lesz a mereg
+	/**
+	 * A hátralévő idő, amíg még a pályán lesz a méreg.
+	 */
 	private int TTL;
 
-	public void animate() {
-
+	public Poison() {
+		Logger.attach("Poison", this);
 	}
 	
-	// Utkozes egy hangyaval
+	/**
+	 * A méreg animálása. Midenkörben csökkenti a hátralévő időt.
+	 */
+	public void animate() {
+		Logger.enter(this, "animate");
+		Logger.exit(this);
+	}
+	
+	/**
+	 * Ütközés egy hangyával. Megmérgezi a hangyát.
+	 */
 	public void collide(Ant ant) {
-		
+		Logger.enter(this, "collide", Logger.getObjectName(ant));
+		ant.poison();
+		Logger.exit(this);
 	}
 
 }

@@ -1,41 +1,71 @@
-package modell;
+﻿package modell;
 
 import java.util.ArrayList;
 
+import skeleton.Logger;
+
 public class Glade {
 
-	// A mezoket tarolo lista
+	/**
+	 * A mezőket tároló lista.
+	 */
 	private ArrayList<Field> fields;
 	
-	// Az elelmeket tarolo lista
+	/**
+	 * Az élelmeket tároló lista.
+	 */
 	private ArrayList<Food> foods;
 	
-	// A spray-ket tarolo lista
+	/**
+	 * A spray-ket tároló lista.
+	 */
 	private ArrayList<Spray> sprays;
 	
-	// Az aktiv elemek listaja
+	/**
+	 * Az aktiv elemek listája.
+	 */
 	private ArrayList<Active> activeObjects;
 	
-	// Az eltelt ido
+	/**
+	 * Az eltelt idő.
+	 */
 	private int time;
 	
-	// A jatek inditasa
+	public Glade() {
+		Logger.attach("Glade", this);
+	}
+	
+	/**
+	 * A játék indítása.
+	 */
 	public void start() {
-		
+		Logger.enter(this, "start");
+		Logger.exit(this);
 	}
 	
-	// Az ido leptetese
+	/**
+	 * Az idő léptetése.
+	 */
 	public void tick() {
-		
+		Logger.enter(this, "tick");
+		Logger.exit(this);
 	}
 	
-	// Aktiv elem hozzaadasa
+	/**
+	 * Egy aktív elem hozzáadása.
+	 * @param active Az aktív elem.
+	 */
 	public void addActiveObject(Active active) {
-		
+		Logger.enter(this, "addActiveObject", Logger.getObjectName(active));
+		Logger.exit(this);
 	}
 	
-	// Aktiv elem eltavolitasa
+	/**
+	 * Egy aktív elem eltávolítása.
+	 * @param active Az eltávolítandó elem.
+	 */
 	public void removeActiveObject(Active active) {
-		
+		Logger.enter(this, "removeActiveObject", Logger.getObjectName(active));
+		Logger.exit(this);
 	}
 }
