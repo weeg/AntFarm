@@ -6,34 +6,22 @@ import skeleton.Logger;
 
 public class Ant extends Entity implements Active {
 
-	/** 
-	 * Az irany, amerre a hangya megy
-	 */
+	/** Az irany, amerre a hangya megy */
 	private Direction direction;
 	
-	/**
-	 * Azok a mezok, amiken vegigment a hangya
-	 */
+	/** Azok a mezok, amiken vegigment a hangya */
 	private ArrayList<Field> memory = new ArrayList<Field>();
 	
-	/**
-	 *  Van-e a hangyanal elelem
-	 */
+	/** Van-e a hangyanal elelem */
 	private boolean hasFood;
 	
-	/**
-	 * Meg van-e mergezve a hangya
-	 */
+	/** Meg van-e mergezve a hangya */
 	private boolean poisened;
 	
-	/**
-	 *  Akadalyba utkozott-e a hangya
-	 */
+	/** Akadalyba utkozott-e a hangya */
 	private boolean blocked;
 	
-	/**
-	 *  Meg hany korig fog elni (ha mergezett)
-	 */
+	/** Meg hany korig fog elni (ha mergezett) */
 	private int TTL;
 	
 	/**

@@ -4,29 +4,19 @@ import skeleton.Logger;
 
 public class Anteater extends Entity implements Active {
 	
-	/**
-	 *  A hangyaszsun iranya
-	 */
+	/** A hangyaszsun iranya */
 	private Direction direction;
 	
-	/**
-	 *  Az aktualis palyaralepes soran mar megevett hangyak szama
-	 */
+	/** Az aktualis palyaralepes soran mar megevett hangyak szama */
 	private int eatenAnts;
 	
-	/**
-	 *  Visszamarado ido, amig pihen az ujabb palyara lepes elott
-	 */
+	/** Visszamarado ido, amig pihen az ujabb palyara lepes elott */
 	private int timeToRest;
 	
-	/**
-	 *  Pihen-e a hangyaszsun
-	 */
+	/** Pihen-e a hangyaszsun */
 	private boolean isResting;
 	
-	/**
-	 * Lekuzdhetetlen akadalyba utkozott-e
-	 */
+	/** Lekuzdhetetlen akadalyba utkozott-e */
 	private boolean blocked;
 	
 	/**
