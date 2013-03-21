@@ -13,6 +13,14 @@ public class Odor {
 		return 0;
 	}
 	
+	public Field getPosition() {
+		return position;
+	}
+
+	public void setPosition(Field position) {
+		this.position = position;
+	}
+	
 	// Az intenzitas beallitasa
 	public void setIntensity() {
 		

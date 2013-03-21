@@ -2,6 +2,8 @@ package modell;
 
 import java.util.ArrayList;
 
+import skeleton.Logger;
+
 public class Food extends Entity {
 
 	// A meg meglevo elelem mennyisege

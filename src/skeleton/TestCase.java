@@ -5,7 +5,5 @@ public abstract class TestCase {
 	/**
 	 * A teszteset futtatasa
 	 */
-	public void test() {
-		
-	}
+	public abstract void test();
 }
