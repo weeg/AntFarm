@@ -1,10 +1,10 @@
 package modell;
 
+
 public interface Active {
 	
 	/**
-	 * Reagalas az ido mulasara
-	 * @param glade A tisztas, amin az aktiv objektum talalhato
+	 * Reagalas az ido mulasara	 
 	 */
-	void animate(Glade glade);
+	void animate();
 }

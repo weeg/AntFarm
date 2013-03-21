@@ -1,5 +1,7 @@
 package modell;
 
+import java.util.ArrayList;
+
 import skeleton.Logger;
 
 public class Anteater extends Entity implements Active {
@@ -54,7 +56,9 @@ public class Anteater extends Entity implements Active {
 	 * Utkozes egy hangyaval
 	 */
 	public void collide(Ant ant) {
-		
+		// Semmi nem tortenik, de azert a fuggvenyt megmutatjuk
+		Logger.enter(this, "collide", Logger.getObjectName(ant));
+		Logger.exit(this);
 	}
 
 	/**
@@ -76,8 +80,14 @@ public class Anteater extends Entity implements Active {
 	/**
 	 * A hangyaszsun animalasa
 	 */
-	public void animate(Glade glade) {
+	public void animate() {
 		
+		Logger.enter(this, "animate");
+		ArrayList<Entity> entities = getPosition().getEntities();
+		for (Entity entity : entities) {
+			entity.collide(this);
+		}
+		Logger.exit(this);
 	}
 
 	

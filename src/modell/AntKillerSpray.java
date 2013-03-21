@@ -1,5 +1,7 @@
 package modell;
 
+import java.util.ArrayList;
+
 import skeleton.Logger;
 
 public class AntKillerSpray extends Spray {
@@ -18,7 +20,12 @@ public class AntKillerSpray extends Spray {
 	public void use(Field center) {
 		
 		Logger.enter(this, "use", Logger.getObjectName(center));
-		// TODO
+		ArrayList<Field> fields = center.getNeighbours(getRadius());
+		Poison poison = new Poison();
+		for (Field field : fields) {
+			field.addEntity(poison);
+		}		
+		// Glade???
 		Logger.exit(this);
 	}
 

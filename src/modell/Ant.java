@@ -9,6 +9,9 @@ public class Ant extends Entity implements Active {
 	/** Az irany, amerre a hangya megy */
 	private Direction direction;
 	
+	/** A tiszt‡s, amin van a hangya */
+	private Glade glade;
+	
 	/** Azok a mezok, amiken vegigment a hangya */
 	private ArrayList<Field> memory = new ArrayList<Field>();
 	
@@ -53,7 +56,10 @@ public class Ant extends Entity implements Active {
 	 *  A hangya megolese
 	 */
 	public void kill() {
+		
 		Logger.enter(this, "kill");
+		getPosition().removeEntity(this);
+		glade.removeActiveObject(this);
 		Logger.exit(this);
 	}
 	
@@ -75,10 +81,27 @@ public class Ant extends Entity implements Active {
 		
 	/**
 	 * A hangya animalasa
-	 * @param A tisztas, amin a hangya talalhato
 	 */
-	public void animate(Glade glade) {		
+	public void animate() {		
 		
+		Logger.enter(this, "animate", Logger.getObjectName(glade));
+		for (int i = 0; i < 3; i++) {
+			Field f = null;
+			switch (i) {
+			case 0:
+				f = getPosition().getNeighbour(Direction.getLeftDirection(direction));
+				break;
+			case 1:
+				f = getPosition().getNeighbour(direction);
+				break;
+			case 2:
+				f = getPosition().getNeighbour(Direction.getRightDirection(direction));
+				break;
+			}
+			int intensity = f.getOdorIntensity();
+			// TODO
+		}
+		Logger.exit(this);
 	}
 	
 	/**
@@ -89,10 +112,17 @@ public class Ant extends Entity implements Active {
 	
 		Logger.enter(this, "collide", Logger.getObjectName(anteater));
 		if (anteater.isHungry()) {
-			// remove entity
-			// remove active entity
+			kill();
 			anteater.increaseEatenAnts();
 		}
 		Logger.exit(this);
+	}
+
+	public Glade getGlade() {
+		return glade;
+	}
+
+	public void setGlade(Glade glade) {
+		this.glade = glade;
 	}	
 }

@@ -4,6 +4,9 @@ import skeleton.Logger;
 
 public class AntHill extends Entity implements Active {
 	
+	/** A tisztas, amin van a hangyaboly */
+	private Glade glade;
+	
 	/**
 	 * A hangyaboly default konstruktora
 	 */
@@ -27,7 +30,7 @@ public class AntHill extends Entity implements Active {
 	/**
 	 * A hangyaboly animalasa
 	 */
-	public void animate(Glade glade) {		
+	public void animate() {		
 		
 		Logger.enter(this, "animate", Logger.getObjectName(glade));
 		int r = Logger.choose("Hozzon letre a hangyaboly egy uj hangyat?", "Igen", "Nem");
