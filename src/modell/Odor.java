@@ -7,12 +7,12 @@ public class Odor {
 	/**
 	 * A szag intenzitása.
 	 */
-	private int intensity;
+	protected int intensity;
 	
 	/**
 	 * A mező, amihez tartozik.
 	 */
-	private Field position;
+	protected Field position;
 	
 	/**
 	 * Visszaadja a szag intenzitását.
@@ -21,7 +21,7 @@ public class Odor {
 	public int getIntensity() {
 		Logger.enter(this, "getIntensity");
 		Logger.exit(this);
-		return 0;
+		return intensity;
 	}
 	
 	/**

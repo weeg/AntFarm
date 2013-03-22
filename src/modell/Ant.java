@@ -10,7 +10,7 @@ public class Ant extends Entity implements Active {
 	/** Az irany, amerre a hangya megy */
 	private Direction direction;
 	
-	/** A tiszt‡s, amin van a hangya */
+	/** A tisztas, amin van a hangya */
 	private Glade glade;
 	
 	/** Azok a mezok, amiken vegigment a hangya */
@@ -36,9 +36,21 @@ public class Ant extends Entity implements Active {
 	/**
 	 * A hangya default konstruktora
 	 */
-	public Ant(Glade gl) {
+	public Ant() {
 		Logger.attach("ant", this);
-		glade = gl;
+	}
+	
+	/**
+	 * Hangya konstruktor
+	 * @param glade A tisztas, amin van a hangya
+	 * @param position A mezo, amin van a hangya
+	 * @param dir A hangya iranya
+	 */
+	public Ant(Glade glade, Field position, Direction dir) {
+		this();
+		this.glade = glade;
+		this.position = position;
+		this.direction = dir;
 	}
 	
 	/**
@@ -171,8 +183,10 @@ public class Ant extends Entity implements Active {
 					target.addEntity(this);
 				}
 			}
+			Field f = position.getNeighbour(direction);
+			int intensity = f.getOdorIntensity();			
 		}
-		Logger.exit(this);
+		Logger.exit(this);	
 	}
 
 	private Field popFieldFromMemory() {
