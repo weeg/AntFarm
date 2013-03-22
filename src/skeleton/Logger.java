@@ -26,6 +26,15 @@ public class Logger {
 	private static Map<Object, String> objects = new HashMap<Object, String>();
 	
 	/**
+	 * Resets the logger
+	 */
+	public static void reset() {
+		stack.removeAllElements();
+		objectIDs.clear();
+		objects.clear();
+	}
+	
+	/**
 	 * Csendes uzemmodhoz.
 	 */
 	private static boolean silent = false;
