@@ -8,6 +8,10 @@ import skeleton.Logger;
  */
 public class DeadEnd extends Entity {
 
+	public DeadEnd() {
+		Logger.attach("Deadend", this);
+	}
+	
 	/**
 	 * Ütközés hangyával, megöli a hangyát.
 	 * @param ant A hangya, amivel ütközik.

@@ -1,6 +1,7 @@
 ﻿package modell;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import skeleton.Logger;
 
@@ -13,16 +14,21 @@ public class Ant extends Entity implements Active {
 	private Glade glade;
 	
 	/** Azok a mezok, amiken vegigment a hangya */
-	private ArrayList<Field> memory = new ArrayList<Field>();
+	private Stack<Field> memory = new Stack<Field>();
 	
 	/** Van-e a hangyanal elelem */
-	private boolean hasFood;
+	private boolean hasFood = false;
 	
 	/** Meg van-e mergezve a hangya */
-	private boolean poisened;
+	private boolean poisened = false;
 	
 	/** Akadalyba utkozott-e a hangya */
-	private boolean blocked;
+	private boolean blocked = false;
+	
+	/**
+	 * Halott-e a hangya.
+	 */
+	private boolean killed = false;
 	
 	/** Meg hany korig fog elni (ha mergezett) */
 	private int TTL;
@@ -30,8 +36,9 @@ public class Ant extends Entity implements Active {
 	/**
 	 * A hangya default konstruktora
 	 */
-	public Ant() {
+	public Ant(Glade gl) {
 		Logger.attach("ant", this);
+		glade = gl;
 	}
 	
 	/**
@@ -39,17 +46,9 @@ public class Ant extends Entity implements Active {
 	 * @return Igaz, ha a hangyanal van elelem
 	 */
 	public boolean hasFood() {
-		
 		Logger.enter(this, "hasFood");		
 		Logger.exit(this);
-		int r = Logger.choose("Legyen-e a hangyanal elelem?", "Igen", "Nem");
-		switch (r) {
-		case 1:
-			return true;
-		case 2:
-			return false;		
-		}
-		return false;
+		return hasFood;
 	}
 	
 	/**
@@ -60,6 +59,7 @@ public class Ant extends Entity implements Active {
 		Logger.enter(this, "kill");
 		getPosition().removeEntity(this);
 		glade.removeActiveObject(this);
+		killed = true;
 		Logger.exit(this);
 	}
 	
@@ -68,6 +68,7 @@ public class Ant extends Entity implements Active {
 	 */
 	public void block() {
 		Logger.enter(this, "block");
+		blocked = true;
 		Logger.exit(this);
 	}
 	
@@ -78,13 +79,33 @@ public class Ant extends Entity implements Active {
 		Logger.enter(this, "eat");
 		Logger.exit(this);
 	}		
-		
+	
+	
+	private void changeDirection() {
+		Logger.enter(this, "changeDirection");
+		Logger.exit(this);
+	}
+	
 	/**
 	 * A hangya animalasa
 	 */
 	public void animate() {		
-		
 		Logger.enter(this, "animate", Logger.getObjectName(glade));
+		int a = Logger.choose("Legyen-e a hangyanal elelem?", "Igen", "Nem");
+		switch (a) {
+			case 1:
+				hasFood = true;
+				break;
+			case 2:
+				hasFood = false;	
+				break;
+		}
+		Logger.off();
+		direction = Direction.NE;
+		Field target = null;
+		if (hasFood) {
+			target = popFieldFromMemory();
+		}
 		for (int i = 0; i < 3; i++) {
 			Field f = null;
 			switch (i) {
@@ -99,11 +120,68 @@ public class Ant extends Entity implements Active {
 				break;
 			}
 			int intensity = f.getOdorIntensity();
-			// TODO
+			if (target == null) {
+				target = f;
+			}
+			if (target.getOdorIntensity() < intensity) {
+				target = f; 
+			}
+		}
+		int r = Logger.choose("Mivel ütközzön a hangya?", "Akadállyal (Kővel)", "Hangyával", "Hangyabollyal", 
+				"Hangyalesővel", "Hangyászsünnel", "Élelemmel", "Méreggel", "Pályaszélével");
+		switch (r) {
+			case 1:
+				target.addEntity(new Stone());
+				break;
+			case 2:
+				target.addEntity(new Ant(glade));
+				break;
+			case 3:
+				target.addEntity(new AntHill(glade));
+				break;
+			case 4:
+				target.addEntity(new AntLion());
+				break;
+			case 5:
+				target.addEntity(new Anteater());
+				break;
+			case 6:
+				target.addEntity(new Food());
+				break;
+			case 7:
+				target.addEntity(new Poison());
+				break;
+			case 8:
+				target.addEntity(new DeadEnd());
+				break;
+		}
+		Logger.on();
+		for (Entity e : target.getEntities()) {
+			e.collide(this);
+		}
+		if (killed == false) { 
+			if (hasFood == false) {
+				if (blocked) {
+					this.changeDirection();
+				} else {
+					AntOdor ao = new AntOdor();
+					this.getPosition().addOdor(ao);
+					glade.addActiveObject(ao);
+					this.getPosition().removeEntity(this);
+					target.addEntity(this);
+				}
+			}
 		}
 		Logger.exit(this);
 	}
-	
+
+	private Field popFieldFromMemory() {
+		Logger.enter(this, "popFieldFromMemory");
+		Logger.exit(this);
+		//return memory.pop();
+		return new Field();
+	}
+
 	/**
 	 * Utkozes egy hangyaszsunnel
 	 * @param anteater A hangyaszsun, amivel a hangya utkozik

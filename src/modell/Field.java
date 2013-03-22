@@ -10,17 +10,17 @@ public class Field {
 	/**
 	 * A szomszédokat tároló objektum.
 	 */
-	private HashMap<Direction, Field> neighbours;
+	private HashMap<Direction, Field> neighbours = new HashMap<Direction, Field>();
 	
 	/**
 	 * A szagokat tároló lista.
 	 */
-	private ArrayList<Odor> odors;
+	private ArrayList<Odor> odors = new ArrayList<Odor>();
 	
 	/**
 	 * Az entitásokat tároló lista.
 	 */
-	private ArrayList<Entity> entities;
+	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	public Field() {
 		Logger.attach("Field", this);
@@ -33,6 +33,7 @@ public class Field {
 	 */
 	public void setNeighbour(Direction dir, Field neighbour) {
 		Logger.enter(this, "setNeighbour", "dir:Direction", Logger.getObjectName(neighbour));
+		neighbours.put(dir, neighbour);
 		Logger.exit(this);
 	}
 	
@@ -44,7 +45,7 @@ public class Field {
 	public Field getNeighbour(Direction dir) {
 		Logger.enter(this, "getNeighbour", "dir:Direction");
 		Logger.exit(this);
-		return null;
+		return neighbours.get(dir);
 	}
 	
 	/**
@@ -64,8 +65,12 @@ public class Field {
 	 */
 	public int getOdorIntensity() {
 		Logger.enter(this, "getOdorIntensity");
+		int intens = 0;
+		for (Odor o : odors) {
+			intens += o.getIntensity();
+		}
 		Logger.exit(this);
-		return 0;
+		return intens;
 	}
 	
 	/**
@@ -74,6 +79,7 @@ public class Field {
 	 */
 	public void addOdor(Odor odor) {
 		Logger.enter(this, "addOdor");
+		odors.add(odor);
 		Logger.exit(this);
 	}
 	
@@ -84,7 +90,7 @@ public class Field {
 	public ArrayList<Odor> getOdors() {
 		Logger.enter(this, "getOdors");
 		Logger.exit(this);
-		return null;
+		return odors;
 	}
 
 	/**
@@ -93,6 +99,7 @@ public class Field {
 	 */
 	public void removeOdor(Odor odor) {
 		Logger.enter(this, "removeOdors", Logger.getObjectName(odor));
+		odors.remove(odor);
 		Logger.exit(this);
 	}
 
@@ -100,8 +107,9 @@ public class Field {
 	 * Entitás hozzáadása a mezőhöz.
 	 * @param entity Egy entitás.
 	 */
-	public void addEntity(Entity entity) {
-		Logger.enter(this, "addEntity", Logger.getObjectName(entity));
+	public void addEntity(Entity e) {
+		Logger.enter(this, "addEntity", Logger.getObjectName(e));
+		entities.add(e);
 		Logger.exit(this);
 	}
 
@@ -109,8 +117,9 @@ public class Field {
 	 * Entitás eltávolítása.
 	 * @param entity Törlendő entitás.
 	 */
-	public void removeEntity(Entity entity) {
-		Logger.enter(this, "removeEntity", Logger.getObjectName(entity));
+	public void removeEntity(Entity e) {
+		Logger.enter(this, "removeEntity", Logger.getObjectName(e));
+		entities.remove(e);
 		Logger.exit(this);
 	}
 
@@ -121,6 +130,6 @@ public class Field {
 	public ArrayList<Entity> getEntities() {
 		Logger.enter(this, "getEntities");
 		Logger.exit(this);
-		return null;
+		return entities;
 	}	
 }

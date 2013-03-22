@@ -1,4 +1,4 @@
-package skeleton;
+﻿package skeleton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,6 +24,11 @@ public class Logger {
 	 * A peldanyokat (referenciait es neveit) tarolo tomb
 	 */
 	private static Map<Object, String> objects = new HashMap<Object, String>();
+	
+	/**
+	 * Csendes üzemmódhoz.
+	 */
+	private static boolean silent = false;
 	
 	/**
 	 * Visszaadja egy objektum nevet a referenciaja alapjan
@@ -62,8 +67,12 @@ public class Logger {
 		objects.put(o, s + objectIDs.get(s));
 		
 		// Kiiras
-		tab();
-		System.out.println("-:> " + s + "." + s + "(): " + objects.get(o) + " created");
+		if (silent == false) {
+			tab();
+			if (silent == false) {
+				System.out.println("-:> " + s + "." + s + "(): " + objects.get(o) + " created");
+			}
+		}
 	}	
 		
 	/**
@@ -73,20 +82,21 @@ public class Logger {
 	 * @param parameters A fuggveny parameterei
 	 */
 	public static void enter(Object sender, String function, String... parameters) {
-
-		// Kiiras
-		tab();
-		System.out.print("--> " + objects.get(sender) + "." + function + "(");
-		for (int i = 0; i < parameters.length; i++) {
-			System.out.print(parameters[i]);
-			if (i < parameters.length - 1) {
-				System.out.print(", ");
-			}			
-		}
-		System.out.println(")");
+		if (silent == false) {
+			// Kiiras
+			tab();
+			System.out.print("--> " + objects.get(sender) + "." + function + "(");
+			for (int i = 0; i < parameters.length; i++) {
+				System.out.print(parameters[i]);
+				if (i < parameters.length - 1) {
+					System.out.print(", ");
+				}			
+			}
+			System.out.println(")");
 		
-		// A fuggveny mentese a stackre
-		stack.add(function);
+			// A fuggveny mentese a stackre
+			stack.add(function);
+		}
 	}
 	
 	/**
@@ -94,13 +104,13 @@ public class Logger {
 	 * @param sender Az az objektum, amely kilepett egy fuggvenybol
 	 */
 	public static void exit(Object sender) {
-			
-		// Fuggveny nevenek lekerese a stackrol
-		String function = stack.pop();
-		
-		// Kiiras
-		tab();
-		System.out.println("<-- " + objects.get(sender) + "." + function + "()" );
+		if (silent == false) {	
+			// Fuggveny nevenek lekerese a stackrol
+			String function = stack.pop();
+			// Kiiras
+			tab();
+			System.out.println("<-- " + objects.get(sender) + "." + function + "()" );
+		}
 	}
 	
 	/**
@@ -135,5 +145,17 @@ public class Logger {
 		System.out.println();
 		return answer;
 	    
+	}
+	/**
+	 * Bekapcsolja a loggolást.
+	 */
+	public static void on() {
+		silent = false;
+	}
+	/**
+	 * Kikapcsolja a loggolást. (Csendesüzemmód)
+	 */
+	public static void off() {
+		silent = true;
 	}
 }
