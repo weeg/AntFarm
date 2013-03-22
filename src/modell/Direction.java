@@ -3,6 +3,25 @@ package modell;
 public enum Direction {
 	N, NE, SE, S, SW, NW;
 	
+	public static Direction parseInt(int i) {
+		switch (i) {
+		case 0:
+			return N;			
+		case 1:
+			return NE;
+		case 2:
+			return SE;
+		case 3:
+			return S;
+		case 4:
+			return SW;
+		case 5:
+			return NW;
+		default:
+			return N;
+		}
+	}
+	
 	public static Direction getLeftDirection(Direction d) {
 		switch (d) {
 		case N:
