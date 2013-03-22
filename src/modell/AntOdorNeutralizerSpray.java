@@ -34,7 +34,7 @@ public class AntOdorNeutralizerSpray extends Spray {
 			while (i.hasNext()) {
 				Odor o = i.next();
 				if (o.neutralize()) {
-					i.remove();
+					i.remove();					
 				}
 			}
 		}
