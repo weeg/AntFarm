@@ -32,7 +32,7 @@ public class Field {
 	 * @param neighbour A szomszéd mezõ.
 	 */
 	public void setNeighbour(Direction dir, Field neighbour) {
-		Logger.enter(this, "setNeighbour", "dir:Direction", Logger.getObjectName(neighbour));
+		Logger.enter(this, "setNeighbour", "dir:" + dir.toString(), Logger.getObjectName(neighbour));
 		neighbours.put(dir, neighbour);
 		Logger.exit(this);
 	}

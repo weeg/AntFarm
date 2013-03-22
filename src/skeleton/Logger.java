@@ -83,6 +83,7 @@ public class Logger {
 	 */
 	public static void enter(Object sender, String function, String... parameters) {
 		if (silent == false) {
+			
 			// Kiiras
 			tab();
 			System.out.print("--> " + objects.get(sender) + "." + function + "(");
@@ -105,6 +106,7 @@ public class Logger {
 	 */
 	public static void exit(Object sender) {
 		if (silent == false) {	
+			
 			// Fuggveny nevenek lekerese a stackrol
 			String function = stack.pop();
 			// Kiiras
@@ -146,6 +148,7 @@ public class Logger {
 		return answer;
 	    
 	}
+	
 	/**
 	 * Bekapcsolja a loggolast.
 	 */

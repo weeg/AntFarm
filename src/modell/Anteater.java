@@ -28,6 +28,11 @@ public class Anteater extends Entity implements Active {
 		Logger.attach("anteater", this);
 	}
 	
+	public Anteater(Field position) {
+		this();
+		this.position = position;
+	}
+	
 	/**
 	 * Visszaadja, hogy ehes-e a hangyaszsun
 	 */
@@ -74,6 +79,7 @@ public class Anteater extends Entity implements Active {
 	 */
 	public void block() {
 		Logger.enter(this, "block");
+		blocked = true;
 		Logger.exit(this);
 	}
 	
@@ -82,13 +88,49 @@ public class Anteater extends Entity implements Active {
 	 */
 	public void animate() {
 		
-		Logger.enter(this, "animate");
-		ArrayList<Entity> entities = getPosition().getEntities();
-		for (Entity entity : entities) {
-			entity.collide(this);
+		Logger.enter(this, "animate");		
+		Logger.off();
+		direction = Direction.N;		
+		Field target = position.getNeighbour(direction);			
+		int r = Logger.choose("Mivel utkozzon a hangyaszsun?", "Kovel", "Tocsaval", "Faronkkel", 
+				"Hangyaval", "Palya szelevel");
+		switch (r) {
+			case 1:
+				target.addEntity(new Stone());
+				break;
+			case 2:
+				target.addEntity(new Water());
+				break;
+			case 3:
+				target.addEntity(new Log());
+				break;
+			case 4:
+				target.addEntity(new Ant());
+				break;
+			case 5:
+				target.addEntity(new DeadEnd());
+				break;			
 		}
+		Logger.on();
+		for (Entity e : target.getEntities()) {
+			e.collide(this);
+		}
+		
+		if (blocked) {
+			changeDirection();
+		} else {
+			position.removeEntity(this);
+			target.addEntity(this);
+		}
+		
+		Logger.exit(this);	
+	}
+	
+	private void changeDirection() {
+		Logger.enter(this, "changeDirection");
 		Logger.exit(this);
 	}
+
 
 	
 }
