@@ -12,7 +12,7 @@ public class TestCase3 extends TestCase {
 		
 		Glade glade = new Glade();
 		Field field = new Field();		
-		Anteater anteater = new Anteater(field);
+		Anteater anteater = new Anteater(glade, field);
 		
 		Logger.on();
 		

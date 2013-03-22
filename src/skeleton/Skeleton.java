@@ -6,20 +6,11 @@ public class Skeleton {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		TestCase testCase = null;
-		int r = Logger.choose("Melyik tesztesetet futtatja?", "Dummy", "Jatek kezdese", "Hangya animalasa");
-		switch(r) {
-=======
-		
 		while (true) {
-			
+			TestCase testCase = null;
 			int r = Logger.choose("Melyik tesztesetet futtatja?", "Jatek kezdese", "Hangya animalasa",
 					  "Hangyaszsun animalasa", "Fujas spray-vel");
-			
-			TestCase testCase = null;
 			switch (r) {
->>>>>>> neutralize nem jó
 			case 1:
 				testCase = new TestCase1();				
 				break;

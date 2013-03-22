@@ -201,8 +201,8 @@ public class Ant extends Entity implements Active {
 	
 		Logger.enter(this, "collide", Logger.getObjectName(anteater));
 		if (anteater.isHungry()) {
-			kill();
-			anteater.increaseEatenAnts();
+			//kill();
+			anteater.increaseEatenAnts(this);
 		}
 		Logger.exit(this);
 	}

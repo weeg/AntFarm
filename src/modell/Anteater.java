@@ -1,6 +1,7 @@
 package modell;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import skeleton.Logger;
 
@@ -8,6 +9,9 @@ public class Anteater extends Entity implements Active {
 	
 	/** A hangyaszsun iranya */
 	private Direction direction;
+	
+	/** A tisztas, amin van a hangyaszsun */
+	private Glade glade;
 	
 	/** Az aktualis palyaralepes soran mar megevett hangyak szama */
 	private int eatenAnts;
@@ -22,15 +26,21 @@ public class Anteater extends Entity implements Active {
 	private boolean blocked;
 	
 	/**
+	 * A hangyaszsun aldozatai.
+	 */
+	private ArrayList<Ant> victims = new ArrayList<Ant>();
+	
+	/**
 	 * A hangyaszsun default konstruktor
 	 */
 	public Anteater() {
 		Logger.attach("anteater", this);
 	}
 	
-	public Anteater(Field position) {
+	public Anteater(Glade gl, Field position) {
 		this();
 		this.position = position;
+		this.glade = gl;
 	}
 	
 	/**
@@ -68,9 +78,12 @@ public class Anteater extends Entity implements Active {
 
 	/**
 	 * Megevett hangyak szamanak novelese
+	 * @param a A megevett hangya.
 	 */
-	public void increaseEatenAnts() {
+	public void increaseEatenAnts(Ant a) {
 		Logger.enter(this, "increaseEatenAnts");
+		this.victims.add(a);
+		this.eatenAnts++;
 		Logger.exit(this);
 	}
 	
@@ -106,7 +119,7 @@ public class Anteater extends Entity implements Active {
 				target.addEntity(new Log());
 				break;
 			case 4:
-				target.addEntity(new Ant());
+				target.addEntity(new Ant(glade, target, Direction.NW));
 				break;
 			case 5:
 				target.addEntity(new DeadEnd());
@@ -115,6 +128,9 @@ public class Anteater extends Entity implements Active {
 		Logger.on();
 		for (Entity e : target.getEntities()) {
 			e.collide(this);
+		}
+		for (Ant a : victims) {
+			a.kill();
 		}
 		
 		if (blocked) {
@@ -131,7 +147,5 @@ public class Anteater extends Entity implements Active {
 		Logger.enter(this, "changeDirection");
 		Logger.exit(this);
 	}
-
-
 	
 }
