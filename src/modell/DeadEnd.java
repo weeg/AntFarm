@@ -3,7 +3,7 @@ package modell;
 import skeleton.Logger;
 
 /**
- * A pályaszéle objektum. 
+ * A palyaszele objektum. 
  *
  */
 public class DeadEnd extends Entity {
@@ -13,8 +13,8 @@ public class DeadEnd extends Entity {
 	}
 	
 	/**
-	 * Ütközés hangyával, megöli a hangyát.
-	 * @param ant A hangya, amivel ütközik.
+	 * Utkozes hangyaval, megoli a hangyat.
+	 * @param ant A hangya, amivel utkozik.
 	 */
 	public void collide(Ant ant) {
 		Logger.enter(this, "collide", Logger.getObjectName(ant));
@@ -23,8 +23,8 @@ public class DeadEnd extends Entity {
 	}
 	
 	/**
-	 * Ütközés hangyászsünnel, pihenni küldi a hangyászt.
-	 * @param anteater A hangyászsün, amivel ütközik,.
+	 * Utkozes hangyaszsunnel, pihenni kuldi a hangyaszt.
+	 * @param anteater A hangyaszsun, amivel utkozik,.
 	 */
 	public void collide(Anteater anteater) {
 		Logger.enter(this, "collide", Logger.getObjectName(anteater));

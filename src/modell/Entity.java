@@ -1,27 +1,27 @@
 package modell;
 
 /**
- * Az entitás objektum. 
+ * Az entitas objektum. 
  */
 public abstract class Entity {
 	
 	/** A tisztas, amin van az entitas */
 	protected Glade glade;
 	/**
-	 * A mezõ, amin az entitás van.
+	 * A mezo, amin az entitas van.
 	 */
 	protected Field position;
 	
 	/**
-	 * Visszadja a poziciót.
-	 * @return a pozició.
+	 * Visszadja az entitas poziciojat.
+	 * @return a pozicio.
 	 */
 	public Field getPosition() {
 		return position;
 	}
 	
 	/**
-	 * Beállítja az új poziciót.
+	 * Beallitja az entitas uj poziciojat.
 	 * @param position Az új pozició.
 	 */
 	public void setPosition(Field position) {
@@ -29,18 +29,18 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Ütközés egy hangyával. A leszármazottak különbõzõ módon implemetálhatják, 
-	 * attól függõen mi történjen az ütközés során.
-	 * @param ant A hangya, amivel ütközik.
+	 * Utkozes egy hangyaval. A leszarmazottak kulonbozo modon implemetalhatjak, 
+	 * attol fuggoen mi tortenjen az utkozes soran.
+	 * @param ant A hangya, amivel utkozik.
 	 */
 	public void collide(Ant ant) {		
 		// A leszarmazottak fogjak implementalni szukseg eseten
 	}
 	
 	/**
-	 * Ütközés egy hangyászsünnel. A leszármazottak különbõzõ módon implemetálhatják, 
-	 * attól függõen mi történjen az ütközés során.
-	 * @param anteater A hangyássün, amivel ütközik.
+	 * Utkozes egy hangyaszsunnel. A leszarmazottak kulonbozo modon implemetalhatjak, 
+	 * attol fuggoen mi tortenjen az utkozes soran.
+	 * @param anteater A hangyassun, amivel utkozik.
 	 */
 	public void collide(Anteater anteater) {
 		// A leszarmazottak fogjak implementalni szukseg eseten

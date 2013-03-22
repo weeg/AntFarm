@@ -1,8 +1,5 @@
 package skeleton;
 
-import modell.Field;
-import modell.Food;
-import modell.FoodOdor;
 import modell.Glade;
 
 public class TestCase5 extends TestCase {

@@ -1,6 +1,5 @@
 package modell;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 import skeleton.Logger;
@@ -9,9 +8,6 @@ public class Ant extends Entity implements Active {
 
 	/** Az irany, amerre a hangya megy */
 	private Direction direction;
-	
-	/** A tisztas, amin van a hangya */
-	private Glade glade;
 	
 	/** Azok a mezok, amiken vegigment a hangya */
 	private Stack<Field> memory = new Stack<Field>();
@@ -91,7 +87,10 @@ public class Ant extends Entity implements Active {
 		Logger.enter(this, "eat");
 		Logger.exit(this);
 	}		
-		
+	
+	/**
+	 * Irany valtoztatas.
+	 */
 	private void changeDirection() {
 		Logger.enter(this, "changeDirection");
 		Logger.exit(this);
@@ -186,6 +185,10 @@ public class Ant extends Entity implements Active {
 		Logger.exit(this);	
 	}
 
+	/**
+	 * Egy mezo kivetele a utvonallista tetejerol.
+	 * @return A mezo, ami kovetkezik a visszauthoz.
+	 */
 	private Field popFieldFromMemory() {
 		Logger.enter(this, "popFieldFromMemory");
 		Logger.exit(this);

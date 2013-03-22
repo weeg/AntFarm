@@ -1,7 +1,6 @@
 package modell;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import skeleton.Logger;
 
@@ -66,11 +65,14 @@ public class Anteater extends Entity implements Active {
 	}
 	
 	/**
-	 * Utkozes egy hangyaval
+	 * Utkozes egy hangyaval, megoli a hangyat.
+	 * @param ant A hangya, amivel utkozik.
 	 */
 	public void collide(Ant ant) {
-		// Semmi nem tortenik, de azert a fuggvenyt megmutatjuk
 		Logger.enter(this, "collide", Logger.getObjectName(ant));
+		if (this.isHungry()) {
+			ant.kill();
+		}
 		Logger.exit(this);
 	}
 
@@ -141,6 +143,9 @@ public class Anteater extends Entity implements Active {
 		Logger.exit(this);	
 	}
 	
+	/**
+	 * Iranyvaltoztatas.
+	 */
 	private void changeDirection() {
 		Logger.enter(this, "changeDirection");
 		Logger.exit(this);

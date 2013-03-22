@@ -3,15 +3,11 @@ package modell;
 import skeleton.Logger;
 
 public class AntHill extends Entity implements Active {
-	
-	/** A tisztas, amin van a hangyaboly */
-	private Glade glade;
-	
 	/**
 	 * A hangyaboly default konstruktora
 	 */
 	public AntHill(Glade gl) {
-		Logger.attach("anthill", this);
+		Logger.attach("antHill", this);
 		glade = gl;
 	}
 	

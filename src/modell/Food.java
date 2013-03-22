@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 import skeleton.Logger;
 /**
- * Az élelem objektum.
+ * Az elelem objektum.
  */
 public class Food extends Entity {
 
 	/**
-	 *  A meglévõ élelem mennyisége.
+	 *  A meglevo elelem mennyisege.
 	 */
 	private int quantity;
 	
 	/**
-	 * Az élelemhez tartozó szagok.
+	 * Az elelemhez tartozo szagok.
 	 */
 	private ArrayList<FoodOdor> foodOdors = new ArrayList<FoodOdor>();
 	
@@ -23,7 +23,7 @@ public class Food extends Entity {
 	}
 	
 	/**
-	 * Visszaadja a még meglévõ élelem mennyiségét.
+	 * Visszaadja a meg meglevo elelem mennyiseget.
 	 * @return A meglévõ mennyiség.
 	 */
 	public int getQuantity() {
@@ -32,25 +32,25 @@ public class Food extends Entity {
 			fo.evaporate();
 		}
 		Logger.exit(this);
-		return 0;
+		return quantity;
 	}
 	
 	/**
-	 * Hozzáad a listához egy új élelemszagot.
-	 * @param foodOdor Az élelemszag.
+	 * Hozzaad a listahoz egy uj elelemszagot.
+	 * @param foodOdor Az elelemszag.
 	 */
 	public void addFoodOdor(FoodOdor foodOdor) {
-		Logger.enter(this, "addFoodOdor", Logger.getObjectName(foodOdor));
+		Logger.enter(this, "addFoodOdor", Logger.getObjectName(foodOdor)+":FoodOdor");
 		foodOdors.add(foodOdor);
 		Logger.exit(this);
 	}
 	
 	/**
-	 * Ütközés egy hangyával. Csökkenti az élelem mennyiségét.
+	 * Utkozes egy hangyaval. Csokkenti az elelem mennyiseget.
 	 * @param A hangya. 
 	 */
 	public void collide(Ant ant) {
-		Logger.enter(this, "collide", Logger.getObjectName(ant));
+		Logger.enter(this, "collide", Logger.getObjectName(ant)+":Ant");
 		Logger.exit(this);
 	}
 }

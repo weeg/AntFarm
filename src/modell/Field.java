@@ -8,17 +8,17 @@ import skeleton.Logger;
 public class Field {
 
 	/**
-	 * A szomszédokat tároló objektum.
+	 * A szomszedokat tarolo objektum.
 	 */
 	private HashMap<Direction, Field> neighbours = new HashMap<Direction, Field>();
 	
 	/**
-	 * A szagokat tároló lista.
+	 * A szagokat tarolo lista.
 	 */
 	private ArrayList<Odor> odors = new ArrayList<Odor>();
 	
 	/**
-	 * Az entitásokat tároló lista.
+	 * Az entitasokat tarolo lista.
 	 */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
@@ -27,9 +27,9 @@ public class Field {
 	}
 	
 	/**
-	 * Az adott irányban lévõ szomszéd megadása.
-	 * @param dir Az irány.
-	 * @param neighbour A szomszéd mezõ.
+	 * Az adott iranyban levo szomszed megadasa.
+	 * @param dir Az irany.
+	 * @param neighbour A szomszed mezo.
 	 */
 	public void setNeighbour(Direction dir, Field neighbour) {
 		Logger.enter(this, "setNeighbour", "dir:" + dir.toString(), Logger.getObjectName(neighbour));		
@@ -37,20 +37,23 @@ public class Field {
 	}
 	
 	/**
-	 * Visszaadja az adott irányban lévõ szomszédot.
-	 * @param dir Az irány.
-	 * @return A szomszéd mezõ.
+	 * Visszaadja az adott iranyban levo szomszedot.
+	 * @param dir Az irany.
+	 * @return A szomszed mezo.
 	 */
 	public Field getNeighbour(Direction dir) {
 		Logger.enter(this, "getNeighbour", "dir: " + dir.toString());
 		Logger.exit(this);
-		return new Field();
+		Logger.off();
+		Field n = new Field();
+		Logger.on();
+		return n;
 	}
 	
 	/**
-	 * Egy listát ad vissza azokkal a mezõkkel, amik a mezõtõl radius távolságon belül vannak.
-	 * @param radius A távolság.
-	 * @return Lista a mezõkrõl.
+	 * Egy listat ad vissza azokkal a mezokkel, amik a mezotol radius tavolsagon belul vannak.
+	 * @param radius A tavolsag.
+	 * @return Lista a mezokrol.
 	 */
 	public ArrayList<Field> getNeighbours(int radius) {
 		Logger.enter(this, "getNeighbours", "radius:int");
@@ -66,8 +69,8 @@ public class Field {
 	}
 	
 	/**
-	 * A mezõben lévõ szagok összintenzitása.
-	 * @return Az összintenzitás.
+	 * A mezoben levo szagok osszintenzitasa.
+	 * @return Az osszintenzitas.
 	 */
 	public int getOdorIntensity() {
 		Logger.enter(this, "getOdorIntensity");
@@ -80,7 +83,7 @@ public class Field {
 	}
 	
 	/**
-	 * Egy szag hozzáadása a mezõhöz.
+	 * Egy szag hozzaadása a mezohoz.
 	 * @param odor A szagobjektum.
 	 */
 	public void addOdor(Odor odor) {
@@ -90,7 +93,7 @@ public class Field {
 	}
 	
 	/**
-	 * Visszaadja a mezõben található szagok listáját.
+	 * Visszaadja a mezoben talalhato szagok listajat.
 	 * @return A szaglista.
 	 */
 	public ArrayList<Odor> getOdors() {
@@ -100,38 +103,38 @@ public class Field {
 	}
 
 	/**
-	 * Szag törlése a mezõrõl.
-	 * @param odor A törlendõ szagobjektum.
+	 * Szag torlese a mezorol.
+	 * @param odor A torlendo szagobjektum.
 	 */
 	public void removeOdor(Odor odor) {
-		Logger.enter(this, "removeOdors", Logger.getObjectName(odor));
+		Logger.enter(this, "removeOdors", Logger.getObjectName(odor)+":Odor");
 		odors.remove(odor);
 		Logger.exit(this);
 	}
 
 	/**
-	 * Entitás hozzáadása a mezõhöz.
-	 * @param entity Egy entitás.
+	 * Entitas hozzaadasa a mezohoz.
+	 * @param entity Egy entitas.
 	 */
 	public void addEntity(Entity e) {
-		Logger.enter(this, "addEntity", Logger.getObjectName(e));
+		Logger.enter(this, "addEntity", Logger.getObjectName(e)+":Entity");
 		entities.add(e);
 		Logger.exit(this);
 	}
 
 	/**
-	 * Entitás eltávolítása.
-	 * @param entity Törlendõ entitás.
+	 * Entitas eltavolitasa.
+	 * @param entity Torlendo entitas.
 	 */
 	public void removeEntity(Entity e) {
-		Logger.enter(this, "removeEntity", Logger.getObjectName(e));
+		Logger.enter(this, "removeEntity", Logger.getObjectName(e)+":Entity");
 		entities.remove(e);
 		Logger.exit(this);
 	}
 
 	/**
-	 * Az összes entitás lekérése.
-	 * @return Az entitások listája.
+	 * Az osszes entitas lekerese.
+	 * @return Az entitasok listaja.
 	 */
 	public ArrayList<Entity> getEntities() {
 		Logger.enter(this, "getEntities");

@@ -1,10 +1,8 @@
 package skeleton;
 
-import modell.Ant;
 import modell.AntKillerSpray;
 import modell.AntOdor;
 import modell.AntOdorNeutralizerSpray;
-import modell.Direction;
 import modell.Field;
 import modell.Glade;
 import modell.Spray;
