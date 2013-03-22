@@ -16,7 +16,7 @@ public class Food extends Entity {
 	/**
 	 * Az élelemhez tartozó szagok.
 	 */
-	private ArrayList<FoodOdor> foodOdors;
+	private ArrayList<FoodOdor> foodOdors = new ArrayList<FoodOdor>();
 	
 	public Food() {
 		Logger.attach("Food", this);
@@ -28,6 +28,9 @@ public class Food extends Entity {
 	 */
 	public int getQuantity() {
 		Logger.enter(this, "getQuantity");
+		for (FoodOdor fo : foodOdors) {
+			fo.evaporate();
+		}
 		Logger.exit(this);
 		return 0;
 	}
@@ -38,6 +41,7 @@ public class Food extends Entity {
 	 */
 	public void addFoodOdor(FoodOdor foodOdor) {
 		Logger.enter(this, "addFoodOdor", Logger.getObjectName(foodOdor));
+		foodOdors.add(foodOdor);
 		Logger.exit(this);
 	}
 	

@@ -73,8 +73,43 @@ public class Glade {
 	 */
 	public void tick() {
 		Logger.enter(this, "tick");
+		
+		Logger.off();
+		Field center = new Field();
+		Field[] neighbours = new Field[3];
+		for (int i = 0; i < 3; i++) {
+			neighbours[i] = new Field();
+			neighbours[i].addOdor(new FoodOdor());
+		}
+		center.setNeighbour(Direction.N, neighbours[0]);
+		center.setNeighbour(Direction.NE, neighbours[1]);
+		center.setNeighbour(Direction.SE, neighbours[2]);
+		AntHill ah = new AntHill(this);
+		ah.setPosition(center);
+		center.addEntity(ah);
+		Food f = new Food();
+		FoodOdor fo = new FoodOdor();
+		AntOdor ao = new AntOdor();
+		ao.setGlade(this);
+		Poison p = new Poison(this, neighbours[0]);
+		f.addFoodOdor(fo);
+		this.foods.add(f);
+		neighbours[2].addEntity(f);
+		neighbours[1].addOdor(fo);
+		fo.setPosition(neighbours[1]);
+		neighbours[0].addOdor(ao);
+		neighbours[0].addEntity(p);
+		this.activeObjects.add(ao);
+		this.activeObjects.add(ah);
+		this.activeObjects.add(p);
+		Logger.on();
+		foods.get(0).getQuantity();
+		for (Object a : activeObjects.toArray()) {
+			((Active) a).animate();
+		}
 		Logger.exit(this);
 	}
+	
 	
 	/**
 	 * Egy aktív elem hozzáadása.

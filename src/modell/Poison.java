@@ -15,11 +15,19 @@ public class Poison extends Entity implements Active {
 		Logger.attach("Poison", this);
 	}
 	
+	public Poison(Glade gl, Field pos) {
+		Logger.attach("Poison", this);
+		glade = gl;
+		setPosition(pos);
+	}
+	
 	/**
 	 * A méreg animálása. Midenkörben csökkenti a hátralévõ idõt.
 	 */
 	public void animate() {
 		Logger.enter(this, "animate");
+		glade.removeActiveObject(this);
+		getPosition().removeEntity(this);
 		Logger.exit(this);
 	}
 	

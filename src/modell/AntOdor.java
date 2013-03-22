@@ -25,11 +25,12 @@ public class AntOdor extends Odor implements Active {
 	 */
 	public void animate() {
 		
-		Logger.enter(this, "animate", Logger.getObjectName(glade));
-		int r = Logger.choose("Elfogyott a hangyaszag?", "Igen", "Nem");
+		Logger.enter(this, "animate");
+		/**int r = Logger.choose("Elfogyott a hangyaszag?", "Igen", "Nem");
 		if (r == 1) {
 			neutralize();
-		}
+		}*/
+		glade.removeActiveObject(this);
 		Logger.exit(this);
 	}
 	

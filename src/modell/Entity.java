@@ -1,12 +1,12 @@
 package modell;
 
-import skeleton.Logger;
-
 /**
  * Az entitás objektum. 
  */
 public abstract class Entity {
 	
+	/** A tisztas, amin van az entitas */
+	protected Glade glade;
 	/**
 	 * A mezõ, amin az entitás van.
 	 */

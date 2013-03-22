@@ -10,8 +10,6 @@ public class Anteater extends Entity implements Active {
 	/** A hangyaszsun iranya */
 	private Direction direction;
 	
-	/** A tisztas, amin van a hangyaszsun */
-	private Glade glade;
 	
 	/** Az aktualis palyaralepes soran mar megevett hangyak szama */
 	private int eatenAnts;
