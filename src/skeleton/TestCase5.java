@@ -6,8 +6,7 @@ import modell.FoodOdor;
 import modell.Glade;
 
 public class TestCase5 extends TestCase {
-
-	@Override
+	
 	public void test() {
 		Logger.off();
 		Glade gl = new Glade();

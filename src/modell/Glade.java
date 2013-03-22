@@ -43,8 +43,8 @@ public class Glade {
 		for (int i = 0; i < 7; i++) {
 			fields.add(new Field());
 		}
-		for (Field f : fields) {
-			f.setNeighbour(Direction.N, new Field());
+		for (int i = 1; i < 7; i++) {
+			fields.get(0).setNeighbour(Direction.parseInt(i), fields.get(i));
 		}
 		Food f = new Food();
 		fields.get(0).addEntity(f);
