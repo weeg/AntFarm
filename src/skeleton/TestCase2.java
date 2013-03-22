@@ -7,11 +7,9 @@ import modell.FoodOdor;
 import modell.Glade;
 
 public class TestCase2 extends TestCase {
-
-	@Override
+	
 	public void test() {
-		
-		System.out.println("Teszt kornyezet inicializalasa:\n");
+				
 		Logger.off();
 		Glade glade = new Glade();
 		Field center = new Field();
@@ -25,9 +23,9 @@ public class TestCase2 extends TestCase {
 		center.setNeighbour(Direction.SE, neighbours[2]);
 				
 		Ant ant = new Ant(glade, center, Direction.N);		
-		
-		System.out.println("\nA teszt inditasa: ");
+				
 		Logger.on();
+		
 		ant.animate();
 	}
 

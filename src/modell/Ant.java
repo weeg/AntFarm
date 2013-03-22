@@ -91,8 +91,7 @@ public class Ant extends Entity implements Active {
 		Logger.enter(this, "eat");
 		Logger.exit(this);
 	}		
-	
-	
+		
 	private void changeDirection() {
 		Logger.enter(this, "changeDirection");
 		Logger.exit(this);
@@ -102,7 +101,7 @@ public class Ant extends Entity implements Active {
 	 * A hangya animalasa
 	 */
 	public void animate() {		
-		Logger.enter(this, "animate", Logger.getObjectName(glade));
+		Logger.enter(this, "animate");
 		int a = Logger.choose("Legyen-e a hangyanal elelem?", "Igen", "Nem");
 		switch (a) {
 			case 1:
