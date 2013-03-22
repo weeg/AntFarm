@@ -7,7 +7,7 @@ public class Skeleton {
 	 */
 	public static void main(String[] args) {
 		TestCase testCase = null;
-		int r = Logger.choose("Melyik tesztesetet futtatja?", "Dummy", "Jaték kezdése", "Hangya animálása");
+		int r = Logger.choose("Melyik tesztesetet futtatja?", "Dummy", "Jatek kezdese", "Hangya animalasa");
 		switch(r) {
 			case 1:
 				testCase = new TestCase0();

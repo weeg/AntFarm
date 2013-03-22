@@ -1,9 +1,9 @@
-Ôªøpackage modell;
+package modell;
 
 import skeleton.Logger;
 
 /**
- * Az √©lelemszag objektum.
+ * Az Èlelemszag objektum.
  */
 public class FoodOdor extends Odor {
 	
@@ -11,7 +11,7 @@ public class FoodOdor extends Odor {
 		Logger.attach("FoodOdor", this);
 	}
 	/**
-	 * T√∂rli mag√°t a mez≈ër≈ël.
+	 * Tˆrli mag·t a mezırıl.
 	 */
 	public void evaporate() {
 		Logger.enter(this, "evaporate");

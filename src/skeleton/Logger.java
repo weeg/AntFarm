@@ -1,4 +1,4 @@
-﻿package skeleton;
+package skeleton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class Logger {
 	private static Map<Object, String> objects = new HashMap<Object, String>();
 	
 	/**
-	 * Csendes üzemmódhoz.
+	 * Csendes uzemmodhoz.
 	 */
 	private static boolean silent = false;
 	
@@ -147,13 +147,13 @@ public class Logger {
 	    
 	}
 	/**
-	 * Bekapcsolja a loggolást.
+	 * Bekapcsolja a loggolast.
 	 */
 	public static void on() {
 		silent = false;
 	}
 	/**
-	 * Kikapcsolja a loggolást. (Csendesüzemmód)
+	 * Kikapcsolja a loggolast. (Csendesuzemmod)
 	 */
 	public static void off() {
 		silent = true;

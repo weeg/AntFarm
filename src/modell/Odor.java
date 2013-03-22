@@ -1,22 +1,22 @@
-ï»¿package modell;
+package modell;
 
 import skeleton.Logger;
 
 public class Odor {
 	
 	/**
-	 * A szag intenzitÃ¡sa.
+	 * A szag intenzitása.
 	 */
 	protected int intensity;
 	
 	/**
-	 * A mezÅ‘, amihez tartozik.
+	 * A mezõ, amihez tartozik.
 	 */
 	protected Field position;
 	
 	/**
-	 * Visszaadja a szag intenzitÃ¡sÃ¡t.
-	 * @return intezitÃ¡s.
+	 * Visszaadja a szag intenzitását.
+	 * @return intezitás.
 	 */
 	public int getIntensity() {
 		Logger.enter(this, "getIntensity");
@@ -25,24 +25,24 @@ public class Odor {
 	}
 	
 	/**
-	 * Visszadja a poziciÃ³t.
-	 * @return a poziciÃ³.
+	 * Visszadja a poziciót.
+	 * @return a pozició.
 	 */
 	public Field getPosition() {
 		return position;
 	}
 	
 	/**
-	 * BeÃ¡llÃ­tja az Ãºj poziciÃ³t.
-	 * @param position Az Ãºj poziciÃ³.
+	 * Beállítja az új poziciót.
+	 * @param position Az új pozició.
 	 */
 	public void setPosition(Field position) {
 		this.position = position;
 	}
 	
 	/**
-	 * Az intezitÃ¡s beÃ¡llÃ­tÃ¡sa.
-	 * @param i Az intezitÃ¡s Ã©rtÃ©ke.
+	 * Az intezitás beállítása.
+	 * @param i Az intezitás értéke.
 	 */
 	public void setIntensity(int i) {
 		Logger.enter(this, "setIntensity", "i:int");
@@ -50,7 +50,7 @@ public class Odor {
 		Logger.exit(this);
 	}
 	/**
-	 * SemlegesÃ­tÃ©s, a kÃ¼lÃ¶nbÃ¶zÅ‘ leszÃ¡rmazottak fogjÃ¡k implementÃ¡lni.
+	 * Semlegesítés, a különbözõ leszármazottak fogják implementálni.
 	 */
 	public void neutralize() {
 		

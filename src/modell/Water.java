@@ -1,4 +1,4 @@
-﻿package modell;
+package modell;
 
 import skeleton.Logger;
 
@@ -8,8 +8,8 @@ public class Water extends Barricade {
 		Logger.attach("Water", this);
 	}
 	/**
-	 * Ütközés egy hangyászsünnel. Blokkolja a hangyászsünt.
-	 * @param anteater A hangyászsün, amivel ütközik.
+	 * Utkozes egy hangyaszsunnel. Blokkolja a hangyaszsunt.
+	 * @param anteater A hangyaszsun, amivel utkozik.
 	 */
 	public void collide(Anteater anteater) {
 		Logger.enter(this, "collide", Logger.getObjectName(anteater));

@@ -1,20 +1,20 @@
-Ôªøpackage modell;
+package modell;
 
 import java.util.ArrayList;
 
 import skeleton.Logger;
 /**
- * Az √©lelem objektum.
+ * Az Èlelem objektum.
  */
 public class Food extends Entity {
 
 	/**
-	 *  A megl√©v≈ë √©lelem mennyis√©ge.
+	 *  A meglÈvı Èlelem mennyisÈge.
 	 */
 	private int quantity;
 	
 	/**
-	 * Az √©lelemhez tartoz√≥ szagok.
+	 * Az Èlelemhez tartozÛ szagok.
 	 */
 	private ArrayList<FoodOdor> foodOdors;
 	
@@ -23,8 +23,8 @@ public class Food extends Entity {
 	}
 	
 	/**
-	 * Visszaadja a m√©g megl√©v≈ë √©lelem mennyis√©g√©t.
-	 * @return A megl√©v≈ë mennyis√©g.
+	 * Visszaadja a mÈg meglÈvı Èlelem mennyisÈgÈt.
+	 * @return A meglÈvı mennyisÈg.
 	 */
 	public int getQuantity() {
 		Logger.enter(this, "getQuantity");
@@ -33,8 +33,8 @@ public class Food extends Entity {
 	}
 	
 	/**
-	 * Hozz√°ad a list√°hoz egy √∫j √©lelemszagot.
-	 * @param foodOdor Az √©lelemszag.
+	 * Hozz·ad a list·hoz egy ˙j Èlelemszagot.
+	 * @param foodOdor Az Èlelemszag.
 	 */
 	public void addFoodOdor(FoodOdor foodOdor) {
 		Logger.enter(this, "addFoodOdor", Logger.getObjectName(foodOdor));
@@ -42,7 +42,7 @@ public class Food extends Entity {
 	}
 	
 	/**
-	 * √útk√∂z√©s egy hangy√°val. Cs√∂kkenti az √©lelem mennyis√©g√©t.
+	 * ‹tkˆzÈs egy hangy·val. Csˆkkenti az Èlelem mennyisÈgÈt.
 	 * @param A hangya. 
 	 */
 	public void collide(Ant ant) {

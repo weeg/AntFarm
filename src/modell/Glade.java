@@ -1,4 +1,4 @@
-Ôªøpackage modell;
+package modell;
 
 import java.util.ArrayList;
 
@@ -7,27 +7,27 @@ import skeleton.Logger;
 public class Glade {
 
 	/**
-	 * A mez≈ëket t√°rol√≥ lista.
+	 * A mezıket t·rolÛ lista.
 	 */
 	private ArrayList<Field> fields = new ArrayList<Field>();
 	
 	/**
-	 * Az √©lelmeket t√°rol√≥ lista.
+	 * Az Èlelmeket t·rolÛ lista.
 	 */
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	
 	/**
-	 * A spray-ket t√°rol√≥ lista.
+	 * A spray-ket t·rolÛ lista.
 	 */
 	private ArrayList<Spray> sprays = new ArrayList<Spray>();
 	
 	/**
-	 * Az aktiv elemek list√°ja.
+	 * Az aktiv elemek list·ja.
 	 */
 	private ArrayList<Active> activeObjects = new ArrayList<Active>();
 	
 	/**
-	 * Az eltelt id≈ë.
+	 * Az eltelt idı.
 	 */
 	private int time;
 	
@@ -36,7 +36,7 @@ public class Glade {
 	}
 	
 	/**
-	 * A j√°t√©k ind√≠t√°sa.
+	 * A j·tÈk indÌt·sa.
 	 */
 	public void start() {
 		Logger.enter(this, "start");
@@ -69,7 +69,7 @@ public class Glade {
 	}
 	
 	/**
-	 * Az id≈ë l√©ptet√©se.
+	 * Az idı lÈptetÈse.
 	 */
 	public void tick() {
 		Logger.enter(this, "tick");
@@ -77,8 +77,8 @@ public class Glade {
 	}
 	
 	/**
-	 * Egy akt√≠v elem hozz√°ad√°sa.
-	 * @param active Az akt√≠v elem.
+	 * Egy aktÌv elem hozz·ad·sa.
+	 * @param active Az aktÌv elem.
 	 */
 	public void addActiveObject(Active active) {
 		Logger.enter(this, "addActiveObject", Logger.getObjectName(active));
@@ -87,8 +87,8 @@ public class Glade {
 	}
 	
 	/**
-	 * Egy akt√≠v elem elt√°vol√≠t√°sa.
-	 * @param active Az elt√°vol√≠tand√≥ elem.
+	 * Egy aktÌv elem elt·volÌt·sa.
+	 * @param active Az elt·volÌtandÛ elem.
 	 */
 	public void removeActiveObject(Active active) {
 		Logger.enter(this, "removeActiveObject", Logger.getObjectName(active));

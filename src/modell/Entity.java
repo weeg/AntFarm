@@ -1,46 +1,46 @@
-ï»¿package modell;
+package modell;
 
 import skeleton.Logger;
 
 /**
- * Az entitÃ¡s objektum. 
+ * Az entitás objektum. 
  */
 public abstract class Entity {
 	
 	/**
-	 * A mezÅ‘, amin az entitÃ¡s van.
+	 * A mezõ, amin az entitás van.
 	 */
 	protected Field position;
 	
 	/**
-	 * Visszadja a poziciÃ³t.
-	 * @return a poziciÃ³.
+	 * Visszadja a poziciót.
+	 * @return a pozició.
 	 */
 	public Field getPosition() {
 		return position;
 	}
 	
 	/**
-	 * BeÃ¡llÃ­tja az Ãºj poziciÃ³t.
-	 * @param position Az Ãºj poziciÃ³.
+	 * Beállítja az új poziciót.
+	 * @param position Az új pozició.
 	 */
 	public void setPosition(Field position) {
 		this.position = position;
 	}
 	
 	/**
-	 * ÃœtkÃ¶zÃ©s egy hangyÃ¡val. A leszÃ¡rmazottak kÃ¼lÃ¶nbÅ‘zÅ‘ mÃ³don implemetÃ¡lhatjÃ¡k, 
-	 * attÃ³l fÃ¼ggÅ‘en mi tÃ¶rtÃ©njen az Ã¼tkÃ¶zÃ©s sorÃ¡n.
-	 * @param ant A hangya, amivel Ã¼tkÃ¶zik.
+	 * Ütközés egy hangyával. A leszármazottak különbõzõ módon implemetálhatják, 
+	 * attól függõen mi történjen az ütközés során.
+	 * @param ant A hangya, amivel ütközik.
 	 */
 	public void collide(Ant ant) {		
 		// A leszarmazottak fogjak implementalni szukseg eseten
 	}
 	
 	/**
-	 * ÃœtkÃ¶zÃ©s egy hangyÃ¡szsÃ¼nnel. A leszÃ¡rmazottak kÃ¼lÃ¶nbÅ‘zÅ‘ mÃ³don implemetÃ¡lhatjÃ¡k, 
-	 * attÃ³l fÃ¼ggÅ‘en mi tÃ¶rtÃ©njen az Ã¼tkÃ¶zÃ©s sorÃ¡n.
-	 * @param anteater A hangyÃ¡ssÃ¼n, amivel Ã¼tkÃ¶zik.
+	 * Ütközés egy hangyászsünnel. A leszármazottak különbõzõ módon implemetálhatják, 
+	 * attól függõen mi történjen az ütközés során.
+	 * @param anteater A hangyássün, amivel ütközik.
 	 */
 	public void collide(Anteater anteater) {
 		// A leszarmazottak fogjak implementalni szukseg eseten

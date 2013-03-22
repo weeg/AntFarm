@@ -1,4 +1,4 @@
-Ôªøpackage modell;
+package modell;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -139,7 +139,7 @@ public class Ant extends Entity implements Active {
 				target = f; 
 			}
 		}
-		int r = Logger.choose("Mivel utkozzon a hangya?", "Akadallyal (K≈ëvel)", "Hangyaval", "Hangyabollyal", 
+		int r = Logger.choose("Mivel utkozzon a hangya?", "Akadallyal (Kovel)", "Hangyaval", "Hangyabollyal", 
 				"Hangyalesovel", "Hangyaszsunnel", "Elelemmel", "Mereggel", "Palyaszelevel");
 		switch (r) {
 			case 1:
@@ -217,7 +217,7 @@ public class Ant extends Entity implements Active {
 	}
 	
 	/**
-	 * Be√°ll√≠tja a hangy√°n√°l a m√©rgez√©st.
+	 * Be·llÌtja a hangy·n·l a mÈrgezÈst.
 	 */
 	public void poison() {
 		Logger.enter(this, "poison");

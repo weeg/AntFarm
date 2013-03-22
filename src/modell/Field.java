@@ -1,4 +1,4 @@
-Ôªøpackage modell;
+package modell;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,17 +8,17 @@ import skeleton.Logger;
 public class Field {
 
 	/**
-	 * A szomsz√©dokat t√°rol√≥ objektum.
+	 * A szomszÈdokat t·rolÛ objektum.
 	 */
 	private HashMap<Direction, Field> neighbours = new HashMap<Direction, Field>();
 	
 	/**
-	 * A szagokat t√°rol√≥ lista.
+	 * A szagokat t·rolÛ lista.
 	 */
 	private ArrayList<Odor> odors = new ArrayList<Odor>();
 	
 	/**
-	 * Az entit√°sokat t√°rol√≥ lista.
+	 * Az entit·sokat t·rolÛ lista.
 	 */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
@@ -27,9 +27,9 @@ public class Field {
 	}
 	
 	/**
-	 * Az adott ir√°nyban l√©v≈ë szomsz√©d megad√°sa.
-	 * @param dir Az ir√°ny.
-	 * @param neighbour A szomsz√©d mez≈ë.
+	 * Az adott ir·nyban lÈvı szomszÈd megad·sa.
+	 * @param dir Az ir·ny.
+	 * @param neighbour A szomszÈd mezı.
 	 */
 	public void setNeighbour(Direction dir, Field neighbour) {
 		Logger.enter(this, "setNeighbour", "dir:Direction", Logger.getObjectName(neighbour));
@@ -38,9 +38,9 @@ public class Field {
 	}
 	
 	/**
-	 * Visszaadja az adott ir√°nyban l√©v≈ë szomsz√©dot.
-	 * @param dir Az ir√°ny.
-	 * @return A szomsz√©d mez≈ë.
+	 * Visszaadja az adott ir·nyban lÈvı szomszÈdot.
+	 * @param dir Az ir·ny.
+	 * @return A szomszÈd mezı.
 	 */
 	public Field getNeighbour(Direction dir) {
 		Logger.enter(this, "getNeighbour", "dir:Direction");
@@ -49,9 +49,9 @@ public class Field {
 	}
 	
 	/**
-	 * Egy list√°t ad vissza azokkal a mez≈ëkkel, amik a mez≈ët≈ël radius t√°vols√°gon bel√ºl vannak.
-	 * @param radius A t√°vols√°g.
-	 * @return Lista a mez≈ëkr≈ël.
+	 * Egy list·t ad vissza azokkal a mezıkkel, amik a mezıtıl radius t·vols·gon bel¸l vannak.
+	 * @param radius A t·vols·g.
+	 * @return Lista a mezıkrıl.
 	 */
 	public ArrayList<Field> getNeighbours(int radius) {
 		Logger.enter(this, "getNeighbours", "radius:int");
@@ -60,8 +60,8 @@ public class Field {
 	}
 	
 	/**
-	 * A mez≈ëben l√©v≈ë szagok √∂sszintenzit√°sa.
-	 * @return Az √∂sszintenzit√°s.
+	 * A mezıben lÈvı szagok ˆsszintenzit·sa.
+	 * @return Az ˆsszintenzit·s.
 	 */
 	public int getOdorIntensity() {
 		Logger.enter(this, "getOdorIntensity");
@@ -74,7 +74,7 @@ public class Field {
 	}
 	
 	/**
-	 * Egy szag hozz√°ad√°sa a mez≈ëh√∂z.
+	 * Egy szag hozz·ad·sa a mezıhˆz.
 	 * @param odor A szagobjektum.
 	 */
 	public void addOdor(Odor odor) {
@@ -84,7 +84,7 @@ public class Field {
 	}
 	
 	/**
-	 * Visszaadja a mez≈ëben tal√°lhat√≥ szagok list√°j√°t.
+	 * Visszaadja a mezıben tal·lhatÛ szagok list·j·t.
 	 * @return A szaglista.
 	 */
 	public ArrayList<Odor> getOdors() {
@@ -94,8 +94,8 @@ public class Field {
 	}
 
 	/**
-	 * Szag t√∂rl√©se a mez≈ër≈ël.
-	 * @param odor A t√∂rlend≈ë szagobjektum.
+	 * Szag tˆrlÈse a mezırıl.
+	 * @param odor A tˆrlendı szagobjektum.
 	 */
 	public void removeOdor(Odor odor) {
 		Logger.enter(this, "removeOdors", Logger.getObjectName(odor));
@@ -104,8 +104,8 @@ public class Field {
 	}
 
 	/**
-	 * Entit√°s hozz√°ad√°sa a mez≈ëh√∂z.
-	 * @param entity Egy entit√°s.
+	 * Entit·s hozz·ad·sa a mezıhˆz.
+	 * @param entity Egy entit·s.
 	 */
 	public void addEntity(Entity e) {
 		Logger.enter(this, "addEntity", Logger.getObjectName(e));
@@ -114,8 +114,8 @@ public class Field {
 	}
 
 	/**
-	 * Entit√°s elt√°vol√≠t√°sa.
-	 * @param entity T√∂rlend≈ë entit√°s.
+	 * Entit·s elt·volÌt·sa.
+	 * @param entity Tˆrlendı entit·s.
 	 */
 	public void removeEntity(Entity e) {
 		Logger.enter(this, "removeEntity", Logger.getObjectName(e));
@@ -124,8 +124,8 @@ public class Field {
 	}
 
 	/**
-	 * Az √∂sszes entit√°s lek√©r√©se.
-	 * @return Az entit√°sok list√°ja.
+	 * Az ˆsszes entit·s lekÈrÈse.
+	 * @return Az entit·sok list·ja.
 	 */
 	public ArrayList<Entity> getEntities() {
 		Logger.enter(this, "getEntities");

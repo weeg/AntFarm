@@ -1,4 +1,4 @@
-﻿package modell;
+package modell;
 
 import skeleton.Logger;
 
