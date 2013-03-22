@@ -1,6 +1,5 @@
 package modell;
 
-
 public interface Active {
 	
 	/**

@@ -7,7 +7,7 @@ public class Skeleton {
 	 */
 	public static void main(String[] args) {
 		
-		TestCase testCase = new TestCase0();
+		TestCase testCase = new TestCase2();
 		testCase.test();
 
 	}

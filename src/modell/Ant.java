@@ -35,6 +35,19 @@ public class Ant extends Entity implements Active {
 	}
 	
 	/**
+	 * Hangya konstruktor
+	 * @param glade A tisztas, amin van a hangya
+	 * @param position A mezo, amin van a hangya
+	 * @param dir A hangya iranya
+	 */
+	public Ant(Glade glade, Field position, Direction dir) {
+		this();
+		this.glade = glade;
+		this.position = position;
+		this.direction = dir;
+	}
+	
+	/**
 	 *  Visszaadja, hogy a hangyanal van-e elelem
 	 * @return Igaz, ha a hangyanal van elelem
 	 */
@@ -86,22 +99,10 @@ public class Ant extends Entity implements Active {
 		
 		Logger.enter(this, "animate", Logger.getObjectName(glade));
 		for (int i = 0; i < 3; i++) {
-			Field f = null;
-			switch (i) {
-			case 0:
-				f = getPosition().getNeighbour(Direction.getLeftDirection(direction));
-				break;
-			case 1:
-				f = getPosition().getNeighbour(direction);
-				break;
-			case 2:
-				f = getPosition().getNeighbour(Direction.getRightDirection(direction));
-				break;
-			}
-			int intensity = f.getOdorIntensity();
-			// TODO
+			Field f = position.getNeighbour(direction);
+			int intensity = f.getOdorIntensity();			
 		}
-		Logger.exit(this);
+		Logger.exit(this);	
 	}
 	
 	/**

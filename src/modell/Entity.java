@@ -10,7 +10,7 @@ public abstract class Entity {
 	/**
 	 * A mező, amin az entitás van.
 	 */
-	private Field position;
+	protected Field position;
 	
 	/**
 	 * Visszadja a poziciót.
