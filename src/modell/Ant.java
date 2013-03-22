@@ -139,8 +139,8 @@ public class Ant extends Entity implements Active {
 				target = f; 
 			}
 		}
-		int r = Logger.choose("Mivel ütközzön a hangya?", "Akadállyal (Kővel)", "Hangyával", "Hangyabollyal", 
-				"Hangyalesővel", "Hangyászsünnel", "Élelemmel", "Méreggel", "Pályaszélével");
+		int r = Logger.choose("Mivel utkozzon a hangya?", "Akadallyal (Kővel)", "Hangyaval", "Hangyabollyal", 
+				"Hangyalesovel", "Hangyaszsunnel", "Elelemmel", "Mereggel", "Palyaszelevel");
 		switch (r) {
 			case 1:
 				target.addEntity(new Stone());
