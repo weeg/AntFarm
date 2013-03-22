@@ -9,7 +9,7 @@ public class Ant extends Entity implements Active {
 	/** Az irany, amerre a hangya megy */
 	private Direction direction;
 	
-	/** A tiszt‡s, amin van a hangya */
+	/** A tisztas, amin van a hangya */
 	private Glade glade;
 	
 	/** Azok a mezok, amiken vegigment a hangya */
