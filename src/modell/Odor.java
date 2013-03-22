@@ -2,7 +2,7 @@ package modell;
 
 import skeleton.Logger;
 
-public class Odor {
+public abstract class Odor {
 	
 	/**
 	 * A szag intenzit·sa.
@@ -50,10 +50,13 @@ public class Odor {
 		Logger.exit(this);
 	}
 	/**
+<<<<<<< HEAD
 	 * SemlegesÌtÈs, a k¸lˆnbˆzı lesz·rmazottak fogj·k implement·lni.
+=======
+	 * Semleges√≠t√©s, a k√ºl√∂nb√∂z≈ë lesz√°rmazottak fogj√°k implement√°lni.
+	 * 
+>>>>>>> neutralize nem j√≥
 	 */
-	public void neutralize() {
-		
-	}
+	public abstract boolean neutralize();
 
 }

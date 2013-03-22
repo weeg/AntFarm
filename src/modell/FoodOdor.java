@@ -18,4 +18,10 @@ public class FoodOdor extends Odor {
 		this.getPosition().removeOdor(this);
 		Logger.exit(this);
 	}
+	
+	public boolean neutralize() {	
+		Logger.enter(this, "neutralize");
+		Logger.exit(this);
+		return false;
+	}
 }

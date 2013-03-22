@@ -14,6 +14,12 @@ public class AntOdor extends Odor implements Active {
 		Logger.attach("antOdor", this);
 	}
 	
+	public AntOdor(Glade glade, Field field) {
+		this();
+		this.glade = glade;
+		this.position = field;
+	}
+	
 	/**
 	 * A hangyaszag animalasa
 	 */
@@ -30,12 +36,13 @@ public class AntOdor extends Odor implements Active {
 	/**
 	 * A hangyaszag semlegesitese
 	 */
-	public void neutralize() {
+	public boolean neutralize() {
 		
 		Logger.enter(this, "neutralize");
-		getPosition().removeOdor(this);
-		getGlade().removeActiveObject(this);					
+		//position.removeOdor(this);
+		glade.removeActiveObject(this);					
 		Logger.exit(this);
+		return true;
 	}
 
 	public Glade getGlade() {

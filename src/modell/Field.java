@@ -32,8 +32,7 @@ public class Field {
 	 * @param neighbour A szomszéd mezõ.
 	 */
 	public void setNeighbour(Direction dir, Field neighbour) {
-		Logger.enter(this, "setNeighbour", "dir:" + dir.toString(), Logger.getObjectName(neighbour));
-		neighbours.put(dir, neighbour);
+		Logger.enter(this, "setNeighbour", "dir:" + dir.toString(), Logger.getObjectName(neighbour));		
 		Logger.exit(this);
 	}
 	
@@ -43,9 +42,9 @@ public class Field {
 	 * @return A szomszéd mezõ.
 	 */
 	public Field getNeighbour(Direction dir) {
-		Logger.enter(this, "getNeighbour", "dir:Direction");
+		Logger.enter(this, "getNeighbour", "dir: " + dir.toString());
 		Logger.exit(this);
-		return neighbours.get(dir);
+		return new Field();
 	}
 	
 	/**
@@ -56,7 +55,14 @@ public class Field {
 	public ArrayList<Field> getNeighbours(int radius) {
 		Logger.enter(this, "getNeighbours", "radius:int");
 		Logger.exit(this);
-		return null;
+		Logger.off();
+		ArrayList<Field> list = new ArrayList<Field>();
+		for (int i = 0; i < 3; i++) {			
+			list.add(new Field());
+		}
+		list.add(this);
+		Logger.on();
+		return list;
 	}
 	
 	/**
@@ -89,7 +95,7 @@ public class Field {
 	 */
 	public ArrayList<Odor> getOdors() {
 		Logger.enter(this, "getOdors");
-		Logger.exit(this);
+		Logger.exit(this);				
 		return odors;
 	}
 

@@ -88,12 +88,13 @@ public class Anteater extends Entity implements Active {
 	 */
 	public void animate() {
 		
-		Logger.enter(this, "animate");		
-		Logger.off();
+		Logger.enter(this, "animate");				
 		direction = Direction.N;		
-		Field target = position.getNeighbour(direction);			
+		Field target = position.getNeighbour(direction);
+		
 		int r = Logger.choose("Mivel utkozzon a hangyaszsun?", "Kovel", "Tocsaval", "Faronkkel", 
 				"Hangyaval", "Palya szelevel");
+		Logger.off();
 		switch (r) {
 			case 1:
 				target.addEntity(new Stone());

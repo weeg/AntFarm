@@ -69,7 +69,7 @@ public class Ant extends Entity implements Active {
 	public void kill() {
 		
 		Logger.enter(this, "kill");
-		getPosition().removeEntity(this);
+		position.removeEntity(this);
 		glade.removeActiveObject(this);
 		killed = true;
 		Logger.exit(this);
@@ -175,12 +175,12 @@ public class Ant extends Entity implements Active {
 				if (blocked) {
 					this.changeDirection();
 				} else {
-					AntOdor ao = new AntOdor();
-					this.getPosition().addOdor(ao);
+					AntOdor ao = new AntOdor(glade, position);
+					position.addOdor(ao);
 					glade.addActiveObject(ao);
 				}
 			}
-			this.getPosition().removeEntity(this);
+			position.removeEntity(this);
 			target.addEntity(this);
 		}
 		Logger.exit(this);	

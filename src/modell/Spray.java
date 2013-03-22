@@ -12,7 +12,7 @@ public abstract class Spray {
 	/**
 	 * A hatósugár mérete.
 	 */
-	private int radius;
+	protected int radius;
 	
 	protected Glade glade;
 	

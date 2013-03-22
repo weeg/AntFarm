@@ -13,6 +13,11 @@ public class AntKillerSpray extends Spray {
 		Logger.attach("antKillerSpray", this);
 	}
 	
+	public AntKillerSpray(Glade glade) {
+		this();
+		this.glade = glade;
+	}
+	
 	/**
 	 * A hangyairto spray hasznalata
 	 * @param center Az a mezo, amire (es kore) fuj a felhasznalo a spray-el
@@ -25,7 +30,7 @@ public class AntKillerSpray extends Spray {
 		for (Field field : fields) {
 			field.addEntity(poison);
 		}		
-		// Glade???
+		glade.addActiveObject(poison);
 		Logger.exit(this);
 	}
 
