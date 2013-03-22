@@ -179,12 +179,10 @@ public class Ant extends Entity implements Active {
 					AntOdor ao = new AntOdor();
 					this.getPosition().addOdor(ao);
 					glade.addActiveObject(ao);
-					this.getPosition().removeEntity(this);
-					target.addEntity(this);
 				}
 			}
-			Field f = position.getNeighbour(direction);
-			int intensity = f.getOdorIntensity();			
+			this.getPosition().removeEntity(this);
+			target.addEntity(this);
 		}
 		Logger.exit(this);	
 	}
