@@ -146,7 +146,7 @@ public class Ant extends Entity implements Active {
 				target.addEntity(new Stone());
 				break;
 			case 2:
-				target.addEntity(new Ant(glade));
+				target.addEntity(new Ant());
 				break;
 			case 3:
 				target.addEntity(new AntHill(glade));

@@ -3,7 +3,6 @@ package modell;
 public enum Direction {
 	N, NE, SE, S, SW, NW;
 	
-	/*
 	public static Direction getLeftDirection(Direction d) {
 		switch (d) {
 		case N:
@@ -40,5 +39,5 @@ public enum Direction {
 		default:
 			return null;
 		}
-	}*/
+	}
 }

@@ -36,7 +36,7 @@ public class AntHill extends Entity implements Active {
 		Logger.enter(this, "animate", Logger.getObjectName(glade));
 		int r = Logger.choose("Hozzon letre a hangyaboly egy uj hangyat?", "Igen", "Nem");
 		if (r == 1) {
-			Ant ant = new Ant(glade);
+			Ant ant = new Ant();
 		}		
 		Logger.exit(this);
 	}

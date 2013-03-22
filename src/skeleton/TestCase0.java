@@ -12,7 +12,7 @@ public class TestCase0 extends TestCase {
 	
 	public void test() {
 		Glade gl = new Glade();
-		Ant ant = new Ant(gl);
+		Ant ant = new Ant();
 		Anteater anteater = new Anteater();
 		AntHill anthill = new AntHill(gl);
 		AntLion antLion = new AntLion();
