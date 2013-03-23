@@ -6,19 +6,13 @@ public class AntHill extends Entity implements Active {
 	/**
 	 * A hangyaboly default konstruktora
 	 */
-<<<<<<< HEAD
-	public AntHill(Glade gl) {
-		Logger.attach("antHill", this);
-		glade = gl;
-=======
 	public AntHill() {
-		Logger.attach("anthill", this);		
+		Logger.attach("antHill", this);		
 	}
 	
 	public AntHill(Glade glade) {
 		this();
 		this.glade = glade;
->>>>>>> Javítások
 	}
 	
 	/**

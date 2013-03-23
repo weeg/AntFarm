@@ -68,18 +68,12 @@ public class Anteater extends Entity implements Active {
 	 * Utkozes egy hangyaval, megoli a hangyat.
 	 * @param ant A hangya, amivel utkozik.
 	 */
-<<<<<<< HEAD
 	public void collide(Ant ant) {
 		Logger.enter(this, "collide", Logger.getObjectName(ant));
 		if (this.isHungry()) {
 			ant.kill();
+			eatenAnts++;
 		}
-=======
-	public void collide(Ant ant) {		
-		Logger.enter(this, "collide", Logger.getObjectName(ant));
-		ant.kill();
-		increaseEatenAnts(ant);
->>>>>>> Javítások
 		Logger.exit(this);
 	}
 
@@ -89,8 +83,8 @@ public class Anteater extends Entity implements Active {
 	 */
 	public void increaseEatenAnts(Ant a) {
 		Logger.enter(this, "increaseEatenAnts");
-		this.victims.add(a);
-		this.eatenAnts++;
+		victims.add(a);
+		eatenAnts++;
 		Logger.exit(this);
 	}
 	

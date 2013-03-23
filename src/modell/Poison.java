@@ -15,9 +15,9 @@ public class Poison extends Entity implements Active {
 		Logger.attach("Poison", this);
 	}
 	
-	public Poison(Glade gl, Field pos) {
+	public Poison(Glade glade, Field pos) {
 		Logger.attach("Poison", this);
-		glade = gl;
+		this.glade = glade;
 		setPosition(pos);
 	}
 	
