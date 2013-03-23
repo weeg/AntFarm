@@ -30,11 +30,9 @@ public class AntOdorNeutralizerSpray extends Spray {
 		for (Field field : fields) {
 			
 			ArrayList<Odor> odors = field.getOdors();
-			Iterator<Odor> i = odors.iterator();
-			while (i.hasNext()) {
-				Odor o = i.next();
-				if (o.neutralize()) {
-					i.remove();					
+			for (int i = 0; i < odors.size(); i++) {
+				if (odors.get(i).neutralize()) {
+					i--;
 				}
 			}
 		}

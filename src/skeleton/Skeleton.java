@@ -29,7 +29,7 @@ public class Skeleton {
 			}
 			testCase.test();
 			
-			r = Logger.choose("A tesztesett lefutott. Kivan ujat futtatni?", "Igen", "Nem, kilepek");
+			r = Logger.choose("A teszteset lefutott. Kivan ujat futtatni?", "Igen", "Nem, kilepek");
 			Logger.reset();
 			if (r == 2) {
 				break;
