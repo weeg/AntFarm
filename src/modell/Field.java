@@ -114,7 +114,7 @@ public class Field {
 
 	/**
 	 * Entitas hozzaadasa a mezohoz.
-	 * @param entity Egy entitas.
+	 * @param e Egy entitas.
 	 */
 	public void addEntity(Entity e) {
 		Logger.enter(this, "addEntity", Logger.getObjectName(e)+":Entity");
@@ -124,7 +124,7 @@ public class Field {
 
 	/**
 	 * Entitas eltavolitasa.
-	 * @param entity Torlendo entitas.
+	 * @param e Torlendo entitas.
 	 */
 	public void removeEntity(Entity e) {
 		Logger.enter(this, "removeEntity", Logger.getObjectName(e)+":Entity");

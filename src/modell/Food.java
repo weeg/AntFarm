@@ -47,7 +47,7 @@ public class Food extends Entity {
 	
 	/**
 	 * Utkozes egy hangyaval. Csokkenti az elelem mennyiseget.
-	 * @param A hangya. 
+	 * @param ant hangya. 
 	 */
 	public void collide(Ant ant) {
 		Logger.enter(this, "collide", Logger.getObjectName(ant)+":Ant");
