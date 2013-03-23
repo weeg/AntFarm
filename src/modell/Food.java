@@ -50,7 +50,9 @@ public class Food extends Entity {
 	 * @param ant hangya. 
 	 */
 	public void collide(Ant ant) {
-		Logger.enter(this, "collide", Logger.getObjectName(ant)+":Ant");
+		Logger.enter(this, "collide", Logger.getObjectName(ant) + ":Ant");
+		Logger.enter(this, "collide", Logger.getObjectName(ant));
+		ant.eat();
 		Logger.exit(this);
 	}
 }

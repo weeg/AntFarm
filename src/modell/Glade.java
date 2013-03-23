@@ -110,7 +110,6 @@ public class Glade {
 		Logger.exit(this);
 	}
 	
-	
 	/**
 	 * Egy aktív elem hozzáadása.
 	 * @param active Az aktív elem.

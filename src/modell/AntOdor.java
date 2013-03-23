@@ -40,9 +40,9 @@ public class AntOdor extends Odor implements Active {
 	public boolean neutralize() {
 		
 		Logger.enter(this, "neutralize");
-		//position.removeOdor(this);
+		position.removeOdor(this);
 		glade.removeActiveObject(this);					
-		Logger.exit(this);
+		Logger.exit(this);	
 		return true;
 	}
 

@@ -72,6 +72,7 @@ public class Anteater extends Entity implements Active {
 		Logger.enter(this, "collide", Logger.getObjectName(ant));
 		if (this.isHungry()) {
 			ant.kill();
+			eatenAnts++;
 		}
 		Logger.exit(this);
 	}
@@ -82,8 +83,8 @@ public class Anteater extends Entity implements Active {
 	 */
 	public void increaseEatenAnts(Ant a) {
 		Logger.enter(this, "increaseEatenAnts");
-		this.victims.add(a);
-		this.eatenAnts++;
+		victims.add(a);
+		eatenAnts++;
 		Logger.exit(this);
 	}
 	

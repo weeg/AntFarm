@@ -137,50 +137,67 @@ public class Ant extends Entity implements Active {
 				target = f; 
 			}
 		}
-		int r = Logger.choose("Mivel utkozzon a hangya?", "Akadallyal (Kovel)", "Hangyaval", "Hangyabollyal", 
-				"Hangyalesovel", "Hangyaszsunnel", "Elelemmel", "Mereggel", "Palyaszelevel");
-		switch (r) {
-			case 1:
-				target.addEntity(new Stone());
-				break;
-			case 2:
-				target.addEntity(new Ant());
-				break;
-			case 3:
-				target.addEntity(new AntHill(glade));
-				break;
-			case 4:
-				target.addEntity(new AntLion());
-				break;
-			case 5:
-				target.addEntity(new Anteater());
-				break;
-			case 6:
-				target.addEntity(new Food());
-				break;
-			case 7:
-				target.addEntity(new Poison());
-				break;
-			case 8:
-				target.addEntity(new DeadEnd());
-				break;
+		if (hasFood == false) {
+			int r = Logger.choose("Mivel utkozzon a hangya?", "Akadallyal (Kovel)", "Hangyaval", "Hangyabollyal", 
+					"Hangyalesovel", "Hangyaszsunnel", "Elelemmel", "Mereggel", "Palyaszelevel");
+			switch (r) {
+				case 1:
+					target.addEntity(new Stone());
+					break;
+				case 2:
+					target.addEntity(new Ant());
+					break;
+				case 3:
+					target.addEntity(new AntHill(glade));
+					break;
+				case 4:
+					target.addEntity(new AntLion());
+					break;
+				case 5:
+					target.addEntity(new Anteater());
+					break;
+				case 6:
+					target.addEntity(new Food());
+					break;
+				case 7:
+					target.addEntity(new Poison());
+					break;
+				case 8:
+					target.addEntity(new DeadEnd());
+					break;
+			}
+		} else {
+			int r = Logger.choose("Mivel utkozzon a hangya?", "Hangyaval", "Hangyabollyal", 
+					"Hangyaszsunnel", "Mereggel");
+			switch (r) {
+				case 1:
+					target.addEntity(new Ant());
+					break;
+				case 2:
+					target.addEntity(new AntHill(glade));
+					break;
+				case 3:
+					target.addEntity(new Anteater());
+					break;
+				case 4:
+					target.addEntity(new Poison());
+					break;
+			}
 		}
 		Logger.on();
 		for (Entity e : target.getEntities()) {
 			e.collide(this);
 		}
-		if (killed == false) { 
-			if (hasFood == false) {
-				if (blocked) {
-					this.changeDirection();
-				} else {
-					AntOdor ao = new AntOdor(glade, position);
-					position.addOdor(ao);
-					glade.addActiveObject(ao);
-				}
-			}
-			position.removeEntity(this);
-			target.addEntity(this);
+		if (killed == false) { 			
+			if (blocked) {					
+				changeDirection();
+			} else {					
+				AntOdor ao = new AntOdor(glade, position);
+				position.addOdor(ao);
+				glade.addActiveObject(ao);
+				position.removeEntity(this);
+				target.addEntity(this);
+			}							
 		}
 		Logger.exit(this);	
 	}

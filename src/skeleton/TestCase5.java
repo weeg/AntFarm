@@ -8,6 +8,7 @@ public class TestCase5 extends TestCase {
 		Logger.off();
 		Glade gl = new Glade();
 		Logger.on();
+		
 		gl.tick();
 	}
 
