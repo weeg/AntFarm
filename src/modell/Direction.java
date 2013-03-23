@@ -1,62 +1,38 @@
 package modell;
 
 public enum Direction {
-	N, NE, SE, S, SW, NW;
+	N(0), NE(1), SE(2), S(3), SW(4), NW(5);
 	
-	public static Direction parseInt(int i) {
-		switch (i) {
-		case 0:
-			return N;			
-		case 1:
-			return NE;
-		case 2:
-			return SE;
-		case 3:
-			return S;
-		case 4:
-			return SW;
-		case 5:
-			return NW;
-		default:
-			return N;
+	private final int index;   
+
+	Direction(int index) {
+        this.index = index;
+    }
+
+    public int index() { 
+        return index; 
+    }
+	
+	public Direction turn(int i) {
+		int idx = (i + this.index) % 6;
+		if (idx < 0) {
+		    idx += 6;
 		}
-	}
-	
-	public static Direction getLeftDirection(Direction d) {
-		switch (d) {
-		case N:
-			return NW;
-		case NE:
-			return N;
-		case SE:
-			return NE;
-		case S:
-			return SE;
-		case SW:
-			return S;
-		case NW:
-			return SW;
-		default:
-			return null;
-		}
-	}
-	
-	public static Direction getRightDirection(Direction d) {
-		switch (d) {
-		case N:
-			return NE;
-		case NE:
-			return SE;
-		case SE:
-			return S;
-		case S:
-			return SW;
-		case SW:
-			return NW;
-		case NW:
-			return N;
-		default:
-			return null;
+		switch (idx) {
+			case 0:
+				return N;			
+			case 1:
+				return NE;
+			case 2:
+				return SE;
+			case 3:
+				return S;
+			case 4:
+				return SW;
+			case 5:
+				return NW;
+			default:
+				return N;
 		}
 	}
 }

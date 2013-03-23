@@ -110,33 +110,23 @@ public class Ant extends Entity implements Active {
 				hasFood = false;	
 				break;
 		}
-		Logger.off();
 		direction = Direction.NE;
 		Field target = null;
 		if (hasFood) {
 			target = popFieldFromMemory();
-		}
-		for (int i = 0; i < 3; i++) {
-			Field f = null;
-			switch (i) {
-			case 0:
-				f = getPosition().getNeighbour(Direction.getLeftDirection(direction));
-				break;
-			case 1:
-				f = getPosition().getNeighbour(direction);
-				break;
-			case 2:
-				f = getPosition().getNeighbour(Direction.getRightDirection(direction));
-				break;
-			}
-			int intensity = f.getOdorIntensity();
-			if (target == null) {
-				target = f;
-			}
-			if (target.getOdorIntensity() < intensity) {
-				target = f; 
+		} else {
+			for (int i = -1; i < 2; i++) {
+				Field f = getPosition().getNeighbour(direction.turn(i));
+				int intensity = f.getOdorIntensity();
+				if (target == null) {
+					target = f;
+				}
+				if (target.getOdorIntensity() < intensity) {
+					target = f; 
+				}
 			}
 		}
+		Logger.off();
 		if (hasFood == false) {
 			int r = Logger.choose("Mivel utkozzon a hangya?", "Akadallyal (Kovel)", "Hangyaval", "Hangyabollyal", 
 					"Hangyalesovel", "Hangyaszsunnel", "Elelemmel", "Mereggel", "Palyaszelevel");
@@ -191,10 +181,12 @@ public class Ant extends Entity implements Active {
 		if (killed == false) { 			
 			if (blocked) {					
 				changeDirection();
-			} else {					
-				AntOdor ao = new AntOdor(glade, position);
-				position.addOdor(ao);
-				glade.addActiveObject(ao);
+			} else {	
+				if (hasFood == false) {
+					AntOdor ao = new AntOdor(glade, position);
+					position.addOdor(ao);
+					glade.addActiveObject(ao);
+				}
 				position.removeEntity(this);
 				target.addEntity(this);
 			}							
@@ -209,8 +201,10 @@ public class Ant extends Entity implements Active {
 	private Field popFieldFromMemory() {
 		Logger.enter(this, "popFieldFromMemory");
 		Logger.exit(this);
-		//return memory.pop();
-		return new Field();
+		Logger.off();
+		Field n = new Field();
+		Logger.on();
+		return n;
 	}
 
 	/**

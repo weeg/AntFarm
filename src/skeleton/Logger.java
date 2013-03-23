@@ -76,9 +76,7 @@ public class Logger {
 		// Kiiras
 		if (silent == false) {
 			tab();
-			if (silent == false) {
-				System.out.println("-:> " + s + "." + s + "(): " + objects.get(o) + " created");
-			}
+			System.out.println("-:> " + s + "." + s + "(): " + objects.get(o) + " created");
 		}
 	}	
 		

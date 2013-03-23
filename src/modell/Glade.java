@@ -44,7 +44,7 @@ public class Glade {
 			fields.add(new Field());
 		}
 		for (int i = 1; i < 7; i++) {
-			fields.get(0).setNeighbour(Direction.parseInt(i), fields.get(i));
+			fields.get(0).setNeighbour(Direction.N.turn(i), fields.get(i));
 		}
 		Food f = new Food();
 		fields.get(0).addEntity(f);
