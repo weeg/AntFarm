@@ -14,6 +14,11 @@ public class AntOdor extends Odor implements Active {
 		Logger.attach("antOdor", this);
 	}
 	
+	/**
+	 * A hangyaszag konstruktora.
+	 * @param glade A tisztas objektum.
+	 * @param field A mezo, amin van a hangyaszag
+	 */
 	public AntOdor(Glade glade, Field field) {
 		this();
 		this.glade = glade;
@@ -35,6 +40,7 @@ public class AntOdor extends Odor implements Active {
 	
 	/**
 	 * A hangyaszag semlegesitese
+	 * @return Sikeres-e a semlegesites.
 	 */
 	public boolean neutralize() {
 		
@@ -44,13 +50,4 @@ public class AntOdor extends Odor implements Active {
 		Logger.exit(this);	
 		return true;
 	}
-
-	public Glade getGlade() {
-		return glade;
-	}
-
-	public void setGlade(Glade glade) {
-		this.glade = glade;
-	}
-
 }

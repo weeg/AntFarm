@@ -1,7 +1,6 @@
 package modell;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import skeleton.Logger;
 
@@ -14,6 +13,10 @@ public class AntOdorNeutralizerSpray extends Spray {
 		Logger.attach("antOdorNeutralizerSpray", this);
 	}
 	
+	/**
+	 * A hangyaszag semlegesito spray konstruktora
+	 * @param glade A tisztas objektum.
+	 */
 	public AntOdorNeutralizerSpray(Glade glade) {
 		this();
 		this.glade = glade;
@@ -37,4 +40,5 @@ public class AntOdorNeutralizerSpray extends Spray {
 			}
 		}
 		Logger.exit(this);
-	}}
+	}
+}

@@ -19,6 +19,10 @@ public class FoodOdor extends Odor {
 		Logger.exit(this);
 	}
 	
+	/**
+	 * A semlegesito metodus_ mivel a szag nem semlegesitheto nem csinal semmit.
+	 * @return Hardcoded false.
+	 */
 	public boolean neutralize() {	
 		Logger.enter(this, "neutralize");
 		Logger.exit(this);

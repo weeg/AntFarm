@@ -7,27 +7,27 @@ import skeleton.Logger;
 public class Glade {
 
 	/**
-	 * A mezõket tároló lista.
+	 * A mezoket tarolo lista.
 	 */
 	private ArrayList<Field> fields = new ArrayList<Field>();
 	
 	/**
-	 * Az élelmeket tároló lista.
+	 * Az elelmeket tarolo lista.
 	 */
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	
 	/**
-	 * A spray-ket tároló lista.
+	 * A spray-ket tarolo lista.
 	 */
 	private ArrayList<Spray> sprays = new ArrayList<Spray>();
 	
 	/**
-	 * Az aktiv elemek listája.
+	 * Az aktiv elemek listaja.
 	 */
 	private ArrayList<Active> activeObjects = new ArrayList<Active>();
 	
 	/**
-	 * Az eltelt idõ.
+	 * Az eltelt ido.
 	 */
 	private int time;
 	
@@ -36,7 +36,7 @@ public class Glade {
 	}
 	
 	/**
-	 * A játék indítása.
+	 * A jatek inditasa.
 	 */
 	public void start() {
 		Logger.enter(this, "start");
@@ -89,8 +89,7 @@ public class Glade {
 		center.addEntity(ah);
 		Food f = new Food();
 		FoodOdor fo = new FoodOdor();
-		AntOdor ao = new AntOdor();
-		ao.setGlade(this);
+		AntOdor ao = new AntOdor(this, neighbours[0]);
 		Poison p = new Poison(this, neighbours[0]);
 		f.addFoodOdor(fo);
 		foods.add(f);
@@ -115,8 +114,8 @@ public class Glade {
 	}
 	
 	/**
-	 * Egy aktív elem hozzáadása.
-	 * @param active Az aktív elem.
+	 * Egy aktiv elem hozzaadasa.
+	 * @param active Az aktiv elem.
 	 */
 	public void addActiveObject(Active active) {
 		Logger.enter(this, "addActiveObject", Logger.getObjectName(active));
@@ -125,8 +124,8 @@ public class Glade {
 	}
 	
 	/**
-	 * Egy aktív elem eltávolítása.
-	 * @param active Az eltávolítandó elem.
+	 * Egy aktiv elem eltavolitasa.
+	 * @param active Az eltavolitando elem.
 	 */
 	public void removeActiveObject(Active active) {
 		Logger.enter(this, "removeActiveObject", Logger.getObjectName(active));
@@ -134,6 +133,9 @@ public class Glade {
 		Logger.exit(this);
 	}
 	
+	/**
+	 * A jatek vege metodus.
+	 */
 	public void gameOver() {
 		Logger.enter(this, "gameOver");
 		Logger.exit(this);

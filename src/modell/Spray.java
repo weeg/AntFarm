@@ -5,26 +5,29 @@ import skeleton.Logger;
 public abstract class Spray {
 	
 	/**
-	 * A rendelekezésre álló fújások száma.
+	 * A rendelekezesre allo fujasok szama.
 	 */
 	private int quantity;
 	
 	/**
-	 * A hatósugár mérete.
+	 * A hatosugar merete.
 	 */
 	protected int radius;
 	
+	/**
+	 * A tisztas objektum.
+	 */
 	protected Glade glade;
 	
 	/**
-	 * A paraméterként átadott mezõ köré fújás.
-	 * @param center
+	 * A parameterkent atadott mezo kore fujas.
+	 * @param center A kozeppontban levo mezo.
 	 */
 	public abstract void use(Field center);
 	
 	/**
-	 * Visszaadja a még rendelekezésre álló fújások számát.
-	 * @return A fújások száma.
+	 * Visszaadja a meg rendelekezesre allo fujasok szaaát.
+	 * @return A fujasok szama.
 	 */
 	public int getQuantity() {
 		Logger.enter(this, "getQuantity");
@@ -33,8 +36,8 @@ public abstract class Spray {
 	}
 
 	/**
-	 * Beállítja fújások számát.
-	 * @param quantity A fújások száma.
+	 * Beallitja fujasok szamat.
+	 * @param quantity A fujasok szama.
 	 */
 	public void setQuantity(int quantity) {
 		Logger.enter(this, "setQuantity", "quantity:int");
@@ -43,7 +46,7 @@ public abstract class Spray {
 	}
 
 	/**
-	 * Visszaadja a hatósugár mértetét.
+	 * Visszaadja a hatosugar mertetet.
 	 * @return A hatósugár
 	 */
 	public int getRadius() {
@@ -53,8 +56,8 @@ public abstract class Spray {
 	}
 
 	/**
-	 * Beállítja a hatósugarat.
-	 * @param radius A hatósugár mérete.
+	 * Beallitja a hatosugarat.
+	 * @param radius A hatosugar merete.
 	 */
 	public void setRadius(int radius) {
 		Logger.enter(this, "setRadius", "radius:int");

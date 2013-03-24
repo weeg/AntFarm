@@ -13,6 +13,10 @@ public class AntKillerSpray extends Spray {
 		Logger.attach("antKillerSpray", this);
 	}
 	
+	/**
+	 * A hangyairto spray konstruktora
+	 * @param glade A tisztas objektum.
+	 */
 	public AntKillerSpray(Glade glade) {
 		this();
 		this.glade = glade;

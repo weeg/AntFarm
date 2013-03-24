@@ -2,7 +2,7 @@ package modell;
 
 import skeleton.Logger;
 /**
- * Fatörzs akadály.
+ * Fatorzs akadaly.
  */
 public class Log extends Barricade {
 	
@@ -11,8 +11,8 @@ public class Log extends Barricade {
 	}
 	
 	/**
-	 * Ütközés egy hangyászsünnel. Blokkolja a hangyászsünt.
-	 * @param anteater A hangyászsün, amivel ütközik.
+	 * Utkozes egy hangyaszsunnel. Blokkolja a hangyaszsunt.
+	 * @param anteater A hangyaszsun, amivel utkozik.
 	 */
 	public void collide(Anteater anteater) {
 		Logger.enter(this, "collide", Logger.getObjectName(anteater));

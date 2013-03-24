@@ -16,7 +16,7 @@ public abstract class Odor {
 	
 	/**
 	 * Visszaadja a szag intenzitasat.
-	 * @return intezitás.
+	 * @return intezitas.
 	 */
 	public int getIntensity() {
 		Logger.enter(this, "getIntensity");
@@ -33,7 +33,7 @@ public abstract class Odor {
 	}
 	
 	/**
-	 * Beállítja az uj poziciot.
+	 * Beallitja az uj poziciot.
 	 * @param position Az uj pozicio.
 	 */
 	public void setPosition(Field position) {

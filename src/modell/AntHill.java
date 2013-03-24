@@ -10,6 +10,10 @@ public class AntHill extends Entity implements Active {
 		Logger.attach("antHill", this);		
 	}
 	
+	/**
+	 * A hangyaboly konstruktora.
+	 * @param glade A tisztas objektum.
+	 */
 	public AntHill(Glade glade) {
 		this();
 		this.glade = glade;

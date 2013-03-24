@@ -2,19 +2,27 @@ package modell;
 
 import skeleton.Logger;
 /**
- * A méreg objektum.
+ * A mereg objektum.
  */
 public class Poison extends Entity implements Active {
 	
 	/**
-	 * A hátralévõ idõ, amíg még a pályán lesz a méreg.
+	 * A hatralevo ido, amig meg a palyan lesz a mereg.
 	 */
 	private int TTL;
-
+	
+	/**
+	 * A mereg default konstruktora.
+	 */
 	public Poison() {
 		Logger.attach("Poison", this);
 	}
 	
+	/**
+	 * A mereg konstruktora.
+	 * @param glade A tisztas objektum.
+	 * @param pos A mezo, amin a mereg van.
+	 */
 	public Poison(Glade glade, Field pos) {
 		Logger.attach("Poison", this);
 		this.glade = glade;
@@ -22,7 +30,7 @@ public class Poison extends Entity implements Active {
 	}
 	
 	/**
-	 * A méreg animálása. Midenkörben csökkenti a hátralévõ idõt.
+	 * A mereg animalasa. Mindenkorben csokkenti a hatralevo idot.
 	 */
 	public void animate() {
 		Logger.enter(this, "animate");
@@ -35,7 +43,7 @@ public class Poison extends Entity implements Active {
 	}
 	
 	/**
-	 * Ütközés egy hangyával. Megmérgezi a hangyát.
+	 * Utkozes egy hangyaval. Megmergezi a hangyat.
 	 */
 	public void collide(Ant ant) {
 		Logger.enter(this, "collide", Logger.getObjectName(ant));
