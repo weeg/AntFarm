@@ -28,9 +28,12 @@ public class Food extends Entity {
 	 */
 	public int getQuantity() {
 		Logger.enter(this, "getQuantity");
-		for (FoodOdor fo : foodOdors) {
-			fo.evaporate();
-		}
+		int r = Logger.choose("Elfogyott mar az elelem?", "Igen", "Nem");
+		if (r == 1) {
+			for (FoodOdor fo : foodOdors) {
+				fo.evaporate();
+			}
+		}		
 		Logger.exit(this);
 		return quantity;
 	}

@@ -115,8 +115,8 @@ public class Ant extends Entity implements Active {
 		if (hasFood) {
 			target = popFieldFromMemory();
 		} else {
-			for (int i = -1; i < 2; i++) {
-				Field f = getPosition().getNeighbour(direction.turn(i));
+			for (int i = -1; i <= 1; i++) {
+				Field f = position.getNeighbour(direction.turn(i));
 				int intensity = f.getOdorIntensity();
 				if (target == null) {
 					target = f;

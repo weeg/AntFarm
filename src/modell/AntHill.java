@@ -34,11 +34,12 @@ public class AntHill extends Entity implements Active {
 	public void animate() {		
 		
 		Logger.enter(this, "animate");
-		//int r = Logger.choose("Hozzon letre a hangyaboly egy uj hangyat?", "Igen", "Nem");
-		//if (r == 1) {
-			Ant ant = new Ant(glade, this.getPosition().getNeighbour(Direction.SE), Direction.SE);
+		int r = Logger.choose("Hozzon letre a hangyaboly egy uj hangyat?", "Igen", "Nem");
+		if (r == 1) {
+			Ant ant = new Ant(glade, position, Direction.SE);
+			position.addEntity(ant);
 			glade.addActiveObject(ant);
-		//}		
+		}		
 		Logger.exit(this);
 	}
 }

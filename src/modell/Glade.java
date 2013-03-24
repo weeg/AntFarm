@@ -69,7 +69,7 @@ public class Glade {
 	}
 	
 	/**
-	 * Az idõ léptetése.
+	 * Az ido leptetese
 	 */
 	public void tick() {
 		Logger.enter(this, "tick");
@@ -93,15 +93,15 @@ public class Glade {
 		ao.setGlade(this);
 		Poison p = new Poison(this, neighbours[0]);
 		f.addFoodOdor(fo);
-		this.foods.add(f);
+		foods.add(f);
 		neighbours[2].addEntity(f);
 		neighbours[1].addOdor(fo);
 		fo.setPosition(neighbours[1]);
 		neighbours[0].addOdor(ao);
 		neighbours[0].addEntity(p);
-		this.activeObjects.add(ao);
-		this.activeObjects.add(ah);
-		this.activeObjects.add(p);
+		activeObjects.add(ao);
+		activeObjects.add(ah);
+		activeObjects.add(p);
 		Logger.on();
 		foods.get(0).getQuantity();
 		for (Object a : activeObjects.toArray()) {

@@ -26,8 +26,11 @@ public class Poison extends Entity implements Active {
 	 */
 	public void animate() {
 		Logger.enter(this, "animate");
-		glade.removeActiveObject(this);
-		getPosition().removeEntity(this);
+		int r = Logger.choose("Elillant a mereg?", "Igen", "Nem");
+		if (r == 1) {
+			glade.removeActiveObject(this);
+			position.removeEntity(this);
+		}		
 		Logger.exit(this);
 	}
 	

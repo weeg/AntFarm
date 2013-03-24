@@ -87,7 +87,7 @@ public class Field {
 	 * @param odor A szagobjektum.
 	 */
 	public void addOdor(Odor odor) {
-		Logger.enter(this, "addOdor");
+		Logger.enter(this, "addOdor", Logger.getObjectName(odor));
 		odors.add(odor);
 		Logger.exit(this);
 	}
@@ -117,7 +117,7 @@ public class Field {
 	 * @param e Egy entitas.
 	 */
 	public void addEntity(Entity e) {
-		Logger.enter(this, "addEntity", Logger.getObjectName(e)+":Entity");
+		Logger.enter(this, "addEntity", Logger.getObjectName(e));
 		entities.add(e);
 		Logger.exit(this);
 	}
@@ -127,7 +127,7 @@ public class Field {
 	 * @param e Torlendo entitas.
 	 */
 	public void removeEntity(Entity e) {
-		Logger.enter(this, "removeEntity", Logger.getObjectName(e)+":Entity");
+		Logger.enter(this, "removeEntity", Logger.getObjectName(e));
 		entities.remove(e);
 		Logger.exit(this);
 	}
