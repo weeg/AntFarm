@@ -102,8 +102,12 @@ public class Glade {
 		activeObjects.add(ao);
 		activeObjects.add(ah);
 		activeObjects.add(p);
-		Logger.on();
-		foods.get(0).getQuantity();
+		Logger.on();		
+		int foodQuantity = foods.get(0).getQuantity();		
+		if (foodQuantity == 0) {
+			gameOver();
+			return;
+		}
 		for (Object a : activeObjects.toArray()) {
 			((Active) a).animate();
 		}
@@ -127,6 +131,11 @@ public class Glade {
 	public void removeActiveObject(Active active) {
 		Logger.enter(this, "removeActiveObject", Logger.getObjectName(active));
 		activeObjects.remove(active);
+		Logger.exit(this);
+	}
+	
+	public void gameOver() {
+		Logger.enter(this, "gameOver");
 		Logger.exit(this);
 	}
 }

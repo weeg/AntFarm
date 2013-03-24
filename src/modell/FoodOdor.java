@@ -15,7 +15,7 @@ public class FoodOdor extends Odor {
 	 */
 	public void evaporate() {
 		Logger.enter(this, "evaporate");
-		this.getPosition().removeOdor(this);
+		position.removeOdor(this);
 		Logger.exit(this);
 	}
 	

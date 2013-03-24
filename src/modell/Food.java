@@ -30,10 +30,13 @@ public class Food extends Entity {
 		Logger.enter(this, "getQuantity");
 		int r = Logger.choose("Elfogyott mar az elelem?", "Igen", "Nem");
 		if (r == 1) {
+			quantity = 0;
 			for (FoodOdor fo : foodOdors) {
 				fo.evaporate();
 			}
-		}		
+		} else {
+			quantity = 1;
+		}
 		Logger.exit(this);
 		return quantity;
 	}
