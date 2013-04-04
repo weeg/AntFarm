@@ -5,11 +5,7 @@ package modell;
  */
 public abstract class Entity {
 	
-	/** A tisztas, amin van az entitas */
-	protected Glade glade;
-	/**
-	 * A mezo, amin az entitas van.
-	 */
+	/** A mezo, amin az entitas van */
 	protected Field position;
 	
 	/**

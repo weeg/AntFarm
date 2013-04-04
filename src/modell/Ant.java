@@ -38,13 +38,11 @@ public class Ant extends Entity implements Active {
 	
 	/**
 	 * Hangya konstruktor
-	 * @param glade A tisztas, amin van a hangya
 	 * @param position A mezo, amin van a hangya
 	 * @param dir A hangya iranya
 	 */
-	public Ant(Glade glade, Field position, Direction dir) {
+	public Ant(Field position, Direction dir) {
 		this();
-		this.glade = glade;
 		this.position = position;
 		this.direction = dir;
 	}
@@ -66,7 +64,7 @@ public class Ant extends Entity implements Active {
 		
 		Logger.enter(this, "kill");
 		position.removeEntity(this);
-		glade.removeActiveObject(this);
+		position.getGlade().removeActiveObject(this);
 		killed = true;
 		Logger.exit(this);
 	}
@@ -138,7 +136,7 @@ public class Ant extends Entity implements Active {
 					target.addEntity(new Ant());
 					break;
 				case 3:
-					target.addEntity(new AntHill(glade));
+					target.addEntity(new AntHill());
 					break;
 				case 4:
 					target.addEntity(new AntLion());
@@ -164,7 +162,7 @@ public class Ant extends Entity implements Active {
 					target.addEntity(new Ant());
 					break;
 				case 2:
-					target.addEntity(new AntHill(glade));
+					target.addEntity(new AntHill());
 					break;
 				case 3:
 					target.addEntity(new Anteater());
@@ -183,9 +181,9 @@ public class Ant extends Entity implements Active {
 				changeDirection();
 			} else {	
 				if (hasFood == false) {
-					AntOdor ao = new AntOdor(glade, position);
+					AntOdor ao = new AntOdor();
 					position.addOdor(ao);
-					glade.addActiveObject(ao);
+					position.getGlade().addActiveObject(ao);
 				}
 				position.removeEntity(this);
 				target.addEntity(this);
@@ -202,7 +200,7 @@ public class Ant extends Entity implements Active {
 		Logger.enter(this, "popFieldFromMemory");
 		Logger.exit(this);
 		Logger.off();
-		Field n = new Field();
+		Field n = new Field(position.getGlade());
 		Logger.on();
 		return n;
 	}
@@ -219,14 +217,6 @@ public class Ant extends Entity implements Active {
 			anteater.increaseEatenAnts(this);
 		}
 		Logger.exit(this);
-	}
-
-	public Glade getGlade() {
-		return glade;
-	}
-
-	public void setGlade(Glade glade) {
-		this.glade = glade;
 	}
 	
 	/**

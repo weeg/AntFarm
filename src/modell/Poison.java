@@ -25,7 +25,6 @@ public class Poison extends Entity implements Active {
 	 */
 	public Poison(Glade glade, Field pos) {
 		Logger.attach("Poison", this);
-		this.glade = glade;
 		setPosition(pos);
 	}
 	
@@ -36,7 +35,7 @@ public class Poison extends Entity implements Active {
 		Logger.enter(this, "animate");
 		int r = Logger.choose("Elillant a mereg?", "Igen", "Nem");
 		if (r == 1) {
-			glade.removeActiveObject(this);
+			position.getGlade().removeActiveObject(this);
 			position.removeEntity(this);
 		}		
 		Logger.exit(this);

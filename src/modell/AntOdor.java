@@ -4,9 +4,6 @@ import skeleton.Logger;
 
 public class AntOdor extends Odor implements Active {
 	
-	/** A tisztas, amin van a szag */
-	private Glade glade;
-	
 	/**
 	 * A hangyaszag default konstruktora
 	 */
@@ -16,13 +13,11 @@ public class AntOdor extends Odor implements Active {
 	
 	/**
 	 * A hangyaszag konstruktora.
-	 * @param glade A tisztas objektum.
 	 * @param field A mezo, amin van a hangyaszag
 	 */
-	public AntOdor(Glade glade, Field field) {
+	public AntOdor(Field position) {
 		this();
-		this.glade = glade;
-		this.position = field;
+		this.position = position;
 	}
 	
 	/**
@@ -33,7 +28,7 @@ public class AntOdor extends Odor implements Active {
 		Logger.enter(this, "animate");
 		int r = Logger.choose("Elfogyott a hangyaszag?", "Igen", "Nem");
 		if (r == 1) {
-			glade.removeActiveObject(this);
+			position.getGlade().removeActiveObject(this);
 		}		
 		Logger.exit(this);
 	}
@@ -46,7 +41,7 @@ public class AntOdor extends Odor implements Active {
 		
 		Logger.enter(this, "neutralize");
 		position.removeOdor(this);
-		glade.removeActiveObject(this);					
+		position.getGlade().removeActiveObject(this);					
 		Logger.exit(this);	
 		return true;
 	}

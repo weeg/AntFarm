@@ -12,17 +12,17 @@ public class TestCase2 extends TestCase {
 				
 		Logger.off();
 		Glade glade = new Glade();
-		Field center = new Field();
+		Field center = new Field(glade);
 		Field[] neighbours = new Field[3];
 		for (int i = 0; i < 3; i++) {
-			neighbours[i] = new Field();
+			neighbours[i] = new Field(glade);
 			neighbours[i].addOdor(new FoodOdor());
 		}
 		center.setNeighbour(Direction.N, neighbours[0]);
 		center.setNeighbour(Direction.NE, neighbours[1]);
 		center.setNeighbour(Direction.SE, neighbours[2]);
 				
-		Ant ant = new Ant(glade, center, Direction.N);		
+		Ant ant = new Ant(center, Direction.N);		
 				
 		Logger.on();
 		

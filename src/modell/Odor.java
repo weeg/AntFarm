@@ -4,14 +4,10 @@ import skeleton.Logger;
 
 public abstract class Odor {
 	
-	/**
-	 * A szag intenzitasa.
-	 */
+	/** A szag intenzitasa */
 	protected int intensity;
 	
-	/**
-	 * A mezo, amihez tartozik.
-	 */
+	/** A mezo, amihez tartozik */
 	protected Field position;
 	
 	/**

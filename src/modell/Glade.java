@@ -41,7 +41,7 @@ public class Glade {
 	public void start() {
 		Logger.enter(this, "start");
 		for (int i = 0; i < 7; i++) {
-			fields.add(new Field());
+			fields.add(new Field(this));
 		}
 		for (int i = 1; i < 7; i++) {
 			fields.get(0).setNeighbour(Direction.N.turn(i), fields.get(i));
@@ -53,7 +53,7 @@ public class Glade {
 			f.addFoodOdor(fo);
 			fields.get(i).addOdor(fo);
 		}
-		AntHill ah = new AntHill(this);
+		AntHill ah = new AntHill();
 		fields.get(1).addEntity(ah);
 		this.addActiveObject(ah);
 		AntLion al = new AntLion();
@@ -75,21 +75,21 @@ public class Glade {
 		Logger.enter(this, "tick");
 		
 		Logger.off();
-		Field center = new Field();
+		Field center = new Field(this);
 		Field[] neighbours = new Field[3];
 		for (int i = 0; i < 3; i++) {
-			neighbours[i] = new Field();
+			neighbours[i] = new Field(this);
 			neighbours[i].addOdor(new FoodOdor());
 		}
 		center.setNeighbour(Direction.N, neighbours[0]);
 		center.setNeighbour(Direction.NE, neighbours[1]);
 		center.setNeighbour(Direction.SE, neighbours[2]);
-		AntHill ah = new AntHill(this);
+		AntHill ah = new AntHill();
 		ah.setPosition(center);
 		center.addEntity(ah);
 		Food f = new Food();
 		FoodOdor fo = new FoodOdor();
-		AntOdor ao = new AntOdor(this, neighbours[0]);
+		AntOdor ao = new AntOdor(neighbours[0]);
 		Poison p = new Poison(this, neighbours[0]);
 		f.addFoodOdor(fo);
 		foods.add(f);

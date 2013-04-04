@@ -14,7 +14,7 @@ public class TestCase4 extends TestCase {
 		int r = Logger.choose("Milyen spray-vel kivan fujni?", "Hangyaolo spray-vel", "Hangyaszagsemlegesito spray-vel");
 		Logger.off();
 		Glade glade = new Glade();
-		Field f = new Field();
+		Field f = new Field(glade);
 		Spray spray = null;
 		switch (r) {
 		case 1:
@@ -22,7 +22,7 @@ public class TestCase4 extends TestCase {
 			break;
 		case 2:
 			spray = new AntOdorNeutralizerSpray(glade);
-			f.addOdor(new AntOdor(glade, f));
+			f.addOdor(new AntOdor(f));
 			break;		
 		}		
 		

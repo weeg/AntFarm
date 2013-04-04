@@ -6,24 +6,26 @@ import java.util.HashMap;
 import skeleton.Logger;
 
 public class Field {
+	
+	/** A tisztas, amin van a mezo */
+	private Glade glade;
 
-	/**
-	 * A szomszedokat tarolo objektum.
-	 */
+	/** A szomszedokat tarolo objektum */
 	private HashMap<Direction, Field> neighbours = new HashMap<Direction, Field>();
 	
-	/**
-	 * A szagokat tarolo lista.
-	 */
+	/** A szagokat tarolo lista */
 	private ArrayList<Odor> odors = new ArrayList<Odor>();
 	
-	/**
-	 * Az entitasokat tarolo lista.
-	 */
+	/** Az entitasokat tarolo lista */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
-	public Field() {
-		Logger.attach("Field", this);
+	/**
+	 * A mezo konstruktora
+	 * @param glade A tisztas, amin van a mezo
+	 */
+	public Field(Glade glade) {
+		Logger.attach("field", this);
+		this.glade = glade;
 	}
 	
 	/**
@@ -45,7 +47,7 @@ public class Field {
 		Logger.enter(this, "getNeighbour", "dir: " + dir.toString());
 		Logger.exit(this);
 		Logger.off();
-		Field n = new Field();
+		Field n = new Field(glade);
 		Logger.on();
 		return n;
 	}
@@ -61,7 +63,7 @@ public class Field {
 		Logger.off();
 		ArrayList<Field> list = new ArrayList<Field>();
 		for (int i = 0; i < 3; i++) {			
-			list.add(new Field());
+			list.add(new Field(glade));
 		}
 		list.add(this);
 		Logger.on();
@@ -140,5 +142,13 @@ public class Field {
 		Logger.enter(this, "getEntities");
 		Logger.exit(this);
 		return entities;
-	}	
+	}
+
+	/**
+	 * Visszaadja a tisztast, amin van a mezo
+	 * @return A tisztas objektum
+	 */
+	public Glade getGlade() {
+		return glade;
+	}
 }

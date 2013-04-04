@@ -8,8 +8,7 @@ public class Anteater extends Entity implements Active {
 	
 	/** A hangyaszsun iranya */
 	private Direction direction;
-	
-	
+
 	/** Az aktualis palyaralepes soran mar megevett hangyak szama */
 	private int eatenAnts;
 	
@@ -34,10 +33,9 @@ public class Anteater extends Entity implements Active {
 		Logger.attach("anteater", this);
 	}
 	
-	public Anteater(Glade gl, Field position) {
+	public Anteater(Field position) {
 		this();
 		this.position = position;
-		this.glade = gl;
 	}
 	
 	/**
@@ -120,7 +118,7 @@ public class Anteater extends Entity implements Active {
 				target.addEntity(new Log());
 				break;
 			case 4:
-				target.addEntity(new Ant(glade, target, Direction.NW));
+				target.addEntity(new Ant(target, Direction.NW));
 				break;
 			case 5:
 				target.addEntity(new DeadEnd());
