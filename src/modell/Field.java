@@ -143,7 +143,7 @@ public class Field {
 		Logger.exit(this);
 		return entities;
 	}
-
+	
 	/**
 	 * Visszaadja a tisztast, amin van a mezo
 	 * @return A tisztas objektum

@@ -35,7 +35,7 @@ public class Logger {
 	/**
 	 * Csendes uzemmodhoz.
 	 */
-	private static boolean silent = false;
+	private static boolean silent = true;
 	
 	/**
 	 * Visszaadja egy objektum nevet a referenciaja alapjan

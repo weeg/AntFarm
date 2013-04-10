@@ -140,4 +140,12 @@ public class Glade {
 		Logger.enter(this, "gameOver");
 		Logger.exit(this);
 	}
+	
+	/**
+	 * Aktiv elemek visszaadasa.
+	 * @return
+	 */
+	public ArrayList<Active> getActiveObjects() {
+		return activeObjects;
+	}
 }
