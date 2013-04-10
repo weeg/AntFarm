@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -30,10 +31,10 @@ public class Commands {
 	/**
 	 * A peldanyokat (referenciait es neveit) tarolo tombok. Kulcs es ertek alapjan is lehessen bennuk keresni.
 	 */
-	private static Map<String, Object> objectsByKey   = new HashMap<String, Object>();
-	private static Map<Object, String> objectsByValue = new HashMap<Object, String>();
+	private static Map<String, Object> objectsByKey   = new LinkedHashMap<String, Object>();
+	private static Map<Object, String> objectsByValue = new LinkedHashMap<Object, String>();
 	
-	public static void parseCommand(String command) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public static void parseCommand(String command) {
 		String[] params = command.split(" ");
 
 		/*
@@ -59,10 +60,12 @@ public class Commands {
 			} else {
 				Logger.add("Mismatch parameter number: "+command);
 			}
-
+		
+		/*
+		 * list parancs meghivasa
+		 */
 		} else if (params[0].equals("list")) {
-			//System.out.println("List command: "+command);
-			
+
 			// Minden kilistazasa
 			if (params.length == 1) {
 				Commands.list("all");
@@ -72,6 +75,17 @@ public class Commands {
 				Commands.list(params[1]);
 			
 			// Hibas parameterezes
+			} else {
+				Logger.add("Mismatch parameter number: "+command);
+			}
+			
+		/*
+		 * set parancs meghivasa
+		 */
+		} else if (params[0].equals("set")) {
+
+			if (params.length == 4) {
+				Commands.set(params[1], params[2], params[3]);
 			} else {
 				Logger.add("Mismatch parameter number: "+command);
 			}
@@ -173,7 +187,8 @@ public class Commands {
 			obj = new Water();
 		
 		}
-			
+		
+		// Letrehozz objektumok eltarolasa
 		if (obj != null) {
 			addObject(obj, object, name);
 		} else {
@@ -248,8 +263,17 @@ public class Commands {
 		// Egy megadott mezo tartalmanak kilistazasa
 		} else {
 			
+			Field fie = (Field) objectsByKey.get(mode);
+			
+			if (fie != null) {
+				ArrayList<Entity> entities = fie.getEntities();
+				Logger.add("List "+mode+": "+getEnititiesName(entities));
+			
+			// Nem letezo mezore valo hivatkozas
+			} else {
+				Logger.add("Listing error. Unknown filed name: "+mode);
+			}
 		}
-		
 	}
 	
 	/**
@@ -316,28 +340,4 @@ public class Commands {
 		objectsByValue.put(obj, name);
 		Logger.add(object+" has been created with name "+name+".");
 	}
-	
-	/**
-	 * Objektum dinamikus letrehozasa
-	 * @param className
-	 * @return
-	 */
-	private static Object createObject(Constructor constructor, Object[] arguments) {
-		Object object = null;
-		try {
-			object = constructor.newInstance(arguments);
-		    System.out.println("Object: " + object.toString());
-		    return object;
-		} catch (InstantiationException e) {
-			System.out.println(e);
-	    } catch (IllegalAccessException e) {
-	    	System.out.println(e);
-	    } catch (IllegalArgumentException e) {
-	    	System.out.println(e);
-	    } catch (InvocationTargetException e) {
-	    	System.out.println(e);
-	    }
-		return object;
-	}
-	
 }
