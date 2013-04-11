@@ -1,14 +1,11 @@
 package modell;
 
-import skeleton.Logger;
-
 public class AntOdor extends Odor implements Active {
 	
 	/**
 	 * A hangyaszag default konstruktora
 	 */
-	public AntOdor() {
-		Logger.attach("antOdor", this);
+	public AntOdor() {		
 	}
 	
 	/**
@@ -23,26 +20,21 @@ public class AntOdor extends Odor implements Active {
 	/**
 	 * A hangyaszag animalasa
 	 */
-	public void animate() {
-		
-		Logger.enter(this, "animate");
-		int r = Logger.choose("Elfogyott a hangyaszag?", "Igen", "Nem");
-		if (r == 1) {
+	public void animate() {			
+		if (intensity > 0) {
+			intensity--;
+		} else {
+			position.removeOdor(this);
 			position.getGlade().removeActiveObject(this);
-		}		
-		Logger.exit(this);
+		}
 	}
 	
 	/**
 	 * A hangyaszag semlegesitese
 	 * @return Sikeres-e a semlegesites.
 	 */
-	public boolean neutralize() {
-		
-		Logger.enter(this, "neutralize");
+	public void neutralize() {
 		position.removeOdor(this);
 		position.getGlade().removeActiveObject(this);					
-		Logger.exit(this);	
-		return true;
 	}
 }

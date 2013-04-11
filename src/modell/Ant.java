@@ -2,8 +2,6 @@ package modell;
 
 import java.util.Stack;
 
-import skeleton.Logger;
-
 public class Ant extends Entity implements Active {
 
 	/** Az irany, amerre a hangya megy */
@@ -92,6 +90,15 @@ public class Ant extends Entity implements Active {
 		
 		Field target = null;
 		
+		if (poisened) {
+			if (TTL > 0) {
+				TTL--;
+			} else {
+				kill();
+				return;
+			}
+		}
+		
 		if (hasFood) {
 			target = popFieldFromMemory();
 		} else {
@@ -118,7 +125,7 @@ public class Ant extends Entity implements Active {
 				position.removeEntity(this);
 				target.addEntity(this);
 			}							
-		}		
+		}				
 	}
 
 	/**
@@ -135,8 +142,7 @@ public class Ant extends Entity implements Active {
 	 */
 	public void collide(Anteater anteater) {
 		if (anteater.isHungry()) {
-			position.removeEntity(this);
-			position.getGlade().removeActiveObject(this);
+			kill();
 			anteater.increaseEatenAnts(this);
 		}		
 	}
@@ -145,6 +151,7 @@ public class Ant extends Entity implements Active {
 	 * Beallitja a hangyanal a mergezest
 	 */
 	public void poison() {		
-		poisened = true;		
+		poisened = true;
+		TTL = 3;
 	}
 }

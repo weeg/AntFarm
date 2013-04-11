@@ -48,6 +48,6 @@ public abstract class Odor {
 	/**
 	 * Semlegesites, a kulonbozo leszarmazottak fogjak implementalni. 
 	 */
-	public abstract boolean neutralize();
+	public abstract void neutralize();
 
 }

@@ -1,39 +1,29 @@
 package modell;
 
-import skeleton.Logger;
-
 public class AntHill extends Entity implements Active {
 	/**
 	 * A hangyaboly default konstruktora
 	 */
-	public AntHill() {
-		Logger.attach("antHill", this);		
+	public AntHill() {		
 	}
 	
 	/**
 	 *  Utkozes egy hangyaval
 	 *  @param ant A hangya, amivel a hangyaboly utkozik
 	 */
-	public void collide(Ant ant) {
-		Logger.enter(this, "collide", Logger.getObjectName(ant));
+	public void collide(Ant ant) {		
 		if (ant.hasFood()) {
 			ant.kill();
-		}
-		Logger.exit(this);
+		}		
 	}
 	
 	/**
 	 * A hangyaboly animalasa
 	 */
 	public void animate() {		
-		
-		Logger.enter(this, "animate");
-		int r = Logger.choose("Hozzon letre a hangyaboly egy uj hangyat?", "Igen", "Nem");
-		if (r == 1) {
-			Ant ant = new Ant(position, Direction.SE);
-			position.addEntity(ant);
-			position.getGlade().addActiveObject(ant);
-		}		
-		Logger.exit(this);
+				
+		Ant ant = new Ant(position, Direction.SE);
+		position.addEntity(ant);
+		position.getGlade().addActiveObject(ant);		
 	}
 }
