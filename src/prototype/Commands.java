@@ -17,12 +17,15 @@ import modell.AntOdor;
 import modell.AntOdorNeutralizerSpray;
 import modell.Anteater;
 import modell.DeadEnd;
+import modell.Direction;
 import modell.Entity;
 import modell.Field;
 import modell.Food;
 import modell.FoodOdor;
 import modell.Glade;
 import modell.Log;
+import modell.Odor;
+import modell.Spray;
 import modell.Stone;
 import modell.Water;
 
@@ -33,10 +36,16 @@ public class Commands {
 	 */
 	private static Map<String, Object> objectsByKey   = new LinkedHashMap<String, Object>();
 	private static Map<Object, String> objectsByValue = new LinkedHashMap<Object, String>();
+	private static String currentCommand = "";
+	private static int currentCommandLine = 0;
 	
-	public static void parseCommand(String command) {
+	public static void parseCommand(String command, int line) {
 		String[] params = command.split(" ");
-
+		
+		// Hibak kiiratasahoz eltarolja a aktualis parancsot es a sorat.
+		currentCommand     = command;
+		currentCommandLine = line;
+		
 		/*
 		 * create parancs meghivasa
 		 */
@@ -47,7 +56,7 @@ public class Commands {
 			} else if (params.length == 3) {
 				Commands.create(params[1], params[2]);
 			} else {
-				Logger.add("Mismatch parameter number: "+command);
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
 			}
 		
 		/*
@@ -58,7 +67,7 @@ public class Commands {
 			if (params.length == 3) {
 				Commands.add(params[1], params[2]);
 			} else {
-				Logger.add("Mismatch parameter number: "+command);
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
 			}
 		
 		/*
@@ -76,7 +85,7 @@ public class Commands {
 			
 			// Hibas parameterezes
 			} else {
-				Logger.add("Mismatch parameter number: "+command);
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
 			}
 			
 		/*
@@ -87,11 +96,55 @@ public class Commands {
 			if (params.length == 4) {
 				Commands.set(params[1], params[2], params[3]);
 			} else {
-				Logger.add("Mismatch parameter number: "+command);
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+			}
+			
+		/*
+		 * animate parancs meghivasa
+		 */
+		} else if (params[0].equals("animate")) {
+
+			if (params.length == 2) {
+				Commands.animate(params[1]);
+			} else {
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+			}
+			
+		/*
+		 * tick parancs meghivasa
+		 */
+		} else if (params[0].equals("tick")) {
+
+			if (params.length == 1) {
+				Commands.tick();
+			} else {
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+			}
+			
+		/*
+		 * addOdor parancs meghivasa
+		 */
+		} else if (params[0].equals("addOdor")) {
+
+			if (params.length == 3) {
+				Commands.addOdor(params[1], params[2]);
+			} else {
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+			}
+			
+		/*
+		 * spray parancs meghivasa
+		 */
+		} else if (params[0].equals("spray")) {
+
+			if (params.length == 3) {
+				Commands.spray(params[1], params[2]);
+			} else {
+				Logger.add("Error at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
 			}
 			
 		} else {
-			Logger.add("Unknown command: "+command);
+			Logger.add("Error at line "+currentCommandLine+"! Unknown command: "+currentCommand);
 		}
 	}
 	
@@ -154,8 +207,7 @@ public class Commands {
 		
 		// Mezok letrehozasa
 		} else if (object.equals("Field")) {
-			// TODO: lehet inkabb ki kene keresni, ahelyett, hogy feltetlezzuk a nevet
-			Glade gla = (Glade) objectsByKey.get("glade");
+			Glade gla = getGlade();
 			obj = new Field(gla);
 		
 		// Kaja letrehozasa
@@ -192,7 +244,7 @@ public class Commands {
 		if (obj != null) {
 			addObject(obj, object, name);
 		} else {
-			Logger.add("Unknown object: "+object);
+			Logger.add("Error at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
 		}
 
 	}
@@ -209,27 +261,143 @@ public class Commands {
 		if (getObjectType(field).equals("Field")) {
 			
 			// Entitasok lekerdezese es castolasa 
-			Field fie  = (Field) objectsByKey.get(field);
-			Entity obj = (Entity) objectsByKey.get(object);
+			Field fie  = (Field) getObject(field);
+			Entity obj = (Entity) getObject(object);
 			fie.addEntity(obj);
 			
 			Logger.add(object+" has been added to "+field+".");
 		
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {
-			Logger.add("Wrong parameters: add "+object+" "+field);
+			Logger.add("Error at line "+currentCommandLine+"! Wrong parameters: "+currentCommand);
 		}
 	}
 	
 	/**
 	 * Egy elem ertekenek megvaltoztatasa.
-	 * Set parancs megvalositasa.
+	 * set parancs megvalositasa.
 	 * @param object
 	 * @param parameter
 	 * @param value
 	 */
 	public static void set(String object, String parameter, String value) {
 		
+		String type = getObjectType(object);
+		Object obj  = null;
+		
+		if (type.equals("Anteater")) {
+			obj = (Anteater) getObject(object);
+			
+			if (parameter.equals("direction")) {
+				((Anteater) obj).setDirection(Direction.valueOf(value));
+			}
+		}
+		
+		if (obj != null) {
+			Logger.add(object+"’s "+parameter+" parameter set to "+value+".");
+		} else {
+			Logger.add("Error at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+		}
+	}
+	
+	/**
+	 * Active objektumok animalasa.
+	 * animate parancs megvalositasa.
+	 * @param object
+	 */
+	public static void animate(String object) {
+		
+		Object obj = getObject(object);
+		
+		if (hasInterface(obj, "Active")) {
+			Active active = (Active) obj;
+			// Meg ne hivja meg.
+			//active.animate();
+			
+			String key = getKey(obj);
+			Logger.add(key+" has been animated.");
+		}
+	}
+	
+	/**
+	 * Ido leptetese.
+	 * tick parancs megvalositasa.
+	 */
+	private static void tick() {
+		
+		Glade glade = getGlade();
+		glade.tick();
+		
+		Logger.add("Tick.");
+	}
+	
+	/**
+	 * Szag hozzaadasa egy mezohoz.
+	 * addOdor parancs megvalositasa.
+	 * @param object
+	 * @param field
+	 */
+	private static void addOdor(String object, String field) {
+		Object obj   = getObject(object);
+		Object fie   = getObject(field);
+		
+		// A mezo nem talalhato
+		if (fie == null) {
+			Logger.add("Error at line "+currentCommandLine+"! Field with name "+field+" cannot be found: "+currentCommand);
+		
+		// A megadaott neve, nem egy Field
+		} else if (!getObjectType(fie).equals("Field")) {
+			Logger.add("Error at line "+currentCommandLine+"! The type of "+field+" is not Field: "+currentCommand);
+		
+		// Field
+		} else {
+			
+			// Nem szagot probal hozzaadni
+			if (!isExtending(obj, "Odor")) {
+				Logger.add("Error at line "+currentCommandLine+"! The type of "+object+" is not an Odor: "+currentCommand);
+			
+			// Szag hozzaadasa a mezohoz.
+			} else {
+				Odor odor = (Odor) obj;
+				((Field) fie).addOdor(odor);
+				Logger.add(object+" has been added to "+field+".");
+			}
+		}
+	}
+	
+	/**
+	 * A megadott spray hasznalata
+	 * spray parancs megvalositasa.
+	 * @param type
+	 * @param field
+	 */
+	private static void spray(String type, String field) {
+		Object obj = getObject(type);
+		Object fie = getObject(field);
+		
+		// A mezo nem talalhato
+		if (fie == null) {
+			Logger.add("Error at line "+currentCommandLine+"! Field with name "+field+" cannot be found: "+currentCommand);
+		
+		// A megadaott neve, nem egy Field
+		} else if (!getObjectType(fie).equals("Field")) {
+			Logger.add("Error at line "+currentCommandLine+"! The type of "+field+" is not Field: "+currentCommand);
+		
+		// Field
+		} else {
+			
+			// Nem spay-jel probalkozik
+			if (!isExtending(obj, "Spray")) {
+				Logger.add("Error at line "+currentCommandLine+"! The type of "+type+" is not a Sprayr: "+currentCommand);
+			
+			// Spray hasznalata.
+			} else {
+				Spray spray = (Spray) obj;
+				spray.use(((Field) fie));
+				
+				Logger.add(type+" has been used with center "+field+". "+spray.getQuantity()+" blows left.");
+			}
+		}
 	}
 	
 	/**
@@ -237,12 +405,12 @@ public class Commands {
 	 * List parancs megvalositasa
 	 * @param mode
 	 */
-	public static void list(String mode) {
+	private static void list(String mode) {
 		
 		// A glade valamint az osszes mezo objektumainak kilistazasa
 		if (mode.equals("all")) {
-			// TODO: itt is ki ki kene keresni a nevet
-			Glade gla = (Glade) objectsByKey.get("glade");
+
+			Glade gla = getGlade();
 			
 			Logger.add("List all:");
 			// Aktiv objektumok kilistazasa
@@ -263,7 +431,7 @@ public class Commands {
 		// Egy megadott mezo tartalmanak kilistazasa
 		} else {
 			
-			Field fie = (Field) objectsByKey.get(mode);
+			Field fie = (Field) getObject(mode);
 			
 			if (fie != null) {
 				ArrayList<Entity> entities = fie.getEntities();
@@ -271,9 +439,54 @@ public class Commands {
 			
 			// Nem letezo mezore valo hivatkozas
 			} else {
-				Logger.add("Listing error. Unknown filed name: "+mode);
+				Logger.add("Error at line "+currentCommandLine+"! Unknown "+mode+" filed: "+currentCommand);
 			}
 		}
+	}
+	
+	/**
+	 * Kikeresi, hogy az adott objektumnak van-e megadott tipusu interface-e.
+	 * @param obj
+	 * @param type
+	 */
+	private static boolean hasInterface(Object obj, String type) {
+		
+		Class[] interfaces = obj.getClass().getInterfaces();
+		
+		for (int i = 0; i < interfaces.length; i++) {
+			if (interfaces[i].getSimpleName().equals(type)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private static boolean isExtending(Object obj, String type) {
+		
+		if (obj.getClass().getSuperclass().getSimpleName().equals(type)) {
+			return true;
+		}
+				
+		return false;
+	}
+	
+	/**
+	 * Kikeresi a palyat az objektum listabol.
+	 * @return
+	 */
+	private static Glade getGlade() {
+		
+		for (Entry<String, Object> obj : objectsByKey.entrySet()) {
+			
+			String key = obj.getKey();
+			// Glade kikeresese
+			if (getObjectType(key).equals("Glade")) {
+				return (Glade) obj.getValue();
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -286,7 +499,7 @@ public class Commands {
 		
 		// Entitasokhoz kikeresi a nevuket
 		for (Entity entity : entities) {
-			String key = objectsByValue.get(entity);
+			String key = getKey(entity);
 			
 			// Vesszok betuzdelese
 			if (sb.length() != 0) {
@@ -296,6 +509,14 @@ public class Commands {
 		}
 	
 		return sb.toString();
+	}
+	
+	private static Object getObject(String key) {
+		return objectsByKey.get(key);
+	}
+	
+	private static String getKey(Object object) {
+		return objectsByValue.get(object);
 	}
 	
 	/**
@@ -308,7 +529,7 @@ public class Commands {
 		
 		// Entitasokhoz kikeresi a nevuket
 		for (Active entity : entities) {
-			String key = objectsByValue.get(entity);
+			String key = getKey(entity);
 			
 			// Vesszok betuzdelese
 			if (sb.length() != 0) {
@@ -326,7 +547,11 @@ public class Commands {
 	 * @return
 	 */
 	private static String getObjectType(String key) {
-		return objectsByKey.get(key).getClass().getSimpleName();
+		return getObject(key).getClass().getSimpleName();
+	}
+	
+	private static String getObjectType(Object obj) {
+		return obj.getClass().getSimpleName();
 	}
 	
 	/**

@@ -10,6 +10,10 @@ create Anteater anteater
 set anteater direction N
 add anteater current
 
+create AntOdor antodor1
+set antodor1 intensity 10
+addOdor antodor1 current
+
 create Stone stone1 field1
 add stone1 field1
 create Stone stone2 field2

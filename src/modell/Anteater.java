@@ -150,4 +150,13 @@ public class Anteater extends Entity implements Active {
 		Logger.exit(this);
 	}
 	
+	/**
+	 * Irany megvaltoztatasa
+	 * Tesztelesi celokat szolgal.
+	 * @param direction
+	 */
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+	
 }

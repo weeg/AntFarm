@@ -227,4 +227,22 @@ public class Ant extends Entity implements Active {
 		this.poisened = true;
 		Logger.exit(this);
 	}
+	
+	/**
+	 * Irany megvaltoztatasa
+	 * Tesztelesi celokat szolgal.
+	 * @param direction
+	 */
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+	
+	/**
+	 * Meg lehet adni,hogy a hangyanal van-e kaja vagy sem.
+	 * Tesztelesi celokat szolgal.
+	 * @param hasFood
+	 */
+	public void setHasFood(boolean hasFood) {
+		this.hasFood = hasFood;
+	}
 }

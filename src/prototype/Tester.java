@@ -20,8 +20,11 @@ public class Tester {
 
 		
 		for (String command : commands) {
-			//System.out.println(command);
-			Commands.parseCommand(command);
+			// Az ures sorokat ne dolgozza fel.
+			if (!command.equals("")) {
+				int line = commands.indexOf(command) + 1;
+				Commands.parseCommand(command, line);
+			}
 		}
 		
 		Logger.printConsole();
@@ -40,10 +43,7 @@ public class Tester {
 	        String line = br.readLine();
 
 	        while (line != null) {
-	        	// Az ures sorokat nem tegye bele
-	        	if (!line.equals("")) {
-	        		commands.add(line);
-	        	}
+	        	commands.add(line);
 	            line = br.readLine();
 	        }
 	        
