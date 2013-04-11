@@ -25,6 +25,7 @@ import modell.FoodOdor;
 import modell.Glade;
 import modell.Log;
 import modell.Odor;
+import modell.Poison;
 import modell.Spray;
 import modell.Stone;
 import modell.Water;
@@ -95,6 +96,17 @@ public class Commands {
 
 			if (params.length == 4) {
 				Commands.set(params[1], params[2], params[3]);
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+			}
+			
+		/*
+		 * get parancs meghivasa
+		 */
+		} else if (params[0].equals("get")) {
+
+			if (params.length == 3) {
+				Commands.get(params[1], params[2]);
 			} else {
 				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
 			}
@@ -347,33 +359,192 @@ public class Commands {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
 			}
 		
-		// Hangyaszag
-		} else if (type.equals("AntOdor")) {
-			obj = (AntOdor) getObject(object);
+		// Hangyaszag / Kajaszag
+		} else if (type.equals("AntOdor") || type.equals("FoodOdor")) {
+			obj = (Odor) getObject(object);
 			
 			// Szag intenzitas megadasa
 			if (parameter.startsWith("intensity")) {
-				((AntOdor) obj).setIntensity(Integer.parseInt(value));
+				((Odor) obj).setIntensity(Integer.parseInt(value));
 				
 			// Ismeretlen parameter
 			} else {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
 			}
 		
+		// Food
+		} else if (type.equals("Food")) {
+			obj = (Food) getObject(object);
+			
+			// Mennyiseg megvaltoztatasa
+			if (parameter.equals("quantity")) {
+				Tester.setVariable(obj, "quantity", Integer.parseInt(value));
+			
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}
+			
+		// Hangyaszag semelegisto / Hangyaolo spray
+		} else if (type.equals("AntKillerSpray") || type.equals("AntOdorNeutralizerSpray")) {
+			obj = (Spray) getObject(object);
+			
+			// Mennyiseg megvaltoztatasa
+			if (parameter.equals("quantity")) {
+				((Spray) obj).setQuantity(Integer.parseInt(value));
+			
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}
+		
+		// Mereg
+		} else if (type.equals("Poison")) {
+			obj = (Poison) getObject(object);
+			
+			// Mereg hatralevo eletenek beallitasa
+			if (parameter.equals("TTL")) {
+				Tester.setVariable(obj, "TTL", Integer.parseInt(value));
+				
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}		
+			
+		// Ismeretlen elem.
+		} else {
+			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
 		}
 		
-		// Ismeretlen elem.
-		if (obj == null) {
-			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
 		
 		// Hibas erek megadasa
-		} else if (!success) {
+		if (!success) {
 			Logger.add("\tError at line "+currentCommandLine+"! "+object+"'s "+parameter+" parameter value is incorrect: "+currentCommand);
 		
 		// Sikeres lefutas
 		} else {
 			Logger.add(object+"’s "+parameter+" parameter set to "+value+".");
 		}
+	}
+	
+	
+	public static void get(String object, String parameter) throws Throwable {
+		
+		String type     = getObjectType(object);
+		Object obj      = null;
+		String value    = "";
+		
+		// Hangyaszsun
+		if (type.equals("Anteater")) {
+			obj = (Anteater) getObject(object);
+
+			// Menetirany lekerdezese
+			if (parameter.equals("direction")) {
+				value = Tester.getVariable(obj, "direction").toString();
+				
+			// Megevett hangyak szama
+			} else if (parameter.equals("eatenAnts")) {
+				value = Tester.getVariable(obj, "eatenAnts").toString();
+			
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}
+		
+		// Hangya
+		} else if (type.equals("Ant")) {
+			obj = (Ant) getObject(object);
+			
+			// Menetirany lekerdezese
+			if (parameter.equals("direction")) {
+				value = Tester.getVariable(obj, "direction").toString();
+			
+			// Etel lekerdezese
+			} else if (parameter.equals("hasFood")) {
+				value = Tester.getVariable(obj, "hasFood").toString();
+				
+			// Hangya mergezesenek lekerdezese
+			} else if (parameter.equals("poisened")) {
+				value = Tester.getVariable(obj, "poisoned").toString();
+			
+			// Hangya hatralevo eletenek lekerdezese
+			} else if (parameter.equals("TTL")) {
+				value = Tester.getVariable(obj, "TTL").toString();
+				
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}
+		
+		// Hangyaszag / Kajaszag
+		} else if (type.equals("AntOdor") || type.equals("FoodOdor")) {
+			obj = (Odor) getObject(object);
+			
+			// Szag intenzitas megadasa
+			if (parameter.startsWith("intensity")) {
+				value = ""+((Odor) obj).getIntensity();
+				
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}
+
+			
+		// Food
+		} else if (type.equals("Food")) {
+			obj = (Food) getObject(object);
+			
+			// Mennyiseg lekerdezese
+			if (parameter.equals("quantity")) {
+				value = Tester.getVariable(obj, "quantity").toString();
+			
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}
+			
+		// Hangyaszag semelegisto / Hangyaolo spray
+		} else if (type.equals("AntKillerSpray") || type.equals("AntOdorNeutralizerSpray")) {
+			obj = (Spray) getObject(object);
+			
+			// Mennyiseg megvaltoztatasa
+			if (parameter.equals("quantity")) {
+				value = ""+((Spray) obj).getQuantity();
+			
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}	
+		
+		// Mereg
+		} else if (type.equals("Poison")) {
+			obj = (Poison) getObject(object);
+			
+			// Mereg hatralevo eletenek lekerdezese
+			if (parameter.equals("TTL")) {
+				value = Tester.getVariable(obj, "TTL").toString();
+				
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}	
+		
+		// Ismeretlen elem.
+		} else {
+			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
+		}
+		
+		
+		// Hibas erek megadasa
+		if (value.equals("")) {
+			Logger.add("\tError at line "+currentCommandLine+"! "+object+"'s "+parameter+" parameter value is incorrect: "+currentCommand);
+		
+		// Sikeres lefutas
+		} else {
+			Logger.add(object+"’s "+parameter+" parameter is "+value+".");
+		}
+		
+		
 	}
 	
 	/**
@@ -591,10 +762,20 @@ public class Commands {
 		return sb.toString();
 	}
 	
+	/**
+	 * Objektum lekerdezese kulcs alapjan.
+	 * @param key
+	 * @return
+	 */
 	private static Object getObject(String key) {
 		return objectsByKey.get(key);
 	}
 	
+	/**
+	 * Kulcs lekerdezese objektum alapjan.
+	 * @param object
+	 * @return
+	 */
 	private static String getKey(Object object) {
 		return objectsByValue.get(object);
 	}

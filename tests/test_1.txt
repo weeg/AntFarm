@@ -13,6 +13,7 @@ add anteater current
 create AntOdor antodor1
 set antodor1 intensity 10
 addOdor antodor1 current
+get antodor1 intensity
 
 create Stone stone1 field1
 add stone1 field1

@@ -52,7 +52,7 @@ public class Logger {
 	}
 	
 	/**
-	 * Log kiirasa a konzolra
+	 * Log kiirasa a konzolra.
 	 */
 	public static void printConsole() {
 		for (String log : logs) {
@@ -60,6 +60,10 @@ public class Logger {
 		}
 	}
 	
+	/**
+	 * Log kiiratasa fileba.
+	 * @throws IOException
+	 */
 	public static void printFile() throws IOException {
 		
 		BufferedWriter out = new BufferedWriter(new FileWriter(getResultFileName()));
@@ -72,7 +76,10 @@ public class Logger {
         out.close();
 	}
 
-	
+	/**
+	 * Visszaadja a kimeneti file nevet a bemeneti file alapjan.
+	 * @return
+	 */
 	private static String getResultFileName() {
 		// Kiterjesztes megkeresese
 		String extension = "";
