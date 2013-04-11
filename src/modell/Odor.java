@@ -1,7 +1,5 @@
 package modell;
 
-import skeleton.Logger;
-
 public abstract class Odor {
 	
 	/** A szag intenzitasa */
@@ -15,8 +13,6 @@ public abstract class Odor {
 	 * @return intezitas.
 	 */
 	public int getIntensity() {
-		Logger.enter(this, "getIntensity");
-		Logger.exit(this);
 		return intensity;
 	}
 	
@@ -41,9 +37,7 @@ public abstract class Odor {
 	 * @param i Az intezitas erteke.
 	 */
 	public void setIntensity(int i) {
-		Logger.enter(this, "setIntensity", "i:int");
 		this.intensity = i;
-		Logger.exit(this);
 	}
 	/**
 	 * Semlegesites, a kulonbozo leszarmazottak fogjak implementalni. 

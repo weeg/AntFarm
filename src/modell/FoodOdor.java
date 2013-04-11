@@ -1,31 +1,21 @@
 package modell;
 
-import skeleton.Logger;
-
 /**
  * Az élelemszag objektum.
  */
 public class FoodOdor extends Odor {
 	
-	public FoodOdor() {
-		Logger.attach("FoodOdor", this);
-	}
+	public FoodOdor() {	}
 	/**
 	 * Törli magát a mezõrõl.
 	 */
 	public void evaporate() {
-		Logger.enter(this, "evaporate");
 		position.removeOdor(this);
-		Logger.exit(this);
 	}
 	
 	/**
-	 * A semlegesito metodus_ mivel a szag nem semlegesitheto nem csinal semmit.
+	 * A semlegesito metodus mivel a szag nem semlegesitheto nem csinal semmit.
 	 * @return Hardcoded false.
 	 */
-	public boolean neutralize() {	
-		Logger.enter(this, "neutralize");
-		Logger.exit(this);
-		return false;
-	}
+	public void neutralize() {	}
 }

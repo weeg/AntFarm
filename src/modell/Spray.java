@@ -1,13 +1,11 @@
 package modell;
 
-import skeleton.Logger;
-
 public abstract class Spray {
 	
 	/**
 	 * A rendelekezesre allo fujasok szama.
 	 */
-	private int quantity;
+	protected int quantity;
 	
 	/**
 	 * A hatosugar merete.
@@ -30,8 +28,6 @@ public abstract class Spray {
 	 * @return A fujasok szama.
 	 */
 	public int getQuantity() {
-		Logger.enter(this, "getQuantity");
-		Logger.exit(this);
 		return quantity;
 	}
 
@@ -40,18 +36,14 @@ public abstract class Spray {
 	 * @param quantity A fujasok szama.
 	 */
 	public void setQuantity(int quantity) {
-		Logger.enter(this, "setQuantity", "quantity:int");
 		this.quantity = quantity;
-		Logger.exit(this);
 	}
 
 	/**
 	 * Visszaadja a hatosugar mertetet.
-	 * @return A hatósugár
+	 * @return A hatosugar
 	 */
 	public int getRadius() {
-		Logger.enter(this, "getRadius");
-		Logger.exit(this);
 		return radius;
 	}
 
@@ -60,8 +52,6 @@ public abstract class Spray {
 	 * @param radius A hatosugar merete.
 	 */
 	public void setRadius(int radius) {
-		Logger.enter(this, "setRadius", "radius:int");
 		this.radius = radius;
-		Logger.exit(this);
 	}
 }

@@ -3,8 +3,6 @@ package modell;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import skeleton.Logger;
-
 public class Field {
 	
 	/** A tisztas, amin van a mezo */
@@ -19,12 +17,13 @@ public class Field {
 	/** Az entitasokat tarolo lista */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
+	public Field() {}
+	
 	/**
 	 * A mezo konstruktora
 	 * @param glade A tisztas, amin van a mezo
 	 */
 	public Field(Glade glade) {
-		Logger.attach("field", this);
 		this.glade = glade;
 	}
 	
@@ -34,8 +33,7 @@ public class Field {
 	 * @param neighbour A szomszed mezo.
 	 */
 	public void setNeighbour(Direction dir, Field neighbour) {
-		Logger.enter(this, "setNeighbour", "dir:" + dir.toString(), Logger.getObjectName(neighbour));		
-		Logger.exit(this);
+		neighbours.put(dir, neighbour);
 	}
 	
 	/**
@@ -44,12 +42,7 @@ public class Field {
 	 * @return A szomszed mezo.
 	 */
 	public Field getNeighbour(Direction dir) {
-		Logger.enter(this, "getNeighbour", "dir: " + dir.toString());
-		Logger.exit(this);
-		Logger.off();
-		Field n = new Field(glade);
-		Logger.on();
-		return n;
+		return neighbours.get(dir);
 	}
 	
 	/**
@@ -58,15 +51,17 @@ public class Field {
 	 * @return Lista a mezokrol.
 	 */
 	public ArrayList<Field> getNeighbours(int radius) {
-		Logger.enter(this, "getNeighbours", "radius:int");
-		Logger.exit(this);
-		Logger.off();
 		ArrayList<Field> list = new ArrayList<Field>();
-		for (int i = 0; i < 3; i++) {			
-			list.add(new Field(glade));
+		Direction dir = Direction.N;
+		for (int i = 0; i < 5; i++) {
+			Field neighbour = neighbours.get(dir.turn(i));
+			if (radius > 0) {
+				ArrayList<Field> neighbour_list = neighbour.getNeighbours(radius-1);
+				list.addAll(neighbour_list);
+			}
+			list.add(neighbour);
 		}
 		list.add(this);
-		Logger.on();
 		return list;
 	}
 	
@@ -75,12 +70,10 @@ public class Field {
 	 * @return Az osszintenzitas.
 	 */
 	public int getOdorIntensity() {
-		Logger.enter(this, "getOdorIntensity");
 		int intens = 0;
 		for (Odor o : odors) {
 			intens += o.getIntensity();
 		}
-		Logger.exit(this);
 		return intens;
 	}
 	
@@ -89,18 +82,14 @@ public class Field {
 	 * @param odor A szagobjektum.
 	 */
 	public void addOdor(Odor odor) {
-		Logger.enter(this, "addOdor", Logger.getObjectName(odor));
 		odors.add(odor);
-		Logger.exit(this);
 	}
 	
 	/**
 	 * Visszaadja a mezoben talalhato szagok listajat.
 	 * @return A szaglista.
 	 */
-	public ArrayList<Odor> getOdors() {
-		Logger.enter(this, "getOdors");
-		Logger.exit(this);				
+	public ArrayList<Odor> getOdors() {				
 		return odors;
 	}
 
@@ -109,9 +98,7 @@ public class Field {
 	 * @param odor A torlendo szagobjektum.
 	 */
 	public void removeOdor(Odor odor) {
-		Logger.enter(this, "removeOdors", Logger.getObjectName(odor)+":Odor");
 		odors.remove(odor);
-		Logger.exit(this);
 	}
 
 	/**
@@ -119,9 +106,7 @@ public class Field {
 	 * @param e Egy entitas.
 	 */
 	public void addEntity(Entity e) {
-		Logger.enter(this, "addEntity", Logger.getObjectName(e));
 		entities.add(e);
-		Logger.exit(this);
 	}
 
 	/**
@@ -129,9 +114,7 @@ public class Field {
 	 * @param e Torlendo entitas.
 	 */
 	public void removeEntity(Entity e) {
-		Logger.enter(this, "removeEntity", Logger.getObjectName(e));
 		entities.remove(e);
-		Logger.exit(this);
 	}
 
 	/**
@@ -139,8 +122,6 @@ public class Field {
 	 * @return Az entitasok listaja.
 	 */
 	public ArrayList<Entity> getEntities() {
-		Logger.enter(this, "getEntities");
-		Logger.exit(this);
 		return entities;
 	}
 	

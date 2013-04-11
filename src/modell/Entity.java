@@ -41,4 +41,12 @@ public abstract class Entity {
 	public void collide(Anteater anteater) {
 		// A leszarmazottak fogjak implementalni szukseg eseten
 	}
+	/**
+	 * Utkozes egy kaviccsal. A leszarmazottak kulonbozo modon implemetalhatjak, 
+	 * attol fuggoen mi tortenjen az utkozes soran.
+	 * @param stone A kavics, amivel utkozik.
+	 */
+	public void collide(Stone stone) {
+		// A leszarmazottak fogjak implementalni szukseg eseten
+	}
 }
