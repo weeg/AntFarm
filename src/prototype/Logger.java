@@ -69,8 +69,11 @@ public class Logger {
 		BufferedWriter out = new BufferedWriter(new FileWriter(getResultFileName()));
 
         for (String log : logs) {
-			out.write(log);
-			out.newLine();
+        	// Uccso sorba ne szurjon be uj sort
+        	if (logs.indexOf(log) != 0) {
+				out.newLine();
+			}
+        	out.write(log);
 		}
         
         out.close();
