@@ -1,5 +1,6 @@
 package modell;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Ant extends Entity implements Active {
@@ -110,7 +111,7 @@ public class Ant extends Entity implements Active {
 				}
 			}
 		}	
-		for (Entity e : target.getEntities()) {
+		for (Entity e : (ArrayList<Entity>)target.getEntities()) {
 			e.collide(this);
 		}
 		if (killed == false) {
