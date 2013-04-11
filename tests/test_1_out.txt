@@ -11,6 +11,7 @@ anteater has been added to current.
 AntOdor has been created with name antodor1.
 antodor1's intensity parameter set to 10.
 antodor1 has been added to current.
+antodor1’s intensity parameter is 10.
 Stone has been created with name stone1.
 stone1 has been added to field1.
 Stone has been created with name stone2.
