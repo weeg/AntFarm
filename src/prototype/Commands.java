@@ -25,6 +25,7 @@ import modell.FoodOdor;
 import modell.Glade;
 import modell.Log;
 import modell.Odor;
+import modell.Poison;
 import modell.Spray;
 import modell.Stone;
 import modell.Water;
@@ -358,13 +359,13 @@ public class Commands {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
 			}
 		
-		// Hangyaszag
-		} else if (type.equals("AntOdor")) {
-			obj = (AntOdor) getObject(object);
+		// Hangyaszag / Kajaszag
+		} else if (type.equals("AntOdor") || type.equals("FoodOdor")) {
+			obj = (Odor) getObject(object);
 			
 			// Szag intenzitas megadasa
 			if (parameter.startsWith("intensity")) {
-				((AntOdor) obj).setIntensity(Integer.parseInt(value));
+				((Odor) obj).setIntensity(Integer.parseInt(value));
 				
 			// Ismeretlen parameter
 			} else {
@@ -383,7 +384,33 @@ public class Commands {
 			} else {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
 			}
+			
+		// Hangyaszag semelegisto / Hangyaolo spray
+		} else if (type.equals("AntKillerSpray") || type.equals("AntOdorNeutralizerSpray")) {
+			obj = (Spray) getObject(object);
+			
+			// Mennyiseg megvaltoztatasa
+			if (parameter.equals("quantity")) {
+				((Spray) obj).setQuantity(Integer.parseInt(value));
+			
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}
 		
+		// Mereg
+		} else if (type.equals("Poison")) {
+			obj = (Poison) getObject(object);
+			
+			// Mereg hatralevo eletenek beallitasa
+			if (parameter.equals("TTL")) {
+				Tester.setVariable(obj, "TTL", Integer.parseInt(value));
+				
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}		
+			
 		// Ismeretlen elem.
 		} else {
 			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
@@ -449,19 +476,20 @@ public class Commands {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
 			}
 		
-		// Hangyaszag
-		} else if (type.equals("AntOdor")) {
-			obj = (AntOdor) getObject(object);
+		// Hangyaszag / Kajaszag
+		} else if (type.equals("AntOdor") || type.equals("FoodOdor")) {
+			obj = (Odor) getObject(object);
 			
 			// Szag intenzitas megadasa
 			if (parameter.startsWith("intensity")) {
-				value = ""+((AntOdor) obj).getIntensity();
+				value = ""+((Odor) obj).getIntensity();
 				
 			// Ismeretlen parameter
 			} else {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
 			}
-		
+
+			
 		// Food
 		} else if (type.equals("Food")) {
 			obj = (Food) getObject(object);
@@ -475,6 +503,32 @@ public class Commands {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
 			}
 			
+		// Hangyaszag semelegisto / Hangyaolo spray
+		} else if (type.equals("AntKillerSpray") || type.equals("AntOdorNeutralizerSpray")) {
+			obj = (Spray) getObject(object);
+			
+			// Mennyiseg megvaltoztatasa
+			if (parameter.equals("quantity")) {
+				value = ""+((Spray) obj).getQuantity();
+			
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}	
+		
+		// Mereg
+		} else if (type.equals("Poison")) {
+			obj = (Poison) getObject(object);
+			
+			// Mereg hatralevo eletenek lekerdezese
+			if (parameter.equals("TTL")) {
+				value = Tester.getVariable(obj, "TTL").toString();
+				
+			// Ismeretlen parameter
+			} else {
+				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+			}	
+		
 		// Ismeretlen elem.
 		} else {
 			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);

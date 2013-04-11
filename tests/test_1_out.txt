@@ -2,14 +2,14 @@ Glade has been created with name glade.
 Field has been created with name current.
 Field has been created with name field1.
 Field has been created with name field2.
-field1's direction_N parameter set to field2.
+field1’s direction_N parameter set to field2.
 Field has been created with name field3.
-field2's direction_N parameter set to field3.
+field2’s direction_N parameter set to field3.
 Anteater has been created with name anteater.
-anteater's direction parameter set to N.
+anteater’s direction parameter set to N.
 anteater has been added to current.
 AntOdor has been created with name antodor1.
-antodor1's intensity parameter set to 10.
+antodor1’s intensity parameter set to 10.
 antodor1 has been added to current.
 antodor1’s intensity parameter is 10.
 Stone has been created with name stone1.
