@@ -44,7 +44,7 @@ public class Commands {
 		
 		// Hibak kiiratasahoz eltarolja a aktualis parancsot es a sorat.
 		currentCommand     = command;
-		currentCommandLine = line;
+		currentCommandLine = line;		
 		
 		/*
 		 * create parancs meghivasa

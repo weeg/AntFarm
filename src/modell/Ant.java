@@ -33,7 +33,7 @@ public class Ant extends Entity implements Active {
 	 * A hangya default konstruktora
 	 */
 	public Ant() {
-		Logger.attach("ant", this);
+		
 	}
 	
 	/**
@@ -51,9 +51,7 @@ public class Ant extends Entity implements Active {
 	 *  Visszaadja, hogy a hangyanal van-e elelem
 	 * @return Igaz, ha a hangyanal van elelem
 	 */
-	public boolean hasFood() {
-		Logger.enter(this, "hasFood");		
-		Logger.exit(this);
+	public boolean hasFood() {		
 		return hasFood;
 	}
 	
@@ -61,148 +59,74 @@ public class Ant extends Entity implements Active {
 	 *  A hangya megolese
 	 */
 	public void kill() {
-		
-		Logger.enter(this, "kill");
 		position.removeEntity(this);
 		position.getGlade().removeActiveObject(this);
-		killed = true;
-		Logger.exit(this);
+		killed = true;		
 	}
 	
 	/**
 	 *  A hangya blokkolasa
 	 */
-	public void block() {
-		Logger.enter(this, "block");
-		blocked = true;
-		Logger.exit(this);
+	public void block() {		
+		blocked = true;		
 	}
 	
 	/**
 	 *  A hangya eszik
 	 */
 	public void eat() {
-		Logger.enter(this, "eat");
-		Logger.exit(this);
+		hasFood = true;		
 	}		
 	
 	/**
 	 * Irany valtoztatas.
 	 */
 	private void changeDirection() {
-		Logger.enter(this, "changeDirection");
-		Logger.exit(this);
+		direction = direction.turn(1);
 	}
 	
 	/**
 	 * A hangya animalasa
 	 */
 	public void animate() {		
-		Logger.enter(this, "animate");
-		int a = Logger.choose("Legyen-e a hangyanal elelem?", "Igen", "Nem");
-		switch (a) {
-			case 1:
-				hasFood = true;
-				break;
-			case 2:
-				hasFood = false;	
-				break;
-		}
-		direction = Direction.NE;
+		
 		Field target = null;
+		
 		if (hasFood) {
 			target = popFieldFromMemory();
 		} else {
+			int intensity = 0;
 			for (int i = -1; i <= 1; i++) {
 				Field f = position.getNeighbour(direction.turn(i));
-				int intensity = f.getOdorIntensity();
-				if (target == null) {
-					target = f;
-				}
-				if (target.getOdorIntensity() < intensity) {
-					target = f; 
+				if (target == null || target.getOdorIntensity() > intensity) {
+					target = f;								
 				}
 			}
-		}
-		Logger.off();
-		if (hasFood == false) {
-			int r = Logger.choose("Mivel utkozzon a hangya?", "Akadallyal (Kovel)", "Hangyaval", "Hangyabollyal", 
-					"Hangyalesovel", "Hangyaszsunnel", "Elelemmel", "Mereggel", "Palyaszelevel");
-			switch (r) {
-				case 1:
-					target.addEntity(new Stone());
-					break;
-				case 2:
-					target.addEntity(new Ant());
-					break;
-				case 3:
-					target.addEntity(new AntHill());
-					break;
-				case 4:
-					target.addEntity(new AntLion());
-					break;
-				case 5:
-					target.addEntity(new Anteater());
-					break;
-				case 6:
-					target.addEntity(new Food());
-					break;
-				case 7:
-					target.addEntity(new Poison());
-					break;
-				case 8:
-					target.addEntity(new DeadEnd());
-					break;
-			}
-		} else {
-			int r = Logger.choose("Mivel utkozzon a hangya?", "Hangyaval", "Hangyabollyal", 
-					"Hangyaszsunnel", "Mereggel");
-			switch (r) {
-				case 1:
-					target.addEntity(new Ant());
-					break;
-				case 2:
-					target.addEntity(new AntHill());
-					break;
-				case 3:
-					target.addEntity(new Anteater());
-					break;
-				case 4:
-					target.addEntity(new Poison());
-					break;
-			}
-		}
-		Logger.on();
+		}	
 		for (Entity e : target.getEntities()) {
 			e.collide(this);
 		}
-		if (killed == false) { 			
+		if (killed == false) {
 			if (blocked) {					
 				changeDirection();
 			} else {	
 				if (hasFood == false) {
-					AntOdor ao = new AntOdor();
-					position.addOdor(ao);
-					position.getGlade().addActiveObject(ao);
+					AntOdor antOdor = new AntOdor();
+					position.addOdor(antOdor);
+					position.getGlade().addActiveObject(antOdor);
 				}
 				position.removeEntity(this);
 				target.addEntity(this);
 			}							
-		}
-		Logger.exit(this);	
+		}		
 	}
 
 	/**
 	 * Egy mezo kivetele a utvonallista tetejerol.
 	 * @return A mezo, ami kovetkezik a visszauthoz.
 	 */
-	private Field popFieldFromMemory() {
-		Logger.enter(this, "popFieldFromMemory");
-		Logger.exit(this);
-		Logger.off();
-		Field n = new Field(position.getGlade());
-		Logger.on();
-		return n;
+	private Field popFieldFromMemory() {						
+		return memory.pop();
 	}
 
 	/**
@@ -210,21 +134,17 @@ public class Ant extends Entity implements Active {
 	 * @param anteater A hangyaszsun, amivel a hangya utkozik
 	 */
 	public void collide(Anteater anteater) {
-	
-		Logger.enter(this, "collide", Logger.getObjectName(anteater));
 		if (anteater.isHungry()) {
-			//kill();
+			position.removeEntity(this);
+			position.getGlade().removeActiveObject(this);
 			anteater.increaseEatenAnts(this);
-		}
-		Logger.exit(this);
+		}		
 	}
 	
 	/**
-	 * Beállítja a hangyánál a mérgezést.
+	 * Beallitja a hangyanal a mergezest
 	 */
-	public void poison() {
-		Logger.enter(this, "poison");
-		this.poisened = true;
-		Logger.exit(this);
+	public void poison() {		
+		poisened = true;		
 	}
 }
