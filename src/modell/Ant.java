@@ -110,7 +110,7 @@ public class Ant extends Entity implements Active {
 					target = f;								
 				}
 			}
-		}	
+		}
 		for (Entity e : (ArrayList<Entity>)target.getEntities()) {
 			e.collide(this);
 		}
@@ -134,7 +134,7 @@ public class Ant extends Entity implements Active {
 	 * @return A mezo, ami kovetkezik a visszauthoz.
 	 */
 	private Field popFieldFromMemory() {						
-		return memory.pop();
+		return memory.isEmpty() ? null : memory.pop();
 	}
 
 	/**

@@ -22,6 +22,7 @@ public class Logger {
 	 * @param log
 	 */
 	public static void add(String log) {
+		System.out.println(log);
 		logs.add(log);
 	}
 	

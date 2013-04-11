@@ -32,8 +32,9 @@ import modell.Water;
 
 public class Commands {
 	
-	/**
+	/*
 	 * A peldanyokat (referenciait es neveit) tarolo tombok. Kulcs es ertek alapjan is lehessen bennuk keresni.
+	 * A LinkedHashMap sorrendhelyesen tarolja az elemeket
 	 */
 	private static Map<String, Object> objectsByKey   = new LinkedHashMap<String, Object>();
 	private static Map<Object, String> objectsByValue = new LinkedHashMap<Object, String>();
@@ -41,6 +42,7 @@ public class Commands {
 	private static int currentCommandLine = 0;
 	
 	public static void parseCommand(String command, int line) throws Throwable {
+		
 		String[] params = command.split(" ");
 		
 		// Hibak kiiratasahoz eltarolja a aktualis parancsot es a sorat.
@@ -187,7 +189,7 @@ public class Commands {
 			
 		// Hangyaszsun letrehozasa
 		} else if (object.equals("Anteater")) {	
-			obj = new Anteater();	
+			obj = new Anteater();
 		
 		// Hangyafiu letrehozasa
 		} else if (object.equals("AntHill")) {	
@@ -278,7 +280,22 @@ public class Commands {
 			fie.addEntity(obj);
 			
 			Logger.add(object+" has been added to "+field+".");
-		
+			
+			// Hangya
+			if (getObjectType(object).equals("Ant")) {
+				
+				// Adja hozza a mezot a hangyahoz
+				Ant ant = (Ant) getObject(object);
+				ant.setPosition(fie);
+			
+			// Hangyaszsun
+			} else if (getObjectType(object).equals("Anteater")) {
+				
+				// Adja hozza a mezot a hangyaszsunhoz
+				Anteater anteater = (Anteater) getObject(object);
+				anteater.setPosition(fie);
+			}
+			
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {
 			Logger.add("\tError at line "+currentCommandLine+"! Wrong parameters: "+currentCommand);
@@ -305,11 +322,11 @@ public class Commands {
 
 			// Menetirany megvaltoztatasa
 			if (parameter.equals("direction")) {
-				Tester.setVariable(obj, "direction", Direction.valueOf(value));
+				setVariable(obj, "direction", Direction.valueOf(value));
 				
 			// Megevett hangyak szamanak novelese
 			} else if (parameter.equals("eatenAnts")) {
-				Tester.setVariable(obj, "eatenAnts", Integer.parseInt(value));
+				setVariable(obj, "eatenAnts", Integer.parseInt(value));
 			
 			// Ismeretlen parameter
 			} else {
@@ -322,15 +339,15 @@ public class Commands {
 			
 			// Menetirany megvaltoztatasa
 			if (parameter.equals("direction")) {
-				Tester.setVariable(obj, "direction", Direction.valueOf(value));
+				setVariable(obj, "direction", Direction.valueOf(value));
 			
 			// Etel hozzaadasa/elvetele
 			} else if (parameter.equals("hasFood")) {
-				Tester.setVariable(obj, "hasFood", value.equals("true") ? true : false);
+				setVariable(obj, "hasFood", value.equals("true") ? true : false);
 				
 			// Hangya megmergezese
 			} else if (parameter.equals("poisened")) {
-				Tester.setVariable(obj, "poisened", value.equals("true") ? true : false);
+				setVariable(obj, "poisened", value.equals("true") ? true : false);
 			
 			// Ismeretlen parameter
 			} else {
@@ -342,7 +359,7 @@ public class Commands {
 			obj = (Field) getObject(object);
 			
 			// Szomszedok hozzaadasa
-			if (parameter.startsWith("direction")) {
+			if (parameter.startsWith("neighbour")) {
 
 				String direction = parameter.split("_")[1];
 				Field field      = (Field) getObject(value);
@@ -378,7 +395,7 @@ public class Commands {
 			
 			// Mennyiseg megvaltoztatasa
 			if (parameter.equals("quantity")) {
-				Tester.setVariable(obj, "quantity", Integer.parseInt(value));
+				setVariable(obj, "quantity", Integer.parseInt(value));
 			
 			// Ismeretlen parameter
 			} else {
@@ -404,7 +421,7 @@ public class Commands {
 			
 			// Mereg hatralevo eletenek beallitasa
 			if (parameter.equals("TTL")) {
-				Tester.setVariable(obj, "TTL", Integer.parseInt(value));
+				setVariable(obj, "TTL", Integer.parseInt(value));
 				
 			// Ismeretlen parameter
 			} else {
@@ -440,12 +457,16 @@ public class Commands {
 
 			// Menetirany lekerdezese
 			if (parameter.equals("direction")) {
-				value = Tester.getVariable(obj, "direction").toString();
+				value = getVariable(obj, "direction").toString();
 				
 			// Megevett hangyak szama
 			} else if (parameter.equals("eatenAnts")) {
-				value = Tester.getVariable(obj, "eatenAnts").toString();
+				value = getVariable(obj, "eatenAnts").toString();
 			
+			// Piheno modban van-e
+			} else if (parameter.equals("isResting")) {
+				value = getVariable(obj, "isResting").toString();	
+				
 			// Ismeretlen parameter
 			} else {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
@@ -457,19 +478,19 @@ public class Commands {
 			
 			// Menetirany lekerdezese
 			if (parameter.equals("direction")) {
-				value = Tester.getVariable(obj, "direction").toString();
+				value = getVariable(obj, "direction").toString();
 			
 			// Etel lekerdezese
 			} else if (parameter.equals("hasFood")) {
-				value = Tester.getVariable(obj, "hasFood").toString();
+				value = getVariable(obj, "hasFood").toString();
 				
 			// Hangya mergezesenek lekerdezese
 			} else if (parameter.equals("poisened")) {
-				value = Tester.getVariable(obj, "poisoned").toString();
+				value = getVariable(obj, "poisoned").toString();
 			
 			// Hangya hatralevo eletenek lekerdezese
 			} else if (parameter.equals("TTL")) {
-				value = Tester.getVariable(obj, "TTL").toString();
+				value = getVariable(obj, "TTL").toString();
 				
 			// Ismeretlen parameter
 			} else {
@@ -496,7 +517,7 @@ public class Commands {
 			
 			// Mennyiseg lekerdezese
 			if (parameter.equals("quantity")) {
-				value = Tester.getVariable(obj, "quantity").toString();
+				value = getVariable(obj, "quantity").toString();
 			
 			// Ismeretlen parameter
 			} else {
@@ -522,7 +543,7 @@ public class Commands {
 			
 			// Mereg hatralevo eletenek lekerdezese
 			if (parameter.equals("TTL")) {
-				value = Tester.getVariable(obj, "TTL").toString();
+				value = getVariable(obj, "TTL").toString();
 				
 			// Ismeretlen parameter
 			} else {
@@ -559,7 +580,7 @@ public class Commands {
 		if (hasInterface(obj, "Active")) {
 			Active active = (Active) obj;
 			// Meg ne hivja meg.
-			//active.animate();
+			active.animate();
 			
 			String key = getKey(obj);
 			Logger.add(key+" has been animated.");
@@ -570,7 +591,7 @@ public class Commands {
 	 * Ido leptetese.
 	 * tick parancs megvalositasa.
 	 */
-	private static void tick() {
+	public static void tick() {
 		
 		Glade glade = getGlade();
 		glade.tick();
@@ -584,7 +605,7 @@ public class Commands {
 	 * @param object
 	 * @param field
 	 */
-	private static void addOdor(String object, String field) {
+	public static void addOdor(String object, String field) {
 		Object obj   = getObject(object);
 		Object fie   = getObject(field);
 		
@@ -618,7 +639,8 @@ public class Commands {
 	 * @param type
 	 * @param field
 	 */
-	private static void spray(String type, String field) {
+	public static void spray(String type, String field) {
+		
 		Object obj = getObject(type);
 		Object fie = getObject(field);
 		
@@ -652,13 +674,13 @@ public class Commands {
 	 * List parancs megvalositasa
 	 * @param mode
 	 */
-	private static void list(String mode) {
+	public static void list(String mode) {
 		
 		// A glade valamint az osszes mezo objektumainak kilistazasa
 		if (mode.equals("all")) {
 
 			Glade gla                = getGlade();
-			String activeObjectsName = getActiveObjectsName(gla.getActiveObjects());
+			String activeObjectsName = getObjectsName(gla.getActiveObjects());
 			
 			Logger.add("List all:");
 			// Aktiv objektumok kilistazasa
@@ -669,11 +691,19 @@ public class Commands {
 				String key = obj.getKey();
 				// Mezok kikeresese
 				if (getObjectType(key).equals("Field")) {
+					
 					Field fie                  = (Field) obj.getValue();
 					ArrayList<Entity> entities = fie.getEntities();
-					String entitiesName        = getEntitiesName(entities);
+					ArrayList<Odor> odors      = fie.getOdors();
 					
-					Logger.add("\tList "+obj.getKey()+": "+(entitiesName.equals("") ? "-" : entitiesName));
+					// Entitasok es szagok osszefesulese
+					ArrayList<Object> objects = new ArrayList<Object>();
+					objects.addAll(entities);
+					objects.addAll(odors);
+					
+					String objectsName        = getObjectsName(objects);
+					
+					Logger.add("\tList "+obj.getKey()+": "+(objectsName.equals("") ? "-" : objectsName));
 				}
 			}
 			
@@ -683,10 +713,18 @@ public class Commands {
 			Field fie = (Field) getObject(mode);
 			
 			if (fie != null) {
+
 				ArrayList<Entity> entities = fie.getEntities();
-				String entitiesName        = getEntitiesName(entities);
+				ArrayList<Odor> odors      = fie.getOdors();
 				
-				Logger.add("List "+mode+": "+(entitiesName.equals("") ? "-" : entitiesName));
+				// Entitasok es szagok osszefesulese
+				ArrayList<Object> objects = new ArrayList<Object>();
+				objects.addAll(entities);
+				objects.addAll(odors);
+				
+				String objectsName        = getObjectsName(objects);
+				
+				Logger.add("List "+mode+": "+(objectsName.equals("") ? "-" : objectsName));
 			
 			// Nem letezo mezore valo hivatkozas
 			} else {
@@ -713,6 +751,12 @@ public class Commands {
 		return false;
 	}
 	
+	/**
+	 * Visszaadja, hogy az objektum megvalositja-e az adott tipust.
+	 * @param obj
+	 * @param type
+	 * @return
+	 */
 	private static boolean isExtending(Object obj, String type) {
 		
 		if (obj.getClass().getSuperclass().getSimpleName().equals(type)) {
@@ -741,16 +785,21 @@ public class Commands {
 	}
 	
 	/**
-	 * Az entitasoknak kilistazza a nevet.
+	 * Kikeresi es osszefuzi az objektumok nevet.
 	 * @param entities
 	 */
-	private static String getEntitiesName(ArrayList<Entity> entities) {
+	private static String getObjectsName(ArrayList<?> entities) {
 		
 		StringBuilder sb = new StringBuilder();
 		
 		// Entitasokhoz kikeresi a nevuket
-		for (Entity entity : entities) {
+		for (Object entity : entities) {
 			String key = getKey(entity);
+			
+			// Ha nem talalhato a kulcs, akkor a tipusat adja vissza
+			if (key == null) {
+				key = entity.toString();
+			}
 			
 			// Vesszok betuzdelese
 			if (sb.length() != 0) {
@@ -784,6 +833,7 @@ public class Commands {
 	 * Aktiv objektumok nevenek kilistazasa.
 	 * @param entities
 	 */
+	/*
 	private static String getActiveObjectsName(ArrayList<Active> entities) {
 		
 		StringBuilder sb = new StringBuilder();
@@ -791,6 +841,11 @@ public class Commands {
 		// Entitasokhoz kikeresi a nevuket
 		for (Active entity : entities) {
 			String key = getKey(entity);
+			
+			// Ha nem talalhato a kulcs, akkor a tipusat adja vissza
+			if (key == null) {
+				key = entity.toString();
+			}
 			
 			// Vesszok betuzdelese
 			if (sb.length() != 0) {
@@ -801,9 +856,9 @@ public class Commands {
 	
 		return sb.toString();
 	}
-	
+	*/
 	/**
-	 * Visszaadja az objektumok egyszerusitett nevet.
+	 * Visszaadja az objektumok egyszerusitett nevet kulcs alapjan.
 	 * @param key
 	 * @return
 	 */
@@ -811,6 +866,11 @@ public class Commands {
 		return getObject(key).getClass().getSimpleName();
 	}
 	
+	/**
+	 * Visszaadj az objektumok egyszerusitett nevet referencia alapjan.
+	 * @param obj
+	 * @return
+	 */
 	private static String getObjectType(Object obj) {
 		return obj.getClass().getSimpleName();
 	}
@@ -822,8 +882,38 @@ public class Commands {
 	 * @param name
 	 */
 	private static void addObject(Object obj, String object, String name) {
+		
 		objectsByKey.put(name, obj);
 		objectsByValue.put(obj, name);
 		Logger.add(object+" has been created with name "+name+".");
 	}
+	
+	/**
+	 * Egy osztaly privat valtozoit lehet vele lekerdezni.
+	 * @param object
+	 * @param fieldName
+	 * @return
+	 * @throws Throwable
+	 */
+	public static Object getVariable(Object object, String fieldName) throws Throwable {
+        
+		java.lang.reflect.Field field = object.getClass().getDeclaredField(fieldName);       
+        field.setAccessible(true);
+       
+        return field.get(object);
+    }
+	
+	/**
+	 * Egy osztaly privat valtozoit lehet vele beallitani.
+	 * @param object
+	 * @param fieldName
+	 * @param value
+	 * @throws Throwable
+	 */
+	public static void setVariable(Object object, String fieldName, Object value) throws Throwable {
+        
+		java.lang.reflect.Field field = object.getClass().getDeclaredField(fieldName);       
+        field.setAccessible(true);
+        field.set(object, value);
+    }
 }

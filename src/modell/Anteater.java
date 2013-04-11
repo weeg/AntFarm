@@ -33,7 +33,7 @@ public class Anteater extends Entity implements Active {
 	 * Visszaadja, hogy ehes-e a hangyaszsun
 	 */
 	public boolean isHungry() {		
-		return isHungry();
+		return eatenAnts == 7 ? true : false;
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class Anteater extends Entity implements Active {
 	public void animate() {
 		
 		Field target = position.getNeighbour(direction);
-		
+
 		for (Entity e : target.getEntities()) {
 			e.collide(this);
 		}

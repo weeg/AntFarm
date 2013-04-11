@@ -25,22 +25,7 @@ public class Tester {
 			}
 		}
 		
-		Logger.printConsole();
+		//Logger.printConsole();
 		Logger.printFile();
 	}
-	
-	
-	
-	public static Object getVariable(Object object, String fieldName) throws Throwable {
-        java.lang.reflect.Field field = object.getClass().getDeclaredField(fieldName);       
-        field.setAccessible(true);
-       
-        return field.get(object);
-    }
-	
-	public static void setVariable(Object object, String fieldName, Object value) throws Throwable {
-        java.lang.reflect.Field field = object.getClass().getDeclaredField(fieldName);       
-        field.setAccessible(true);
-        field.set(object, value);
-    }
 }
