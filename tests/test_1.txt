@@ -1,22 +1,12 @@
 create Glade glade
 
-create Field current glade
-create Field northwest glade
-create Field north glade
-create Field northeast glade
+create Field center glade
+create AntOdor antodor
+set antodor intensity
+add antodor center
 
-set current neighbour_N north
-set current neighbour_NW northwest
-set current neighbour_NE northeast
+list all
 
-create Ant ant
-set ant direction N
-set ant hasFood true
-add ant current
-
-create AntHill anthill
-add anthill north
-
-animate ant
+animate antodor
 
 list all

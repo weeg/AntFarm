@@ -196,8 +196,9 @@ public class Commands {
 			obj = new AntHill();	
 		
 		// Hangyaolo letrehozasa
-		} else if (object.equals("AntKillerSpray")) {	
-			obj = new AntKillerSpray();	
+		} else if (object.equals("AntKillerSpray")) {
+			Glade gla = getGlade();
+			obj = new AntKillerSpray(gla);	
 		
 		// Hangyaleso letrehozasa
 		} else if (object.equals("AntLion")) {	
@@ -208,13 +209,10 @@ public class Commands {
 			obj = new AntOdor();	
 
 		// Hangyaszagsemlegesito spray letrehozasa
-		} else if (object.equals("AntOdorNeutralizerSpray")) {	
-			obj = new AntOdorNeutralizerSpray();	
+		} else if (object.equals("AntOdorNeutralizerSpray")) {
+			Glade gla = getGlade();
+			obj = new AntOdorNeutralizerSpray(gla);	
 		
-		// Palya vege letrehozasa
-		} else if (object.equals("DeadEnd")) {	
-			obj = new DeadEnd();	
-
 		// Palya vege letrehozasa
 		} else if (object.equals("DeadEnd")) {	
 			obj = new DeadEnd();	
@@ -242,7 +240,7 @@ public class Commands {
 		
 		// Mereg letrehozasa
 		} else if (object.equals("Poison")) {	
-			obj = new Object();
+			obj = new Poison();
 		
 		// Kavics letrehozasa
 		} else if (object.equals("Stone")) {	
@@ -281,6 +279,7 @@ public class Commands {
 			
 			Logger.add(object+" has been added to "+field+".");
 			
+			// TODO: extendek alapjan adja hozza a mezoket. pl.: Entity, Odor
 			// Hangya
 			if (getObjectType(object).equals("Ant")) {
 				
@@ -294,6 +293,14 @@ public class Commands {
 				// Adja hozza a mezot a hangyaszsunhoz
 				Anteater anteater = (Anteater) getObject(object);
 				anteater.setPosition(fie);
+			
+			// Hangyaszag
+			// TODO: nem kell, ha csak addOdor parancs meg nem szunik
+			} else if (getObjectType(object).equals("AntOdor")) {
+				
+				// Adja hozza a mezot a szaghoz
+				Odor odor = (Odor) getObject(object);
+				odor.setPosition(fie);
 			}
 			
 		// Csak a mezohoz lehet elemet hozzarendelni
@@ -410,6 +417,10 @@ public class Commands {
 			if (parameter.equals("quantity")) {
 				((Spray) obj).setQuantity(Integer.parseInt(value));
 			
+			// Hatosugar megvaltoztatasa
+			} else if (parameter.equals("radius")) {
+				((Spray) obj).setRadius(Integer.parseInt(value));
+				
 			// Ismeretlen parameter
 			} else {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
@@ -532,6 +543,10 @@ public class Commands {
 			if (parameter.equals("quantity")) {
 				value = ""+((Spray) obj).getQuantity();
 			
+			// Hatosugar lekerdezese
+			} else if (parameter.equals("radius")) {
+				value = ""+((Spray) obj).getRadius();	
+				
 			// Ismeretlen parameter
 			} else {
 				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
@@ -628,6 +643,8 @@ public class Commands {
 			} else {
 				Odor odor = (Odor) obj;
 				((Field) fie).addOdor(odor);
+				odor.setPosition((Field) fie);
+				
 				Logger.add(object+" has been added to "+field+".");
 			}
 		}
@@ -798,7 +815,7 @@ public class Commands {
 			
 			// Ha nem talalhato a kulcs, akkor a tipusat adja vissza
 			if (key == null) {
-				key = entity.toString();
+				key = getObjectType(entity);
 			}
 			
 			// Vesszok betuzdelese
@@ -829,34 +846,6 @@ public class Commands {
 		return objectsByValue.get(object);
 	}
 	
-	/**
-	 * Aktiv objektumok nevenek kilistazasa.
-	 * @param entities
-	 */
-	/*
-	private static String getActiveObjectsName(ArrayList<Active> entities) {
-		
-		StringBuilder sb = new StringBuilder();
-		
-		// Entitasokhoz kikeresi a nevuket
-		for (Active entity : entities) {
-			String key = getKey(entity);
-			
-			// Ha nem talalhato a kulcs, akkor a tipusat adja vissza
-			if (key == null) {
-				key = entity.toString();
-			}
-			
-			// Vesszok betuzdelese
-			if (sb.length() != 0) {
-				sb.append(", ");
-			}
-			sb.append(key);
-		}
-	
-		return sb.toString();
-	}
-	*/
 	/**
 	 * Visszaadja az objektumok egyszerusitett nevet kulcs alapjan.
 	 * @param key
