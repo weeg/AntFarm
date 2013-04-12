@@ -95,4 +95,12 @@ public class Anteater extends Entity implements Active {
 	private void changeDirection() {
 		direction = direction.turn(1);
 	}
+	
+	/**
+	 * Visszadja a hangyaszsun iranyat.
+	 * @return Az irany.
+	 */
+	public Direction getDirection() {
+		return direction;
+	}
 }
