@@ -38,8 +38,8 @@ public class Commands {
 	 */
 	private static Map<String, Object> objectsByKey   = new LinkedHashMap<String, Object>();
 	private static Map<Object, String> objectsByValue = new LinkedHashMap<Object, String>();
-	private static String currentCommand  = "";
-	private static int currentCommandLine = 0;
+	public static String currentCommand  = "";
+	public static int currentCommandLine = 0;
 	
 	public static void parseCommand(String command, int line) throws Throwable {
 		
@@ -59,7 +59,7 @@ public class Commands {
 			} else if (params.length == 3) {
 				Commands.create(params[1], params[2]);
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 		
 		/*
@@ -70,7 +70,7 @@ public class Commands {
 			if (params.length == 3) {
 				Commands.add(params[1], params[2]);
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 		
 		/*
@@ -88,7 +88,7 @@ public class Commands {
 			
 			// Hibas parameterezes
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 			
 		/*
@@ -99,7 +99,7 @@ public class Commands {
 			if (params.length == 4) {
 				Commands.set(params[1], params[2], params[3]);
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 			
 		/*
@@ -110,7 +110,7 @@ public class Commands {
 			if (params.length == 3) {
 				Commands.get(params[1], params[2]);
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 			
 		/*
@@ -121,7 +121,7 @@ public class Commands {
 			if (params.length == 2) {
 				Commands.animate(params[1]);
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 			
 		/*
@@ -132,7 +132,7 @@ public class Commands {
 			if (params.length == 1) {
 				Commands.tick();
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 			
 		/*
@@ -143,7 +143,7 @@ public class Commands {
 			if (params.length == 3) {
 				Commands.addOdor(params[1], params[2]);
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 			
 		/*
@@ -154,11 +154,11 @@ public class Commands {
 			if (params.length == 3) {
 				Commands.spray(params[1], params[2]);
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Mismatch parameter number: "+currentCommand);
+				Logger.error("Mismatch parameter number!");
 			}
 			
 		} else {
-			Logger.add("\tError at line "+currentCommandLine+"! Unknown command: "+currentCommand);
+			Logger.error("Unknown command!");
 		}
 	}
 	
@@ -256,7 +256,7 @@ public class Commands {
 		if (obj != null) {
 			addObject(obj, object, name);
 		} else {
-			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
+			Logger.error("Unknown object "+object+"!");
 		}
 
 	}
@@ -277,7 +277,7 @@ public class Commands {
 			Entity obj = (Entity) getObject(object);
 			fie.addEntity(obj);
 			
-			Logger.add(object+" has been added to "+field+".");
+			Logger.success(object+" has been added to "+field+".");
 			
 			// TODO: extendek alapjan adja hozza a mezoket. pl.: Entity, Odor
 			// Hangya
@@ -305,7 +305,7 @@ public class Commands {
 			
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {
-			Logger.add("\tError at line "+currentCommandLine+"! Wrong parameters: "+currentCommand);
+			Logger.error("Wrong parameters!");
 		}
 	}
 	
@@ -337,7 +337,7 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 			
 		// Hangya	
@@ -358,7 +358,7 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 		
 		// Mezo	
@@ -380,7 +380,7 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 		
 		// Hangyaszag / Kajaszag
@@ -393,7 +393,7 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 		
 		// Food
@@ -406,7 +406,7 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 			
 		// Hangyaszag semelegisto / Hangyaolo spray
@@ -423,7 +423,7 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 		
 		// Mereg
@@ -436,22 +436,22 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}		
 			
 		// Ismeretlen elem.
 		} else {
-			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
+			Logger.error(object+" doesn't have "+parameter+" parameter!");
 		}
 		
 		
 		// Hibas erek megadasa
 		if (!success) {
-			Logger.add("\tError at line "+currentCommandLine+"! "+object+"'s "+parameter+" parameter value is incorrect: "+currentCommand);
+			Logger.error(object+" doesn't have "+parameter+" parameter!");
 		
 		// Sikeres lefutas
 		} else {
-			Logger.add(object+"’s "+parameter+" parameter set to "+value+".");
+			Logger.success(object+"’s "+parameter+" parameter set to "+value+".");
 		}
 	}
 	
@@ -480,7 +480,7 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 		
 		// Hangya
@@ -505,7 +505,7 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 		
 		// Hangyaszag / Kajaszag
@@ -518,7 +518,7 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 
 			
@@ -532,7 +532,7 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}
 			
 		// Hangyaszag semelegisto / Hangyaolo spray
@@ -549,7 +549,7 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}	
 		
 		// Mereg
@@ -562,22 +562,22 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! "+object+" doesn't have "+parameter+" parameter: "+currentCommand);
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}	
 		
 		// Ismeretlen elem.
 		} else {
-			Logger.add("\tError at line "+currentCommandLine+"! Unknown object "+object+": "+currentCommand);
+			Logger.error("Unknown object "+object+"!");
 		}
 		
 		
 		// Hibas erek megadasa
 		if (value.equals("")) {
-			Logger.add("\tError at line "+currentCommandLine+"! "+object+"'s "+parameter+" parameter value is incorrect: "+currentCommand);
+			Logger.error(object+"'s "+parameter+" parameter value is incorrect!");
 		
 		// Sikeres lefutas
 		} else {
-			Logger.add(object+"’s "+parameter+" parameter is "+value+".");
+			Logger.success(object+"’s "+parameter+" parameter is "+value+".");
 		}
 		
 		
@@ -598,7 +598,7 @@ public class Commands {
 			active.animate();
 			
 			String key = getKey(obj);
-			Logger.add(key+" has been animated.");
+			Logger.success(key+" has been animated.");
 		}
 	}
 	
@@ -611,7 +611,7 @@ public class Commands {
 		Glade glade = getGlade();
 		glade.tick();
 		
-		Logger.add("Tick.");
+		Logger.success("Tick.");
 	}
 	
 	/**
@@ -626,18 +626,18 @@ public class Commands {
 		
 		// A mezo nem talalhato
 		if (fie == null) {
-			Logger.add("\tError at line "+currentCommandLine+"! Field with name "+field+" cannot be found: "+currentCommand);
+			Logger.error("Field with name "+field+" cannot be found!");
 		
 		// A megadaott neve, nem egy Field
 		} else if (!getObjectType(fie).equals("Field")) {
-			Logger.add("\tError at line "+currentCommandLine+"! The type of "+field+" is not Field: "+currentCommand);
+			Logger.error("The type of "+field+" is not Field!");
 		
 		// Field
 		} else {
 			
 			// Nem szagot probal hozzaadni
 			if (!isExtending(obj, "Odor")) {
-				Logger.add("\tError at line "+currentCommandLine+"! The type of "+object+" is not an Odor: "+currentCommand);
+				Logger.error("The type of "+object+" is not an Odor!");
 			
 			// Szag hozzaadasa a mezohoz.
 			} else {
@@ -645,7 +645,7 @@ public class Commands {
 				((Field) fie).addOdor(odor);
 				odor.setPosition((Field) fie);
 				
-				Logger.add(object+" has been added to "+field+".");
+				Logger.success(object+" has been added to "+field+".");
 			}
 		}
 	}
@@ -663,25 +663,25 @@ public class Commands {
 		
 		// A mezo nem talalhato
 		if (fie == null) {
-			Logger.add("\tError at line "+currentCommandLine+"! Field with name "+field+" cannot be found: "+currentCommand);
+			Logger.error("Field with name "+field+" cannot be found!");
 		
 		// A megadaott neve, nem egy Field
 		} else if (!getObjectType(fie).equals("Field")) {
-			Logger.add("\tError at line "+currentCommandLine+"! The type of "+field+" is not Field: "+currentCommand);
+			Logger.error("The type of "+field+" is not Field!");
 		
 		// Field
 		} else {
 			
 			// Nem spay-jel probalkozik
 			if (!isExtending(obj, "Spray")) {
-				Logger.add("\tError at line "+currentCommandLine+"! The type of "+type+" is not a Sprayr: "+currentCommand);
+				Logger.error("The type of "+type+" is not a Spray!");
 			
 			// Spray hasznalata.
 			} else {
 				Spray spray = (Spray) obj;
 				spray.use(((Field) fie));
 				
-				Logger.add(type+" has been used with center "+field+". "+spray.getQuantity()+" blows left.");
+				Logger.success(type+" has been used with center "+field+". "+spray.getQuantity()+" blows left.");
 			}
 		}
 	}
@@ -699,9 +699,9 @@ public class Commands {
 			Glade gla                = getGlade();
 			String activeObjectsName = getObjectsName(gla.getActiveObjects());
 			
-			Logger.add("List all:");
+			Logger.success("List all:");
 			// Aktiv objektumok kilistazasa
-			Logger.add("\tList glade: "+(activeObjectsName.equals("") ? "-" : activeObjectsName));
+			Logger.success("\tList glade: "+(activeObjectsName.equals("") ? "-" : activeObjectsName));
 			
 			for (Entry<String, Object> obj : objectsByKey.entrySet()) {
 				
@@ -720,7 +720,7 @@ public class Commands {
 					
 					String objectsName        = getObjectsName(objects);
 					
-					Logger.add("\tList "+obj.getKey()+": "+(objectsName.equals("") ? "-" : objectsName));
+					Logger.success("\tList "+obj.getKey()+": "+(objectsName.equals("") ? "-" : objectsName));
 				}
 			}
 			
@@ -741,11 +741,11 @@ public class Commands {
 				
 				String objectsName        = getObjectsName(objects);
 				
-				Logger.add("List "+mode+": "+(objectsName.equals("") ? "-" : objectsName));
+				Logger.success("List "+mode+": "+(objectsName.equals("") ? "-" : objectsName));
 			
 			// Nem letezo mezore valo hivatkozas
 			} else {
-				Logger.add("\tError at line "+currentCommandLine+"! Unknown "+mode+" filed: "+currentCommand);
+				Logger.error("Unknown "+mode+" field!");
 			}
 		}
 	}
@@ -874,7 +874,7 @@ public class Commands {
 		
 		objectsByKey.put(name, obj);
 		objectsByValue.put(obj, name);
-		Logger.add(object+" has been created with name "+name+".");
+		Logger.success(object+" has been created with name "+name+".");
 	}
 	
 	/**

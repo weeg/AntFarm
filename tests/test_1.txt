@@ -3,7 +3,6 @@ create Glade glade
 create Field center glade
 create AntOdor antodor
 set antodor intensity
-add antodor center
 
 list all
 

@@ -18,10 +18,29 @@ public class Logger {
 	private static String fileName = "";
 	
 	/**
+	 * Hiba uzenetek hozzaadasa.
+	 * @param log
+	 */
+	public static void error(String log) {
+		add("\tError at line #"+Commands.currentCommandLine+" \""+Commands.currentCommand+"\". "+log);
+		
+		// Hiba esten alljon le. Igy nem okoz tobb hibat.
+		System.exit(-1);
+	}
+	
+	/**
+	 * Teszteredmeny hozzaadasa.
+	 * @param log
+	 */
+	public static void success(String log) {
+		add(log);
+	}
+	
+	/**
 	 * A log listahoz hozzafuz egy ujabb bejegyzest.
 	 * @param log
 	 */
-	public static void add(String log) {
+	private static void add(String log) {
 		System.out.println(log);
 		logs.add(log);
 	}

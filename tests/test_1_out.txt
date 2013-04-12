@@ -1,12 +1,11 @@
 Glade has been created with name glade.
 Field has been created with name center.
-Poison has been created with name poison.
-poison’s TTL parameter set to 0.
-poison has been added to center.
+AntOdor has been created with name antodor.
+antodor’s intensity parameter set to 10.
 List all:
 	List glade: -
-	List center: poison
-poison has been animated.
+	List center: -
+antodor has been animated.
 List all:
 	List glade: -
-	List center: poison
+	List center: -
