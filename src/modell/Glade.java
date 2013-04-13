@@ -48,8 +48,9 @@ public class Glade {
 			gameOver();
 			return;
 		}
-		for (Object a : activeObjects.toArray()) {
-			((Active) a).animate();
+		ArrayList<Active> copy = new ArrayList<Active>(activeObjects);
+		for (Active a : copy) {
+			a.animate();
 		}
 	}
 	
