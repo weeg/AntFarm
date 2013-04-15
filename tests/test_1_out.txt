@@ -1,11 +1,15 @@
 Glade has been created with name glade.
-Field has been created with name center.
-AntOdor has been created with name antodor.
-antodor’s intensity parameter set to 10.
+Field has been created with name current.
+Field has been created with name north.
+current's neighbour_N parameter set to north.
+Anteater has been created with name anteater.
+anteater's direction parameter set to N.
+anteater has been added to current.
+DeadEnd has been created with name deadend.
+deadend has been added to north.
+anteater has been animated.
 List all:
 	List glade: -
-	List center: -
-antodor has been animated.
-List all:
-	List glade: -
-	List center: -
+	List current: -
+	List north: deadend, anteater
+anteater's isResting parameter is true.

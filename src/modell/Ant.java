@@ -81,7 +81,7 @@ public class Ant extends Entity implements Active {
 	 * Irany valtoztatas.
 	 */
 	private void changeDirection() {
-		direction = direction.turn(1);
+		direction = direction.turn(-1);
 	}
 	
 	/**

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Logger {
@@ -20,12 +21,12 @@ public class Logger {
 	/**
 	 * Hiba uzenetek hozzaadasa.
 	 * @param log
+	 * @return hibakod
 	 */
-	public static void error(String log) {
+	public static int error(String log) {
 		add("\tError at line #"+Commands.currentCommandLine+" \""+Commands.currentCommand+"\". "+log);
-		
-		// Hiba esten alljon le. Igy nem okoz tobb hibat.
-		System.exit(-1);
+				
+		return 1;
 	}
 	
 	/**
@@ -114,5 +115,40 @@ public class Logger {
 		}
 		
 		return path+"_out."+extension;
+	}
+	
+	/**
+	 * A felhasznalo valaszthat a rendelkezesre allo alternativak kozul
+	 * @param question A kerdes, amit felteszunk
+	 * @param answeres A lehetseges valaszlehetosegek
+	 * @return A kivalasztott valaszlehetoseg
+	 */
+	public static int choose(String question, String... answers) {
+		
+		System.out.println();
+		System.out.println(question);
+		for (int i = 0; i < answers.length; i++) {
+			System.out.println((i + 1) + ": " + answers[i]);
+		}		
+		
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		int answer = 0;
+		while (answer == 0) {
+		    try {
+		    	System.out.print("Answer: ");
+				 String s = bufferedReader.readLine();
+				 answer = Integer.parseInt(s);
+				 if (answer <= 0 || answer > answers.length) {
+					 answer = 0;
+					 throw new Exception();					 
+				 }
+			} catch (Exception e) {
+				System.out.println("The given answer is not valid. Please choose a number between 1 and " 
+					+ answers.length + ".");
+			}
+		}
+		System.out.println();
+		return answer;
+	    
 	}
 }

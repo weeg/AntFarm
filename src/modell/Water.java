@@ -1,7 +1,5 @@
 package modell;
 
-import skeleton.Logger;
-
 public class Water extends Barricade {
 	
 	public Water() {}
