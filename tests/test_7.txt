@@ -1,0 +1,32 @@
+create Glade glade
+
+create Field current glade
+create Field northwest glade
+create Field north glade
+create Field northeast glade
+
+set current neighbour_N north
+set current neighbour_NW northwest
+set current neighbour_NE northeast
+
+create AntOdor antodor1
+create AntOdor antodor2
+create AntOdor antodor3
+create FoodOdor foododor1
+create FoodOdor foododor2
+
+set antodor1 intensity 10
+set antodor2 intensity 10
+set antodor3 intensity 10
+
+addOdor antodor1 northwest
+addOdor antodor2 northwest
+addOdor antodor3 northeast
+addOdor foododor1 north
+addOdor foododor2 northwest
+create Ant ant
+set ant direction N
+add ant current
+animate ant
+
+list all

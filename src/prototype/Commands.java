@@ -295,7 +295,6 @@ public class Commands {
 			Field fie  = (Field) getObject(field);
 			
 			// Entitasok
-			//if (isExtending(getObject(object), "Entity")) {
 			if (getObject(object) instanceof Entity) {
 				Entity obj = (Entity) getObject(object);
 				
@@ -322,7 +321,8 @@ public class Commands {
 			
 			// TODO: ezt lehet mashogy kene megoldani
 			// Entitas hozzaadasa a glade-hez.
-			if (hasInterface(getObject(object), "Active")) {
+			if (getObject(object) instanceof Active) {
+				
 				Glade glade = getGlade();
 				glade.addActiveObject((Active) getObject(object));
 			}
@@ -331,7 +331,7 @@ public class Commands {
 			
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {
-			return Logger.error("Wrong object type!");
+			return Logger.error("Second parameter in not a Field!");
 		}
 		
 		return 0;
@@ -621,7 +621,7 @@ public class Commands {
 		
 		Object obj = getObject(object);
 		
-		if (hasInterface(obj, "Active")) {
+		if (obj instanceof Active) {
 			Active active = (Active) obj;
 			// Meg ne hivja meg.
 			try {
@@ -655,35 +655,7 @@ public class Commands {
 	 * @param field
 	 */
 	public static int addOdor(String object, String field) {
-		Object obj   = getObject(object);
-		Object fie   = getObject(field);
-		
-		// A mezo nem talalhato
-		if (fie == null) {
-			return Logger.error("Field with name "+field+" cannot be found!");
-		
-		// A megadaott neve, nem egy Field
-		} else if (!getObjectType(fie).equals("Field")) {
-			return Logger.error("The type of "+field+" is not Field!");
-		
-		// Field
-		} else {
-			
-			// Nem szagot probal hozzaadni
-			if (!(obj instanceof Odor)) {
-				return Logger.error("The type of "+object+" is not an Odor!");
-			
-			// Szag hozzaadasa a mezohoz.
-			} else {
-				Odor odor = (Odor) obj;
-				((Field) fie).addOdor(odor);
-				odor.setPosition((Field) fie);
-				
-				Logger.success(object+" has been added to "+field+".");
-			}
-		}
-		
-		return 0;
+		return add(object, field);
 	}
 	
 	/**
@@ -790,47 +762,6 @@ public class Commands {
 		return 0;
 	}
 	
-	/**
-	 * Kikeresi, hogy az adott objektumnak van-e megadott tipusu interface-e.
-	 * @param obj
-	 * @param type
-	 */
-	private static boolean hasInterface(Object obj, String type) {
-		
-		Class[] interfaces = obj.getClass().getInterfaces();
-		
-		for (int i = 0; i < interfaces.length; i++) {
-			if (interfaces[i].getSimpleName().equals(type)) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Visszaadja, hogy az objektum megvalositja-e az adott tipust.
-	 * @param obj
-	 * @param type
-	 * @return
-	 */
-	private static boolean isExtending(Object obj, String type) {
-		
-		if (obj.getClass().getSuperclass().getSimpleName().equals(type)) {
-			return true;
-		}
-				
-		return false;
-	}
-	/*
-	private static boolean isExtending(Object obj, Class<?> type) {
-		Class<FoodOdor> f = FoodOdor.class;
-
-		if (obj instanceof type) {
-			
-		}
-	}
-	*/
 	/**
 	 * Kikeresi a palyat az objektum listabol.
 	 * @return

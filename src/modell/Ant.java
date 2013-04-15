@@ -108,8 +108,14 @@ public class Ant extends Entity implements Active {
 			int intensity = 0;
 			for (int i = -1; i <= 1; i++) {
 				Field f = position.getNeighbour(direction.turn(i));
-				if (target == null || target.getOdorIntensity() > intensity) {
-					target = f;								
+				
+				// Alapertelmezettkent lepjen elore.
+				target = position.getNeighbour(direction);
+				
+				// Ha a szomszedos szagok nagyobbak, akkor forduljon csak el.
+				if (target.getOdorIntensity() > intensity) {
+					target = f;
+					intensity = target.getOdorIntensity();
 				}
 			}
 		}

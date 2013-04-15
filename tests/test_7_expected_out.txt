@@ -1,0 +1,31 @@
+Glade has been created with name glade.
+Field has been created with name current.
+Field has been created with name northwest.
+Field has been created with name north.
+Field has been created with name northeast.
+current's neighbour_N parameter set to north.
+current's neighbour_NW parameter set to northwest.
+current's neighbour_NE parameter set to northeast.
+AntOdor has been created with name antodor1.
+AntOdor has been created with name antodor2.
+AntOdor has been created with name antodor3.
+FoodOdor has been created with name foododor1.
+FoodOdor has been created with name foododor2.
+antodor1's intensity parameter set to 10.
+antodor2's intensity parameter set to 10.
+antodor3's intensity parameter set to 10.
+antodor1 has been added to northwest.
+antodor2 has been added to northwest.
+antodor3 has been added to northeast.
+foododor1 has been added to north.
+foododor2 has been added to northwest.
+Ant has been created with name ant.
+ant's direction parameter set to N.
+ant has been added to current.
+ant has been animated.
+List all:
+	List glade: antodor1, antodor2, antodor3, ant
+	List current: AntOdor
+	List northwest: antodor1, antodor2, foododor2, ant
+	List north: foododor1
+	List northeast: antodor3
