@@ -12,5 +12,5 @@ anteater has been animated.
 List all:
 	List glade: -
 	List current: -
-	List north: ant, anteater
-anteater's eatenAnts parameter is 0.
+	List north: anteater
+anteater's eatenAnts parameter is 1.

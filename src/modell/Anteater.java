@@ -1,5 +1,7 @@
 package modell;
 
+import java.util.ArrayList;
+
 public class Anteater extends Entity implements Active {
 	
 	/** A hangyaszsun iranya */
@@ -21,7 +23,8 @@ public class Anteater extends Entity implements Active {
 	/**
 	 * A hangyaszsun default konstruktor
 	 */
-	public Anteater() {		
+	public Anteater() {
+		
 	}
 	
 	public Anteater(Field position) {
@@ -33,7 +36,7 @@ public class Anteater extends Entity implements Active {
 	 * Visszaadja, hogy ehes-e a hangyaszsun
 	 */
 	public boolean isHungry() {		
-		return eatenAnts == 7 ? true : false;
+		return eatenAnts < 7 ? true : false;
 	}
 	
 	/**
@@ -77,7 +80,9 @@ public class Anteater extends Entity implements Active {
 		
 		Field target = position.getNeighbour(direction);
 		
-		for (Entity e : target.getEntities()) {
+		// Uj lista, hogy torlesnel ne legyen gond.
+		ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
+		for (Entity e : copy) {
 			e.collide(this);
 		}
 				

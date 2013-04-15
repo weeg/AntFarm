@@ -3,6 +3,8 @@ package modell;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import prototype.Logger;
+
 public class Field {
 	
 	/** A tisztas, amin van a mezo */
@@ -107,7 +109,7 @@ public class Field {
 	 * Entitas hozzaadasa a mezohoz.
 	 * @param e Egy entitas.
 	 */
-	public void addEntity(Entity e) {
+	public void addEntity(Entity e) {	
 		entities.add(e);
 	}
 

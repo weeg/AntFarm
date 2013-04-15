@@ -14,7 +14,7 @@ add anteater current
 create Stone stone1 field1
 add stone1 field1
 create Stone stone2 field2
-add stone1 field2
+add stone2 field2
 
 animate anteater
 

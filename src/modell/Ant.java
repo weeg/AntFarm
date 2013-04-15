@@ -3,6 +3,8 @@ package modell;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import prototype.Logger;
+
 public class Ant extends Entity implements Active {
 
 	/** Az irany, amerre a hangya megy */
@@ -111,7 +113,10 @@ public class Ant extends Entity implements Active {
 				}
 			}
 		}
-		for (Entity e : (ArrayList<Entity>)target.getEntities()) {
+		
+		// Uj lista, hogy torlesnel ne legyen gond.
+		ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
+		for (Entity e : copy) {
 			e.collide(this);
 		}
 		if (killed == false) {

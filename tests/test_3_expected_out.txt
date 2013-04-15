@@ -1,6 +1,7 @@
 Glade has been created with name glade.
 Field has been created with name current.
 Field has been created with name field1.
+current's neighbour_N parameter set to field1.
 Field has been created with name field2.
 field1's neighbour_N parameter set to field2.
 Field has been created with name field3.

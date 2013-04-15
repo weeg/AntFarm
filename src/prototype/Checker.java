@@ -9,7 +9,6 @@ public class Checker {
 	
 	public static void check(String fileName) throws Throwable {		
 		
-		boolean different = false;
 		BufferedReader br_out = null;
 		BufferedReader br_expected_out = null;
 		
@@ -33,8 +32,6 @@ public class Checker {
 	        		out.append("\n\t" + row+": " + line_out);
 	        		out.append("\n\t" + row+": " + line_expected_out);
 	        		out.append("\n");
-	        		
-	        		different = true;
 	        	}
 	        	
 	        	line_out = br_out.readLine();
@@ -44,12 +41,12 @@ public class Checker {
 	        }
 	        
 	        // Nincs hiba
-	        if (!different) {
+	        if (out.length() == 0) {
 	        	System.out.println("\n\tThe text result equals the expected result.");
 	        
 	        // Hiba
 	        } else {
-	        	System.out.println("\n\tDifference detected at lines (Test/Excepted):");
+	        	System.out.println("\n\tDifference detected at lines (Test/Expected):");
 	        	System.out.print(out.toString());
 	        }
 		} catch (FileNotFoundException e) {

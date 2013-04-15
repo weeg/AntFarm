@@ -12,11 +12,11 @@ anteater has been added to current.
 Stone has been created with name stone1.
 stone1 has been added to field1.
 Stone has been created with name stone2.
-stone1 has been added to field2.
+stone2 has been added to field2.
 anteater has been animated.
 List all:
 	List glade: -
 	List current: -
 	List field1: stone1, anteater
-	List field2: stone1
+	List field2: stone2
 	List field3: -
