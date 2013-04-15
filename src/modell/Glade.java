@@ -50,7 +50,12 @@ public class Glade {
 		}
 		ArrayList<Active> copy = new ArrayList<Active>(activeObjects);
 		for (Active a : copy) {
-			a.animate();
+			try {
+				a.animate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

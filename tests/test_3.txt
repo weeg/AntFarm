@@ -1,6 +1,7 @@
 create Glade glade
 create Field current glade
 create Field field1 glade
+set current neighbour_N field1
 create Field field2 glade
 set field1 neighbour_N field2
 create Field field3 glade

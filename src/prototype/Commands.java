@@ -615,7 +615,11 @@ public class Commands {
 		if (hasInterface(obj, "Active")) {
 			Active active = (Active) obj;
 			// Meg ne hivja meg.
-			active.animate();
+			try {
+				active.animate();
+			} catch (Exception e) {
+				Logger.error("An error occured during animation.");
+			}
 			
 			String key = getKey(obj);
 			Logger.success(key+" has been animated.");

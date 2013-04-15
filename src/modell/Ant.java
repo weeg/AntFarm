@@ -87,7 +87,7 @@ public class Ant extends Entity implements Active {
 	/**
 	 * A hangya animalasa
 	 */
-	public void animate() {		
+	public void animate() throws Exception {		
 		
 		Field target = null;
 		

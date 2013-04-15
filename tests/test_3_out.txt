@@ -6,8 +6,6 @@ Field has been created with name field2.
 field1's neighbour_N parameter set to field2.
 Field has been created with name field3.
 field2's neighbour_N parameter set to field3.
-Field has been created with name field4.
-field3's neighbour_N parameter set to field4.
 Anteater has been created with name anteater.
 anteater's direction parameter set to N.
 anteater has been added to current.
@@ -15,8 +13,6 @@ Stone has been created with name stone1.
 stone1 has been added to field1.
 Stone has been created with name stone2.
 stone1 has been added to field2.
-Stone has been created with name stone3.
-stone1 has been added to field3.
 anteater has been animated.
 List all:
 	List glade: -
@@ -24,6 +20,4 @@ List all:
 	List north: log
 	List field1: stone1, anteater
 	List field2: stone1
-	List field3: stone1
-	List field4: -
-anteater's direction parameter is N.
+	List field3: -

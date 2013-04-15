@@ -6,6 +6,7 @@ public interface Active {
 	
 	/**
 	 * Reagalas az ido mulasara	 
+	 * @throws Exception 
 	 */
-	void animate();
+	void animate() throws Exception;
 }

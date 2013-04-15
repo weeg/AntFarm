@@ -73,10 +73,10 @@ public class Anteater extends Entity implements Active {
 	/**
 	 * A hangyaszsun animalasa
 	 */
-	public void animate() {
+	public void animate() throws Exception{
 		
 		Field target = position.getNeighbour(direction);
-
+		
 		for (Entity e : target.getEntities()) {
 			e.collide(this);
 		}
@@ -86,7 +86,7 @@ public class Anteater extends Entity implements Active {
 		} else {
 			position.removeEntity(this);
 			target.addEntity(this);
-		}		
+		}	
 	}
 	
 	/**
