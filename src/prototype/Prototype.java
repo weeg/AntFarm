@@ -54,7 +54,7 @@ public class Prototype {
 						return !name.contains("out");
 					}
 				})) {
-					if (file.isFile() && !file.isHidden()) {
+					if (file.isFile() && !file.isHidden() && !file.getName().equals(".DS_Store")) {
 						fileNames.add("tests/" + file.getName());
 					}
 				}
