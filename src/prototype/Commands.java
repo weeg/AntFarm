@@ -63,9 +63,9 @@ public class Commands {
 		if (params[0].equals("create")) {
 			
 			if (params.length == 4) {
-				Commands.create(params[1], params[2], params[3]);
+				return Commands.create(params[1], params[2], params[3]);
 			} else if (params.length == 3) {
-				Commands.create(params[1], params[2]);
+				return Commands.create(params[1], params[2]);
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}
@@ -76,7 +76,7 @@ public class Commands {
 		} else if (params[0].equals("add")) {
 
 			if (params.length == 3) {
-				Commands.add(params[1], params[2]);
+				return Commands.add(params[1], params[2]);
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}
@@ -88,11 +88,11 @@ public class Commands {
 
 			// Minden kilistazasa
 			if (params.length == 1) {
-				Commands.list("all");
+				return Commands.list("all");
 			
 			// Egy mezo tartalmanak kilistazasa
 			} else if (params.length == 2) {
-				Commands.list(params[1]);
+				return Commands.list(params[1]);
 			
 			// Hibas parameterezes
 			} else {
@@ -106,7 +106,7 @@ public class Commands {
 
 			if (params.length == 4) {
 				try {
-					Commands.set(params[1], params[2], params[3]);
+					return Commands.set(params[1], params[2], params[3]);
 				} catch (Throwable e) {
 					return Logger.error("Parameter cannot be set!");
 				}
@@ -121,7 +121,7 @@ public class Commands {
 
 			if (params.length == 3) {
 				try {
-					Commands.get(params[1], params[2]);
+					return Commands.get(params[1], params[2]);
 				} catch (Throwable e) {
 					return Logger.error("Parameter cannot be get!");
 				}
@@ -135,7 +135,7 @@ public class Commands {
 		} else if (params[0].equals("animate")) {
 
 			if (params.length == 2) {
-				Commands.animate(params[1]);
+				return Commands.animate(params[1]);
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}
@@ -146,7 +146,7 @@ public class Commands {
 		} else if (params[0].equals("tick")) {
 
 			if (params.length == 1) {
-				Commands.tick();
+				return Commands.tick();
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}
@@ -157,7 +157,7 @@ public class Commands {
 		} else if (params[0].equals("addOdor")) {
 
 			if (params.length == 3) {
-				Commands.addOdor(params[1], params[2]);
+				return Commands.addOdor(params[1], params[2]);
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}
@@ -168,7 +168,7 @@ public class Commands {
 		} else if (params[0].equals("spray")) {
 
 			if (params.length == 3) {
-				Commands.spray(params[1], params[2]);
+				return Commands.spray(params[1], params[2]);
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}
@@ -176,8 +176,6 @@ public class Commands {
 		} else {
 			return Logger.error("Unknown command!");
 		}
-		
-		return 0;
 	}
 	
 	/**
@@ -185,9 +183,10 @@ public class Commands {
 	 * Elemek letrehozasa.
 	 * @param object
 	 * @param name
+	 * @return 
 	 */
-	public static void create(String object, String name) {
-		create(object, name, "");
+	public static int create(String object, String name) {
+		return create(object, name, "");
 	}
 	
 	/**
@@ -289,7 +288,7 @@ public class Commands {
 	public static int add(String object, String field) {
 
 		// Masodik parameter tipusanak lekerdezese
-		if (getObjectType(field).equals("Field")) {
+		if (getObject(field) instanceof Field) {
 			
 			// Mezo lekerdezese
 			Field fie  = (Field) getObject(field);
@@ -617,7 +616,7 @@ public class Commands {
 	 * animate parancs megvalositasa.
 	 * @param object
 	 */
-	public static void animate(String object) {
+	public static int animate(String object) {
 		
 		Object obj = getObject(object);
 		
@@ -627,25 +626,29 @@ public class Commands {
 			try {
 				active.animate();
 			} catch (Exception e) {
-				Logger.error("An error occured during animation.");
-				e.printStackTrace();
+				return Logger.error("An error occured during animation.");
+				//e.printStackTrace();
 			}
 			
 			String key = getKey(obj);
 			Logger.success(key+" has been animated.");
 		}
+		
+		return 0;
 	}
 	
 	/**
 	 * Ido leptetese.
 	 * tick parancs megvalositasa.
 	 */
-	public static void tick() {
+	public static int tick() {
 		
 		Glade glade = getGlade();
 		glade.tick();
 		
 		Logger.success("Tick.");
+		
+		return 0;
 	}
 	
 	/**

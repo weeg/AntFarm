@@ -29,8 +29,8 @@ public class Checker {
 
 	        		String row = String.format("% 3d", line);
 	        		
-	        		out.append("\n\t" + row+": " + line_out);
 	        		out.append("\n\t" + row+": " + line_expected_out);
+	        		out.append("\n\t" + row+": " + line_out);
 	        		out.append("\n");
 	        	}
 	        	
@@ -42,11 +42,11 @@ public class Checker {
 	        
 	        // Nincs hiba
 	        if (out.length() == 0) {
-	        	System.out.println("\n\tThe text result equals the expected result.");
+	        	System.out.println("\n\tGood!");
 	        
 	        // Hiba
 	        } else {
-	        	System.out.println("\n\tDifference detected at lines (Test/Expected):");
+	        	System.out.println("\n\tDifference detected at lines (Expected/Test):");
 	        	System.out.print(out.toString());
 	        }
 		} catch (FileNotFoundException e) {

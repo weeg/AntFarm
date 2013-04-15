@@ -103,8 +103,9 @@ public class Prototype {
 				int line = commands.indexOf(command) + 1;
 				int r = Commands.parseCommand(command, line);
 				if (r != 0) {
-					System.out.println("An error occured during running the following test: "
-							+ fileName);
+					//System.out.println("An error occured during running the following test: " + fileName);
+					// Hiba eseten aljon le a futassal
+					break;
 				}
 			}
 		}
