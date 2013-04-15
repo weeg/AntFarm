@@ -61,7 +61,8 @@ public class Prototype {
 				for (String fileName1 : fileNames) {
 					try {
 						// Teszt futtatasa
-						runTest(fileName1, printToConsole, fileNames.indexOf(fileName1) + 1);
+						int num = fileNames.indexOf(fileName1) + 1;
+						runTest(fileName1, printToConsole, num);
 						// Es ez eredmeny ellenorzese
 						Checker.check(fileName1);
 					} catch (Throwable e) {

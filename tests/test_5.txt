@@ -7,10 +7,10 @@ create Anteater anteater
 set anteater direction N
 add anteater current
 
-create Water water north
-add water north
+create DeadEnd deadend north
+add deadend north
 
 animate anteater
 
 list
-get anteater direction
+get anteater isResting

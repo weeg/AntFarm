@@ -24,9 +24,9 @@ public class Checker {
 	        while (line_out != null && line_expected_out != null) {	        	
 	        	
 	        	if (!line_out.equals(line_expected_out)) {
-	        		System.out.println("Difference detected in line " + line);
-	        		System.out.println("\tTest result:     " + line_out);
-	        		System.out.println("\tExpected result: " + line_expected_out);
+	        		System.out.println("\tDifference detected in line " + line);
+	        		System.out.println("\t\tTest result:     " + line_out);
+	        		System.out.println("\t\tExpected result: " + line_expected_out);
 	        		
 	        		different = true;
 	        	}

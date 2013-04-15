@@ -1,0 +1,20 @@
+create Glade glade
+create Field current glade
+create Field field1 glade
+create Field field2 glade
+set field1 neighbour_N field2
+create Field field3 glade
+set field2 neighbour_N field3
+
+create Anteater anteater
+set anteater direction N
+add anteater current
+
+create Stone stone1 field1
+add stone1 field1
+create Stone stone2 field2
+add stone1 field2
+
+animate anteater
+
+list

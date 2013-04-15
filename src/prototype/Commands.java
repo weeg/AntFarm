@@ -726,7 +726,7 @@ public class Commands {
 			Logger.success("List all:");
 			// Aktiv objektumok kilistazasa
 			Logger.success("\tList glade: "+(activeObjectsName.equals("") ? "-" : activeObjectsName));
-			
+		
 			for (Entry<String, Object> obj : objectsByKey.entrySet()) {
 				
 				String key = obj.getKey();
