@@ -46,9 +46,8 @@ public class Commands {
 	 * @param command Parancs
 	 * @param line Sorszam
 	 * @return 0 siker eseten, egyebkent hibakod
-	 * @throws Throwable
 	 */
-	public static int parseCommand(String command, int line) throws Throwable {
+	public static int parseCommand(String command, int line) {
 		
 		String[] params = command.split(" ");
 		
@@ -104,7 +103,11 @@ public class Commands {
 		} else if (params[0].equals("set")) {
 
 			if (params.length == 4) {
-				Commands.set(params[1], params[2], params[3]);
+				try {
+					Commands.set(params[1], params[2], params[3]);
+				} catch (Throwable e) {
+					return Logger.error("Parameter cannot be set!");
+				}
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}
@@ -115,7 +118,11 @@ public class Commands {
 		} else if (params[0].equals("get")) {
 
 			if (params.length == 3) {
-				Commands.get(params[1], params[2]);
+				try {
+					Commands.get(params[1], params[2]);
+				} catch (Throwable e) {
+					return Logger.error("Parameter cannot be get!");
+				}
 			} else {
 				return Logger.error("Mismatch parameter number!");
 			}

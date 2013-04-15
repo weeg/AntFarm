@@ -27,7 +27,7 @@ public class Prototype {
 						return !name.contains("out");
 					}
 				})) {
-					if (file.isFile() && !file.isHidden()) {
+					if (file.isFile() && !file.isHidden() && !file.getName().equals(".DS_Store")) {
 						fileNames.add(file.getName());
 					}
 				}
@@ -38,7 +38,7 @@ public class Prototype {
 				
 				try {
 					// Teszt futtatasa
-					runTest(fileName, printToConsole);
+					runTest(fileName, printToConsole, f);
 					// Es ez eredmeny ellenorzese
 					Checker.check(fileName);
 				} catch (Throwable e) {
@@ -61,7 +61,7 @@ public class Prototype {
 				for (String fileName1 : fileNames) {
 					try {
 						// Teszt futtatasa
-						runTest(fileName1, printToConsole);
+						runTest(fileName1, printToConsole, fileNames.indexOf(fileName1) + 1);
 						// Es ez eredmeny ellenorzese
 						Checker.check(fileName1);
 					} catch (Throwable e) {
@@ -92,7 +92,7 @@ public class Prototype {
 	 * @param printToConsole kiirjuk-e az eredmenyt a konzolra
 	 * @throws Throwable
 	 */
-	private static void runTest(String fileName, boolean printToConsole) throws Throwable {
+	private static void runTest(String fileName, boolean printToConsole, int num) throws Throwable {
 		// Teszt file beolvasasa		
 		ArrayList<String> commands = Logger.readFile(fileName);
 		
@@ -115,6 +115,7 @@ public class Prototype {
 		
 		Logger.clear();
 		
-		System.out.println("The following test ran successfully: " + fileName);				
+		System.out.println("");
+		System.out.println("Test #"+num+": The following test ran successfully: " + fileName);				
 	}
 }
