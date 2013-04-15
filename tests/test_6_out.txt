@@ -10,7 +10,7 @@ Ant has been created with name ant.
 ant has been added to north.
 anteater has been animated.
 List all:
-	List glade: -
+	List glade: anteater
 	List current: -
 	List north: anteater
 anteater's eatenAnts parameter is 1.

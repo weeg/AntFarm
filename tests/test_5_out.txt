@@ -9,7 +9,7 @@ DeadEnd has been created with name deadend.
 deadend has been added to north.
 anteater has been animated.
 List all:
-	List glade: -
+	List glade: anteater
 	List current: -
 	List north: deadend, anteater
 anteater's isResting parameter is true.

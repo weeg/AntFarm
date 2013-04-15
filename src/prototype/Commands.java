@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
 import modell.Active;
 import modell.Ant;
 import modell.AntHill;
@@ -289,40 +291,47 @@ public class Commands {
 		// Masodik parameter tipusanak lekerdezese
 		if (getObjectType(field).equals("Field")) {
 			
-			// Entitasok lekerdezese es castolasa 
+			// Mezo lekerdezese
 			Field fie  = (Field) getObject(field);
-			Entity obj = (Entity) getObject(object);
-			fie.addEntity(obj);
 			
-			Logger.success(object+" has been added to "+field+".");
-			
-			// TODO: extendek alapjan adja hozza a mezoket. pl.: Entity, Odor
-			// Hangya
-			if (getObjectType(object).equals("Ant")) {
+			// Entitasok
+			//if (isExtending(getObject(object), "Entity")) {
+			if (getObject(object) instanceof Entity) {
+				Entity obj = (Entity) getObject(object);
 				
-				// Adja hozza a mezot a hangyahoz
-				Ant ant = (Ant) getObject(object);
-				ant.setPosition(fie);
-			
-			// Hangyaszsun
-			} else if (getObjectType(object).equals("Anteater")) {
+				fie.addEntity(obj);
+				obj.setPosition(fie);
 				
-				// Adja hozza a mezot a hangyaszsunhoz
-				Anteater anteater = (Anteater) getObject(object);
-				anteater.setPosition(fie);
+				Logger.success(object+" has been added to "+field+".");
 			
-			// Hangyaszag
+			// Szagok
 			// TODO: nem kell, ha csak addOdor parancs meg nem szunik
-			} else if (getObjectType(object).equals("AntOdor")) {
+			} else if (getObject(object) instanceof Odor) {
 				
 				// Adja hozza a mezot a szaghoz
 				Odor odor = (Odor) getObject(object);
+				
+				fie.addOdor(odor);
 				odor.setPosition(fie);
+				
+				Logger.success(object+" has been added to "+field+".");
+			
+			} else {
+				return Logger.error("Wrong parameters!");
 			}
+			
+			// TODO: ezt lehet mashogy kene megoldani
+			// Entitas hozzaadasa a glade-hez.
+			if (hasInterface(getObject(object), "Active")) {
+				Glade glade = getGlade();
+				glade.addActiveObject((Active) getObject(object));
+			}
+			
+			
 			
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {
-			return Logger.error("Wrong parameters!");
+			return Logger.error("Wrong object type!");
 		}
 		
 		return 0;
@@ -661,7 +670,7 @@ public class Commands {
 		} else {
 			
 			// Nem szagot probal hozzaadni
-			if (!isExtending(obj, "Odor")) {
+			if (!(obj instanceof Odor)) {
 				return Logger.error("The type of "+object+" is not an Odor!");
 			
 			// Szag hozzaadasa a mezohoz.
@@ -700,7 +709,7 @@ public class Commands {
 		} else {
 			
 			// Nem spay-jel probalkozik
-			if (!isExtending(obj, "Spray")) {
+			if (!(obj instanceof Spray)) {
 				return Logger.error("The type of "+type+" is not a Spray!");
 			
 			// Spray hasznalata.
@@ -813,7 +822,15 @@ public class Commands {
 				
 		return false;
 	}
-	
+	/*
+	private static boolean isExtending(Object obj, Class<?> type) {
+		Class<FoodOdor> f = FoodOdor.class;
+
+		if (obj instanceof type) {
+			
+		}
+	}
+	*/
 	/**
 	 * Kikeresi a palyat az objektum listabol.
 	 * @return

@@ -19,7 +19,7 @@ Stone has been created with name stone3.
 stone3 has been added to field3.
 anteater has been animated.
 List all:
-	List glade: -
+	List glade: anteater
 	List current: -
 	List field1: stone1, anteater
 	List field2: stone2

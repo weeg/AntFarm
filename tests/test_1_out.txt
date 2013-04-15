@@ -9,7 +9,7 @@ Water has been created with name water.
 water has been added to north.
 anteater has been animated.
 List all:
-	List glade: -
+	List glade: anteater
 	List current: anteater
 	List north: water
 anteater's direction parameter is NW.
