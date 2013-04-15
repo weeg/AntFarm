@@ -4,13 +4,12 @@ Field has been created with name north.
 current's neighbour_N parameter set to north.
 Anteater has been created with name anteater.
 anteater's direction parameter set to N.
-anteater's eatenAnts parameter set to 0.
 anteater has been added to current.
-Ant has been created with name ant.
-ant has been added to north.
+DeadEnd has been created with name deadend.
+deadend has been added to north.
 anteater has been animated.
 List all:
-	List glade: -
+	List glade: glade
 	List current: -
-	List north: ant, anteater
-anteater's eatenAnts parameter is 0.
+	List north: deadend, anteater
+anteater's isResting parameter is true.

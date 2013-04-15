@@ -2,7 +2,6 @@ package prototype;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,9 +13,7 @@ public class Logger {
 	/*
 	 * A kimeneti logokat tarolo tomb
 	 */
-	private static ArrayList<String> logs = new ArrayList<String>();
-	
-	private static String fileName = "";
+	private static ArrayList<String> logs = new ArrayList<String>();	
 	
 	/**
 	 * Hiba uzenetek hozzaadasa.
@@ -42,7 +39,7 @@ public class Logger {
 	 * @param log
 	 */
 	private static void add(String log) {
-		System.out.println(log);
+		// System.out.println(log);
 		logs.add(log);
 	}
 	
@@ -52,10 +49,7 @@ public class Logger {
 	 * @return A parancsok listaja
 	 * @throws IOException
 	 */
-	public static ArrayList<String> readFile(String file) throws IOException {
-		
-		fileName = file;
-		
+	public static ArrayList<String> readFile(String file) throws IOException {			
 		BufferedReader br = new BufferedReader(new FileReader(file));
 	    try {
 	    	ArrayList<String> commands = new ArrayList<String>();
@@ -85,9 +79,9 @@ public class Logger {
 	 * Log kiiratasa fileba.
 	 * @throws IOException
 	 */
-	public static void printFile() throws IOException {
+	public static void printFile(String fileName) throws IOException {
 		
-		BufferedWriter out = new BufferedWriter(new FileWriter(getResultFileName()));
+		BufferedWriter out = new BufferedWriter(new FileWriter(getResultFileName(fileName, "_out")));
 
         for (String log : logs) {
         	// Uccso sorba ne szurjon be uj sort
@@ -104,7 +98,7 @@ public class Logger {
 	 * Visszaadja a kimeneti file nevet a bemeneti file alapjan.
 	 * @return
 	 */
-	private static String getResultFileName() {
+	public static String getResultFileName(String fileName, String postfix) {
 		// Kiterjesztes megkeresese
 		String extension = "";
 		String path      = "";
@@ -114,7 +108,14 @@ public class Logger {
 		    path      = fileName.substring(0, i);
 		}
 		
-		return path+"_out."+extension;
+		return path + postfix + "." + extension;
+	}
+	
+	/**
+	 * Torli a logokat
+	 */
+	public static void clear() {
+		logs.clear();
 	}
 	
 	/**
