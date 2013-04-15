@@ -114,9 +114,11 @@ public class Prototype {
 		}
 		Logger.printFile(fileName);
 		
+		// Adatok torlese a teszt lefutasa utan
 		Logger.clear();
+		Commands.clear();
 		
 		System.out.println("");
-		System.out.println("Test #"+num+": The following test ran successfully: " + fileName);				
+		System.out.println("Test #"+num+": The results of " + fileName + ":");				
 	}
 }

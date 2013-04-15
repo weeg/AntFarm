@@ -19,14 +19,20 @@ public class Checker {
 	    	    	
 	        String line_out = br_out.readLine();
 	        String line_expected_out = br_expected_out.readLine();
+	        StringBuilder out = new StringBuilder();
+	        
 	        
 	        int line = 1;
 	        while (line_out != null && line_expected_out != null) {	        	
 	        	
+	        	// Eltero sorok kiiaratasa
 	        	if (!line_out.equals(line_expected_out)) {
-	        		System.out.println("\tDifference detected in line " + line);
-	        		System.out.println("\t\tTest result:     " + line_out);
-	        		System.out.println("\t\tExpected result: " + line_expected_out);
+
+	        		String row = String.format("% 3d", line);
+	        		
+	        		out.append("\n\t" + row+": " + line_out);
+	        		out.append("\n\t" + row+": " + line_expected_out);
+	        		out.append("\n");
 	        		
 	        		different = true;
 	        	}
@@ -37,8 +43,14 @@ public class Checker {
 	        	line++;
 	        }
 	        
+	        // Nincs hiba
 	        if (!different) {
-	        	System.out.println("The text result equals the expected result.");
+	        	System.out.println("\n\tThe text result equals the expected result.");
+	        
+	        // Hiba
+	        } else {
+	        	System.out.println("\n\tDifference detected at lines (Test/Excepted):");
+	        	System.out.print(out.toString());
 	        }
 		} catch (FileNotFoundException e) {
 	        System.out.println("A file was not found: " + e.getMessage());

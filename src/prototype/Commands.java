@@ -908,6 +908,14 @@ public class Commands {
 	}
 	
 	/**
+	 * Objektumok torlese.
+	 */
+	public static void clear() {
+		objectsByKey.clear();
+		objectsByValue.clear();
+	}
+	
+	/**
 	 * Egy osztaly privat valtozoit lehet vele lekerdezni.
 	 * @param object
 	 * @param fieldName

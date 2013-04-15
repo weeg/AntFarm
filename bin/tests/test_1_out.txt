@@ -5,11 +5,11 @@ current's neighbour_N parameter set to north.
 Anteater has been created with name anteater.
 anteater's direction parameter set to N.
 anteater has been added to current.
-DeadEnd has been created with name deadend.
-deadend has been added to north.
+Water has been created with name water.
+water has been added to north.
 anteater has been animated.
 List all:
 	List glade: -
-	List current: -
-	List north: deadend, anteater
-anteater's isResting parameter is true.
+	List current: anteater
+	List north: water
+anteater's direction parameter is NW.
