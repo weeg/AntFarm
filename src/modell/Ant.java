@@ -76,7 +76,10 @@ public class Ant extends Entity implements Active {
 	 *  A hangya eszik
 	 */
 	public void eat() {
-		hasFood = true;		
+		hasFood = true;
+		
+		// hangyaszag otthagyasa
+		leaveAntOdor();
 	}		
 	
 	/**
@@ -92,6 +95,8 @@ public class Ant extends Entity implements Active {
 	public void animate() throws Exception {		
 		
 		Field target = null;
+		// Alapertelemzettkent nincs blokkolva
+		blocked      = false;
 		
 		if (poisened) {
 			if (TTL > 0) {
@@ -114,6 +119,7 @@ public class Ant extends Entity implements Active {
 				
 				// Ha a szomszedos szagok nagyobbak, akkor forduljon csak el.
 				if (target.getOdorIntensity() > intensity) {
+					
 					target = f;
 					intensity = target.getOdorIntensity();
 				}
@@ -128,26 +134,47 @@ public class Ant extends Entity implements Active {
 		if (killed == false) {
 			if (blocked) {					
 				changeDirection();
-			} else {	
+			} else {
+				// Ha epp most utkozott a kajaval, akkor nem hagy maga utan szagot
+				// Ezt az eat metodusban teszi meg.
 				if (hasFood == false) {
-					AntOdor antOdor = new AntOdor();
-					position.addOdor(antOdor);
-					position.getGlade().addActiveObject(antOdor);
+					// hangyaszag otthagyasa
+					leaveAntOdor();
+					
+					// Eltarolja a megtett utat.
+					addFieldToMemory(position);
 				}
 				position.removeEntity(this);
 				target.addEntity(this);
 			}							
 		}				
 	}
+	
+	/**
+	 * Ha ellep egy mezorol, akkor hangyaszagot hagy maga utan.
+	 */
+	private void leaveAntOdor() {
+		AntOdor antOdor = new AntOdor();
+		position.addOdor(antOdor);
+		position.getGlade().addActiveObject(antOdor);
+	}
 
 	/**
 	 * Egy mezo kivetele a utvonallista tetejerol.
 	 * @return A mezo, ami kovetkezik a visszauthoz.
 	 */
-	private Field popFieldFromMemory() {						
+	private Field popFieldFromMemory() {
 		return memory.isEmpty() ? null : memory.pop();
 	}
-
+	
+	/**
+	 * Megtett ut eltarolasa.
+	 * @param field Mezo amirol ellep.
+	 */
+	private void addFieldToMemory(Field field) {
+		memory.add(field);
+	}
+	
 	/**
 	 * Utkozes egy hangyaszsunnel
 	 * @param anteater A hangyaszsun, amivel a hangya utkozik

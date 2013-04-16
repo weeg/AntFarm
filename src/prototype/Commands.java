@@ -632,8 +632,9 @@ public class Commands {
 			try {
 				active.animate();
 			} catch (Exception e) {
+				e.printStackTrace();
 				return Logger.error("An error occured during animation.");
-				//e.printStackTrace();
+				
 			}
 			
 			String key = getKey(obj);

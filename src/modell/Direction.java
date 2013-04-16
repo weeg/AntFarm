@@ -33,10 +33,12 @@ public enum Direction {
      * @return Az uj irany.
      */
 	public Direction turn(int i) {
+		
 		int idx = (i + this.index) % 6;
 		if (idx < 0) {
 		    idx += 6;
 		}
+		
 		switch (idx) {
 			case 0:
 				return N;			
