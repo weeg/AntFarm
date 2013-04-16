@@ -3,6 +3,7 @@ package modell;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import prototype.Commands;
 import prototype.Logger;
 
 public class Ant extends Entity implements Active {
@@ -99,9 +100,9 @@ public class Ant extends Entity implements Active {
 		blocked      = false;
 		
 		if (poisened) {
-			if (TTL > 0) {
-				TTL--;
-			} else {
+			TTL--;
+			if (TTL == 0) {
+				TTL = 0;
 				kill();
 				return;
 			}
@@ -111,15 +112,15 @@ public class Ant extends Entity implements Active {
 			target = popFieldFromMemory();
 		} else {
 			int intensity = 0;
+			
+			// Alapertelmezettkent lepjen elore.
+			target = position.getNeighbour(direction);
+			
 			for (int i = -1; i <= 1; i++) {
 				Field f = position.getNeighbour(direction.turn(i));
 				
-				// Alapertelmezettkent lepjen elore.
-				target = position.getNeighbour(direction);
-				
 				// Ha a szomszedos szagok nagyobbak, akkor forduljon csak el.
-				if (target.getOdorIntensity() > intensity) {
-					
+				if (f.getOdorIntensity() > intensity) {
 					target = f;
 					intensity = target.getOdorIntensity();
 				}
@@ -132,12 +133,14 @@ public class Ant extends Entity implements Active {
 			e.collide(this);
 		}
 		if (killed == false) {
-			if (blocked) {					
+			if (blocked) {			
 				changeDirection();
 			} else {
+				
 				// Ha epp most utkozott a kajaval, akkor nem hagy maga utan szagot
 				// Ezt az eat metodusban teszi meg.
 				if (hasFood == false) {
+					
 					// hangyaszag otthagyasa
 					leaveAntOdor();
 					
@@ -189,7 +192,7 @@ public class Ant extends Entity implements Active {
 	/**
 	 * Beallitja a hangyanal a mergezest
 	 */
-	public void poison() {		
+	public void poison() {
 		poisened = true;
 		TTL = 3;
 	}

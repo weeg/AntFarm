@@ -8,12 +8,13 @@ public class Poison extends Entity implements Active {
 	/**
 	 * A hatralevo ido, amig meg a palyan lesz a mereg.
 	 */
-	private int TTL;
+	private int TTL = 10;
 	
 	/**
 	 * A mereg default konstruktora.
 	 */
-	public Poison() {}
+	public Poison() {
+	}
 	
 	/**
 	 * A mereg konstruktora.
@@ -21,7 +22,6 @@ public class Poison extends Entity implements Active {
 	 * @param pos A mezo, amin a mereg van.
 	 */
 	public Poison(Field pos) {
-		TTL = 5;
 		setPosition(pos);
 	}
 	

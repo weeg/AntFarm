@@ -531,7 +531,7 @@ public class Commands {
 				
 			// Hangya mergezesenek lekerdezese
 			} else if (parameter.equals("poisened")) {
-				value = getVariable(obj, "poisoned").toString();
+				value = getVariable(obj, "poisened").toString();
 			
 			// Hangya hatralevo eletenek lekerdezese
 			} else if (parameter.equals("TTL")) {
@@ -598,7 +598,16 @@ public class Commands {
 			} else {
 				return Logger.error(object+" doesn't have "+parameter+" parameter!");
 			}	
-		
+		/*
+		// Mezo
+		} else if (type.equals("Field")) {
+			obj = (Field) getObject(object);
+
+			// Menetirany lekerdezese
+			if (parameter.equals("neighbours")) {
+				value = getVariable(obj, "neighbours").toString();
+			}
+		*/	
 		// Ismeretlen elem.
 		} else {
 			return Logger.error("Unknown object "+object+"!");
@@ -831,7 +840,7 @@ public class Commands {
 	 * @param object
 	 * @return
 	 */
-	private static String getKey(Object object) {
+	public static String getKey(Object object) {
 		return objectsByValue.get(object);
 	}
 	
