@@ -24,4 +24,4 @@ List all:
 	List southeast: Poison
 	List south: Poison
 	List southwest: Poison
-	List northwest: -
+	List northwest: Poison

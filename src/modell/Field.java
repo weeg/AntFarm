@@ -55,17 +55,19 @@ public class Field {
 	 */
 	public ArrayList<Field> getNeighbours(int radius) {
 		ArrayList<Field> list = new ArrayList<Field>();
-		Direction dir = Direction.N;
-		for (int i = 0; i < 5; i++) {
-			Field neighbour = neighbours.get(dir.turn(i));
-			if (neighbour != null) {
-				if (radius > 0) {
+		
+		if (radius > 0) {
+			Direction dir = Direction.N;
+			for (int i = 0; i <= 5; i++) {
+				Field neighbour = neighbours.get(dir.turn(i));
+				if (neighbour != null) {
 					ArrayList<Field> neighbour_list = neighbour.getNeighbours(radius-1);
 					list.addAll(neighbour_list);
+					list.add(neighbour);
 				}
-				list.add(neighbour);
 			}
 		}
+		
 		list.add(this);
 		return list;
 	}

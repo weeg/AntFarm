@@ -706,9 +706,17 @@ public class Commands {
 			// Spray hasznalata.
 			} else {
 				Spray spray = (Spray) obj;
-				spray.use(((Field) fie));
 				
-				Logger.success(type+" has been used with center "+field+". "+spray.getQuantity()+" blows left.");
+				// Csak akkor fujjon, ha meg van is benne.
+				if (spray.getQuantity() > 0) {
+					
+					spray.use(((Field) fie));
+					Logger.success(type+" has been used with center "+field+". "+spray.getQuantity()+" blows left.");
+				
+				// Kifigyott a spray
+				} else {
+					Logger.success(type+" cannot be used. The spray has run out!");
+				}
 			}
 		}
 		

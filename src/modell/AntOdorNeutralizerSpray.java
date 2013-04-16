@@ -25,11 +25,16 @@ public class AntOdorNeutralizerSpray extends Spray {
 	 */
 	@SuppressWarnings("unchecked")
 	public void use(Field center) {
-		ArrayList<Field> fields = center.getNeighbours(radius);
-		for (Field field : fields) {						
-			for (Odor odor : (ArrayList<Odor>)field.getOdors().clone()) {
-				odor.neutralize();
-			}			
-		}		
+		
+		if (quantity > 0) {
+			ArrayList<Field> fields = center.getNeighbours(radius);
+			for (Field field : fields) {						
+				for (Odor odor : (ArrayList<Odor>)field.getOdors().clone()) {
+					odor.neutralize();
+				}			
+			}
+			
+			quantity--;
+		}
 	}
 }
