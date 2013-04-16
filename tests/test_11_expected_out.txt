@@ -6,16 +6,21 @@ Field has been created with name northeast.
 current's neighbour_N parameter set to north.
 current's neighbour_NW parameter set to northwest.
 current's neighbour_NE parameter set to northeast.
+north's neighbour_S parameter set to current.
+north's neighbour_SW parameter set to northwest.
+north's neighbour_SE parameter set to northeast.
 Ant has been created with name ant.
-ant's direction parameter set to N.
-ant's hasFood parameter set to true.
-ant has been added to current.
+ant has been added to north.
+ant's direction parameter set to S.
 AntHill has been created with name anthill.
 anthill has been added to north.
 ant has been animated.
+ant's hasFood parameter set to true.
+ant's direction parameter set to N.
+ant has been animated.
 List all:
-	List glade: anthill
+	List glade: anthill, AntOdor
 	List current: -
-	List north: anthill
 	List northwest: -
+	List north: anthill, AntOdor
 	List northeast: -

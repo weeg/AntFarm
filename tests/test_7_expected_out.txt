@@ -24,8 +24,8 @@ ant's direction parameter set to N.
 ant has been added to current.
 ant has been animated.
 List all:
-	List glade: antodor1, antodor2, antodor3, ant
+	List glade: antodor1, antodor2, antodor3, ant, AntOdor
 	List current: AntOdor
-	List northwest: antodor1, antodor2, foododor2, ant
+	List northwest: ant, antodor1, antodor2, foododor2
 	List north: foododor1
 	List northeast: antodor3

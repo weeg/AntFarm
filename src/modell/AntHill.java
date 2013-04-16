@@ -11,7 +11,8 @@ public class AntHill extends Entity implements Active {
 	 *  Utkozes egy hangyaval
 	 *  @param ant A hangya, amivel a hangyaboly utkozik
 	 */
-	public void collide(Ant ant) {		
+	public void collide(Ant ant) {
+		//System.out
 		if (ant.hasFood()) {
 			ant.kill();
 		}		

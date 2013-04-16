@@ -11,20 +11,22 @@ set current neighbour_N north
 set current neighbour_NW northwest
 set current neighbour_NE northeast
 
+set north neighbour_S current
+set north neighbour_SW northwest
+set north neighbour_SE northeast
+
+create Ant ant
+add ant north
+set ant direction S
+
 create AntHill anthill
 add anthill north
 
-create Ant ant
-set ant direction N
-add ant current
-
 animate ant
-list all
 
-set ant direction S
 set ant hasFood true
+set ant direction N
 
 animate ant
-list all
 
-get ant hasFood
+list all
