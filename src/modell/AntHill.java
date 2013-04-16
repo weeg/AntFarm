@@ -12,7 +12,7 @@ public class AntHill extends Entity implements Active {
 	 *  @param ant A hangya, amivel a hangyaboly utkozik
 	 */
 	public void collide(Ant ant) {
-		//System.out
+
 		if (ant.hasFood()) {
 			ant.kill();
 		}		
@@ -25,6 +25,6 @@ public class AntHill extends Entity implements Active {
 				
 		Ant ant = new Ant(position, Direction.SE);
 		position.addEntity(ant);
-		position.getGlade().addActiveObject(ant);		
+		position.getGlade().addActiveObject(ant);
 	}
 }

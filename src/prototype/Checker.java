@@ -16,9 +16,9 @@ public class Checker {
 			br_out = new BufferedReader(new FileReader(Logger.getResultFileName(fileName, "_out")));
 			br_expected_out = new BufferedReader(new FileReader(Logger.getResultFileName(fileName, "_expected_out")));
 	    	    	
-	        String line_out = br_out.readLine();
+	        String line_out          = br_out.readLine();
 	        String line_expected_out = br_expected_out.readLine();
-	        StringBuilder out = new StringBuilder();
+	        StringBuilder out        = new StringBuilder();
 	        
 	        
 	        int line = 1;
@@ -26,7 +26,8 @@ public class Checker {
 	        	
 	        	// Eltero sorok kiiaratasa
 	        	// A hosszabb file vegeig olvasson
-	        	if (!line_out.equals(line_expected_out)) {
+	        	if ((line_out != null && !line_out.equals(line_expected_out)) || 
+	        	    (line_expected_out != null &&!line_expected_out.equals(line_out))) {
 
 	        		String row = String.format("% 3d", line);
 	        		
