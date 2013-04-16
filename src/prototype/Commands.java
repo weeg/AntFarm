@@ -58,9 +58,15 @@ public class Commands {
 		currentCommandLine = line;		
 		
 		/*
+		 * Szeszteset cimenek kiiratasa
+		 */
+		if (params[0].equals("#")) {
+			return Logger.setTitle(command);
+		
+		/*
 		 * create parancs meghivasa
 		 */
-		if (params[0].equals("create")) {
+		} else if (params[0].equals("create")) {
 			
 			if (params.length == 4) {
 				return Commands.create(params[1], params[2], params[3]);

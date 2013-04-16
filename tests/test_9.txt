@@ -1,5 +1,4 @@
-# Hangya ütközése hangyalesõvel
-
+# Hangya ütközése pálya szélével
 create Glade glade
 
 create Field current glade
@@ -15,8 +14,8 @@ create Ant ant
 set ant direction N
 add ant current
 
-create AntLion antlion
-add antlion north
+create DeadEnd deadend
+add deadend north
 
 animate ant
 

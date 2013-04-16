@@ -115,11 +115,30 @@ public class Prototype {
 		}
 		Logger.printFile(fileName);
 		
+		System.out.println("");
+		System.out.println(""+getTestName(fileName)+": " + Logger.getTitle() + ":");
+		
 		// Adatok torlese a teszt lefutasa utan
 		Logger.clear();
 		Commands.clear();
+	}
+	
+	/**
+	 * Visszaadja a teszt file nevet.
+	 * @param fileName teszteset eleresi utja
+	 * @return teszteset file neve
+	 */
+	private static String getTestName(String fileName) {
 		
-		System.out.println("");
-		System.out.println("Test #"+num+": The results of " + fileName + ":");				
+		String[] splits = fileName.split("/");
+		
+		// Csak a teszt nevet adja vissza
+		if (splits.length > 1) {
+			return splits[splits.length - 1];
+			
+	    // Nem szabvanyos file nev eseten az egesz fajl nevet adja vissza.
+		} else {
+			return fileName;
+		}
 	}
 }

@@ -1,10 +1,12 @@
+# Hangya döntése.
+
 create Glade glade
 
 create Field current glade
 create Field northwest glade
 create Field north glade
 create Field northeast glade
-take 1
+
 set current neighbour_N north
 set current neighbour_NW northwest
 set current neighbour_NE northeast

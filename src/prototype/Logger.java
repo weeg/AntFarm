@@ -13,7 +13,8 @@ public class Logger {
 	/*
 	 * A kimeneti logokat tarolo tomb
 	 */
-	private static ArrayList<String> logs = new ArrayList<String>();	
+	private static ArrayList<String> logs = new ArrayList<String>();
+	private static String title = "";
 	
 	/**
 	 * Hiba uzenetek hozzaadasa.
@@ -24,6 +25,16 @@ public class Logger {
 		add("\tError at line #"+Commands.currentCommandLine+" \""+Commands.currentCommand+"\". "+log);
 				
 		return 1;
+	}
+	
+	public static int setTitle(String title) {
+		Logger.title = title;
+		
+		return 0;
+	}
+	
+	public static String getTitle() {
+		return title;
 	}
 	
 	/**
@@ -116,6 +127,7 @@ public class Logger {
 	 */
 	public static void clear() {
 		logs.clear();
+		title = "";
 	}
 	
 	/**
