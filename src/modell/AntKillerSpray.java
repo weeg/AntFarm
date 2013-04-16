@@ -24,12 +24,18 @@ public class AntKillerSpray extends Spray {
 	 * @param center Az a mezo, amire (es kore) fuj a felhasznalo a spray-el
 	 */
 	public void use(Field center) {				
-		ArrayList<Field> fields = center.getNeighbours(getRadius());
-		Poison poison = new Poison();
-		for (Field field : fields) {
-			field.addEntity(poison);
-		}		
-		glade.addActiveObject(poison);		
+		
+		if (quantity > 0) {
+			ArrayList<Field> fields = center.getNeighbours(getRadius());
+			Poison poison = new Poison();
+			for (Field field : fields) {
+				field.addEntity(poison);
+			}		
+			glade.addActiveObject(poison);
+			
+			quantity--;
+		}
+		
 	}
 
 }

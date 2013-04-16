@@ -111,10 +111,14 @@ public class Field {
 	 * @param e Egy entitas.
 	 */
 	public void addEntity(Entity e) {
-		entities.add(e);
 		
-		// Pozicio felulirasa
-		e.setPosition(this);
+		// Egy entitast, csak 1x adjon hozza a listahoz. pl.: mergek eseten
+		if (!entities.contains(e)) {
+			entities.add(e);
+			
+			// Pozicio felulirasa
+			e.setPosition(this);
+		}	
 	}
 
 	/**

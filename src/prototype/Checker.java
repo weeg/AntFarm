@@ -22,19 +22,20 @@ public class Checker {
 	        
 	        
 	        int line = 1;
-	        while (line_out != null && line_expected_out != null) {	        	
+	        while (line_out != null || line_expected_out != null) {	        	
 	        	
 	        	// Eltero sorok kiiaratasa
+	        	// A hosszabb file vegeig olvasson
 	        	if (!line_out.equals(line_expected_out)) {
 
 	        		String row = String.format("% 3d", line);
 	        		
-	        		out.append("\n\t" + row+": " + line_expected_out);
-	        		out.append("\n\t" + row+": " + line_out);
+	        		out.append("\n\t" + row+": " + (line_expected_out != null ? line_expected_out : ""));
+	        		out.append("\n\t" + row+": " + (line_out != null ? line_out : ""));
 	        		out.append("\n");
 	        	}
 	        	
-	        	line_out = br_out.readLine();
+	        	line_out          = br_out.readLine();	        	
 	        	line_expected_out = br_expected_out.readLine();
 	        	
 	        	line++;

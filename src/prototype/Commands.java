@@ -754,7 +754,7 @@ public class Commands {
 			}
 			
 		// Egy megadott mezo tartalmanak kilistazasa
-		} else {
+		} else if (getObjectType(mode).equals("Field")){
 			
 			Field fie = (Field) getObject(mode);
 			
@@ -776,6 +776,8 @@ public class Commands {
 			} else {
 				return Logger.error("Unknown "+mode+" field!");
 			}
+		} else {
+			return Logger.error("Wrong parameter type!");
 		}
 		
 		return 0;
