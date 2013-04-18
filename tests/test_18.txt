@@ -1,4 +1,4 @@
-# Hangyaölõ spray használata
+# Hangyaolo spray hasznalata
 
 create Glade glade
 
