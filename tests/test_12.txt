@@ -1,4 +1,4 @@
-# Hangya ütközése kaviccsal
+# Hangya utkozese kaviccsal
 
 create Glade glade
 
