@@ -1,4 +1,4 @@
-# Hangya döntése.
+# Hangya dontese
 
 create Glade glade
 
