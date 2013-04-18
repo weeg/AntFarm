@@ -1,4 +1,4 @@
-# Hangya ütközése pálya szélével
+# Hangya utkozese palya szelevel
 create Glade glade
 
 create Field current glade
