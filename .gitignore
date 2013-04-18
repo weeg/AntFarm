@@ -6,3 +6,23 @@
 *.ear
 .project
 
+tests/test_01_out.txt
+tests/test_02_out.txt
+tests/test_03_out.txt
+tests/test_04_out.txt
+tests/test_05_out.txt
+tests/test_06_out.txt
+tests/test_07_out.txt
+tests/test_08_out.txt
+tests/test_09_out.txt
+tests/test_10_out.txt
+tests/test_11_out.txt
+tests/test_12_out.txt
+tests/test_13_out.txt
+tests/test_14_out.txt
+tests/test_15_out.txt
+tests/test_16_out.txt
+tests/test_17_out.txt
+tests/test_18_out.txt
+tests/test_19_out.txt
+tests/test_20_out.txt
