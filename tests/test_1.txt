@@ -1,4 +1,4 @@
-# Hangyászsün ütközése tócsával
+# Hangyaszsun utkozese tocsaval
 
 create Glade glade
 create Field current glade
