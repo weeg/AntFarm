@@ -1,4 +1,4 @@
-# Hangyászsün ütközése 3 kaviccsal
+# Hangyaszsun utkozese 3 kaviccsal
 
 create Glade glade
 create Field current glade
