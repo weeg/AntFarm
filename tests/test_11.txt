@@ -1,4 +1,4 @@
-# Élelmet szállító hangya ütközése hangyabollyal
+# Elelmet szallito hangya utkozese hangyabollyal
 
 create Glade glade
 
