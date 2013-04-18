@@ -38,9 +38,10 @@ public class Prototype {
 				
 				try {
 					// Teszt futtatasa
-					runTest(fileName, printToConsole, f);
-					// Es ez eredmeny ellenorzese
-					Checker.check(fileName);
+					if (runTest(fileName, printToConsole, f)) {
+						// Siker eseten az eredmeny ellenorzese
+						Checker.check(fileName);
+					}
 				} catch (Throwable e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -60,15 +61,17 @@ public class Prototype {
 				}
 				for (String fileName1 : fileNames) {
 					try {
-						// Teszt futtatasa
 						int num = fileNames.indexOf(fileName1) + 1;
-						runTest(fileName1, printToConsole, num);
-						// Es ez eredmeny ellenorzese
-						Checker.check(fileName1);
+						// Tesztek futtatasa
+						if (runTest(fileName1, printToConsole, num)) {
+							// Siker eseten az eredmeny ellenorzese
+							Checker.check(fileName1);
+						}
 					} catch (Throwable e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}				}
+					}	
+				}
 				break;
 			case 3:
 				// Annak beallitasa, hogy a teszt eredmenyet kiirjuk-e a konzolra
@@ -93,20 +96,24 @@ public class Prototype {
 	 * @param printToConsole kiirjuk-e az eredmenyt a konzolra
 	 * @throws Throwable
 	 */
-	private static void runTest(String fileName, boolean printToConsole, int num) throws Throwable {
+	private static boolean runTest(String fileName, boolean printToConsole, int num) throws Throwable {
 		// Teszt file beolvasasa		
 		ArrayList<String> commands = Logger.readFile(fileName);
+		
+		boolean success = true;
 		
 		for (String command : commands) {
 			// Az ures sorokat ne dolgozza fel.
 			if (!command.equals("")) {
 				int line = commands.indexOf(command) + 1;
-				int r = Commands.parseCommand(command, line);
-				if (r != 0) {
-					//System.out.println("An error occured during running the following test: " + fileName);
+				try {
+					Commands.parseCommand(command, line);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 					// Hiba eseten aljon le a futassal
+					success = false;
 					break;
-				}
+				}			
 			}
 		}
 		
@@ -115,12 +122,15 @@ public class Prototype {
 		}
 		Logger.printFile(fileName);
 		
-		System.out.println("");
-		System.out.println(""+getTestName(fileName)+": " + Logger.getTitle() + ":");
-		
+		if (success) {
+			System.out.println("\n"+getTestName(fileName)+": " + Logger.getTitle() + ":");
+		}			
+				
 		// Adatok torlese a teszt lefutasa utan
 		Logger.clear();
 		Commands.clear();
+		
+		return success;
 	}
 	
 	/**

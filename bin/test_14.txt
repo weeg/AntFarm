@@ -1,0 +1,24 @@
+# Hangya utkozese faronkkel
+
+create Glade glade
+
+create Field current glade
+create Field northwest glade
+create Field north glade
+create Field northeast glade
+
+set current neighbour_N north
+set current neighbour_NW northwest
+set current neighbour_NE northeast
+
+create Ant ant
+set ant direction N
+add ant current
+
+create Log log
+add log north
+
+animate ant
+animate ant
+
+list all

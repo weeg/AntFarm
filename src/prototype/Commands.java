@@ -2,6 +2,7 @@ package prototype;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -48,8 +49,9 @@ public class Commands {
 	 * @param command Parancs
 	 * @param line Sorszam
 	 * @return 0 siker eseten, egyebkent hibakod
+	 * @throws Exception 
 	 */
-	public static int parseCommand(String command, int line) {
+	public static void parseCommand(String command, int line) throws Exception {
 		
 		String[] params = command.split(" ");
 		
@@ -61,7 +63,8 @@ public class Commands {
 		 * Szeszteset cimenek kiiratasa
 		 */
 		if (params[0].equals("#")) {
-			return Logger.setTitle(command);
+			Logger.setTitle(command);
+			return;
 		
 		/*
 		 * create parancs meghivasa
@@ -69,11 +72,14 @@ public class Commands {
 		} else if (params[0].equals("create")) {
 			
 			if (params.length == 4) {
-				return Commands.create(params[1], params[2], params[3]);
+				Commands.create(params[1], params[2], params[3]);
+				return;
 			} else if (params.length == 3) {
-				return Commands.create(params[1], params[2]);
+				Commands.create(params[1], params[2]);
+				return;
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 		
 		/*
@@ -82,9 +88,11 @@ public class Commands {
 		} else if (params[0].equals("add")) {
 
 			if (params.length == 3) {
-				return Commands.add(params[1], params[2]);
+				Commands.add(params[1], params[2]);
+				return;
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 		
 		/*
@@ -94,15 +102,18 @@ public class Commands {
 
 			// Minden kilistazasa
 			if (params.length == 1) {
-				return Commands.list("all");
+				Commands.list("all");
+				return;
 			
 			// Egy mezo tartalmanak kilistazasa
 			} else if (params.length == 2) {
-				return Commands.list(params[1]);
+				Commands.list(params[1]);
+				return;
 			
 			// Hibas parameterezes
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 			
 		/*
@@ -112,12 +123,14 @@ public class Commands {
 
 			if (params.length == 4) {
 				try {
-					return Commands.set(params[1], params[2], params[3]);
+					Commands.set(params[1], params[2], params[3]);
 				} catch (Throwable e) {
-					return Logger.error("Parameter cannot be set!");
+					Logger.error("Parameter cannot be set!");
+					return;
 				}
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 			
 		/*
@@ -127,12 +140,14 @@ public class Commands {
 
 			if (params.length == 3) {
 				try {
-					return Commands.get(params[1], params[2]);
+					Commands.get(params[1], params[2]);
 				} catch (Throwable e) {
-					return Logger.error("Parameter cannot be get!");
+					Logger.error("Parameter cannot be get!");
+					return;
 				}
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 			
 		/*
@@ -141,9 +156,11 @@ public class Commands {
 		} else if (params[0].equals("animate")) {
 
 			if (params.length == 2) {
-				return Commands.animate(params[1]);
+				Commands.animate(params[1]);
+				return;
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 			
 		/*
@@ -152,9 +169,11 @@ public class Commands {
 		} else if (params[0].equals("tick")) {
 
 			if (params.length == 1) {
-				return Commands.tick();
+				Commands.tick();
+				return;
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 			
 		/*
@@ -163,9 +182,11 @@ public class Commands {
 		} else if (params[0].equals("addOdor")) {
 
 			if (params.length == 3) {
-				return Commands.addOdor(params[1], params[2]);
+				Commands.addOdor(params[1], params[2]);
+				return;
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 			
 		/*
@@ -174,13 +195,16 @@ public class Commands {
 		} else if (params[0].equals("spray")) {
 
 			if (params.length == 3) {
-				return Commands.spray(params[1], params[2]);
+				Commands.spray(params[1], params[2]);
+				return;
 			} else {
-				return Logger.error("Mismatch parameter number!");
+				Logger.error("Mismatch parameter number!");
+				return;
 			}
 			
 		} else {
-			return Logger.error("Unknown command!");
+			Logger.error("Unknown command!");
+			return;
 		}
 	}
 	
@@ -190,9 +214,10 @@ public class Commands {
 	 * @param object
 	 * @param name
 	 * @return 
+	 * @throws Exception 
 	 */
-	public static int create(String object, String name) {
-		return create(object, name, "");
+	public static void create(String object, String name) throws Exception {
+		create(object, name, "");
 	}
 	
 	/**
@@ -201,8 +226,9 @@ public class Commands {
 	 * @param object
 	 * @param name
 	 * @param glade
+	 * @throws Exception 
 	 */
-	public static int create(String object, String name, String glade) {
+	public static void create(String object, String name, String glade) throws Exception {
 		
 		Object obj = null;
 		
@@ -279,10 +305,8 @@ public class Commands {
 		if (obj != null) {
 			addObject(obj, object, name);
 		} else {
-			return Logger.error("Unknown object "+object+"!");
+			Logger.error("Unknown object "+object+"!");
 		}
-		
-		return 0;
 	}
 	
 	/**
@@ -290,8 +314,9 @@ public class Commands {
 	 * Elemek hozzarendelese egy mezohoz.
 	 * @param object
 	 * @param field
+	 * @throws Exception 
 	 */
-	public static int add(String object, String field) {
+	public static void add(String object, String field) throws Exception {
 
 		// Masodik parameter tipusanak lekerdezese
 		if (getObject(field) instanceof Field) {
@@ -321,7 +346,8 @@ public class Commands {
 				Logger.success(object+" has been added to "+field+".");
 			
 			} else {
-				return Logger.error("Wrong parameters!");
+				Logger.error("Wrong parameters!");
+				return;
 			}
 			
 			// TODO: ezt lehet mashogy kene megoldani
@@ -331,15 +357,11 @@ public class Commands {
 				Glade glade = getGlade();
 				glade.addActiveObject((Active) getObject(object));
 			}
-			
-			
-			
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {
-			return Logger.error("Second parameter in not a Field!");
+			Logger.error("Second parameter in not a Field!");
 		}
-		
-		return 0;
+
 	}
 	
 	/**
@@ -350,7 +372,7 @@ public class Commands {
 	 * @param value
 	 * @throws Throwable 
 	 */
-	public static int set(String object, String parameter, String value) throws Throwable {
+	public static void set(String object, String parameter, String value) throws Throwable {
 		
 		String type     = getObjectType(object);
 		Object obj      = null;
@@ -370,7 +392,8 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 			
 		// Hangya	
@@ -391,7 +414,8 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 		
 		// Mezo	
@@ -413,7 +437,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 		
 		// Hangyaszag / Kajaszag
@@ -426,7 +451,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 		
 		// Food
@@ -439,7 +465,8 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 			
 		// Hangyaszag semelegisto / Hangyaolo spray
@@ -456,7 +483,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 		
 		// Mereg
@@ -469,28 +497,29 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}		
 			
 		// Ismeretlen elem.
 		} else {
-			return Logger.error(object+" doesn't have "+parameter+" parameter!");
+			Logger.error(object+" doesn't have "+parameter+" parameter!");
+			return;
 		}
 		
 		
 		// Hibas erek megadasa
 		if (!success) {
-			return Logger.error(object+" doesn't have "+parameter+" parameter!");
+			Logger.error(object+" doesn't have "+parameter+" parameter!");
 		
 		// Sikeres lefutas
 		} else {
 			Logger.success(object+"'s "+parameter+" parameter set to "+value+".");
 		}
-		return 0;
 	}
 	
 	
-	public static int get(String object, String parameter) throws Throwable {
+	public static void get(String object, String parameter) throws Throwable {
 		
 		String type     = getObjectType(object);
 		Object obj      = null;
@@ -514,7 +543,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 		
 		// Hangya
@@ -539,7 +569,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 		
 		// Hangyaszag / Kajaszag
@@ -552,7 +583,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 
 			
@@ -566,7 +598,8 @@ public class Commands {
 			
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}
 			
 		// Hangyaszag semelegisto / Hangyaolo spray
@@ -583,7 +616,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}	
 		
 		// Mereg
@@ -596,7 +630,8 @@ public class Commands {
 				
 			// Ismeretlen parameter
 			} else {
-				return Logger.error(object+" doesn't have "+parameter+" parameter!");
+				Logger.error(object+" doesn't have "+parameter+" parameter!");
+				return;
 			}	
 		/*
 		// Mezo
@@ -610,28 +645,27 @@ public class Commands {
 		*/	
 		// Ismeretlen elem.
 		} else {
-			return Logger.error("Unknown object "+object+"!");
+			Logger.error("Unknown object "+object+"!");
+			return;
 		}
 		
 		
 		// Hibas erek megadasa
 		if (value.equals("")) {
-			return Logger.error(object+"'s "+parameter+" parameter value is incorrect!");
-		
+			Logger.error(object+"'s "+parameter+" parameter value is incorrect!");
 		// Sikeres lefutas
 		} else {
 			Logger.success(object+"'s "+parameter+" parameter is "+value+".");
 		}
-		
-		return 0;
 	}
 	
 	/**
 	 * Active objektumok animalasa.
 	 * animate parancs megvalositasa.
 	 * @param object
+	 * @throws Exception 
 	 */
-	public static int animate(String object) {
+	public static void animate(String object) throws Exception {
 		
 		Object obj = getObject(object);
 		
@@ -642,29 +676,26 @@ public class Commands {
 				active.animate();
 			} catch (Exception e) {
 				e.printStackTrace();
-				return Logger.error("An error occured during animation.");
+				Logger.error("An error occured during animation.");
+				return;
 				
 			}
 			
 			String key = getKey(obj);
 			Logger.success(key+" has been animated.");
 		}
-		
-		return 0;
 	}
 	
 	/**
 	 * Ido leptetese.
 	 * tick parancs megvalositasa.
 	 */
-	public static int tick() {
+	public static void tick() {
 		
 		Glade glade = getGlade();
 		glade.tick();
 		
 		Logger.success("Tick.");
-		
-		return 0;
 	}
 	
 	/**
@@ -672,9 +703,10 @@ public class Commands {
 	 * addOdor parancs megvalositasa.
 	 * @param object
 	 * @param field
+	 * @throws Exception 
 	 */
-	public static int addOdor(String object, String field) {
-		return add(object, field);
+	public static void addOdor(String object, String field) throws Exception {
+		add(object, field);
 	}
 	
 	/**
@@ -682,26 +714,30 @@ public class Commands {
 	 * spray parancs megvalositasa.
 	 * @param type
 	 * @param field
+	 * @throws Exception 
 	 */
-	public static int spray(String type, String field) {
+	public static void spray(String type, String field) throws Exception {
 		
 		Object obj = getObject(type);
 		Object fie = getObject(field);
 		
 		// A mezo nem talalhato
 		if (fie == null) {
-			return Logger.error("Field with name "+field+" cannot be found!");
+			Logger.error("Field with name "+field+" cannot be found!");
+			return;
 		
 		// A megadaott neve, nem egy Field
 		} else if (!getObjectType(fie).equals("Field")) {
-			return Logger.error("The type of "+field+" is not Field!");
+			Logger.error("The type of "+field+" is not Field!");
+			return;
 		
 		// Field
 		} else {
 			
 			// Nem spay-jel probalkozik
 			if (!(obj instanceof Spray)) {
-				return Logger.error("The type of "+type+" is not a Spray!");
+				Logger.error("The type of "+type+" is not a Spray!");
+				return;
 			
 			// Spray hasznalata.
 			} else {
@@ -719,16 +755,15 @@ public class Commands {
 				}
 			}
 		}
-		
-		return 0;
 	}
 	
 	/**
 	 * Aktualis helyzet kilistazasa
 	 * List parancs megvalositasa
 	 * @param mode
+	 * @throws Exception 
 	 */
-	public static int list(String mode) {
+	public static void list(String mode) throws Exception {
 		
 		// A glade valamint az osszes mezo objektumainak kilistazasa
 		if (mode.equals("all")) {
@@ -782,13 +817,12 @@ public class Commands {
 			
 			// Nem letezo mezore valo hivatkozas
 			} else {
-				return Logger.error("Unknown "+mode+" field!");
+				Logger.error("Unknown "+mode+" field!");
+				return;
 			}
 		} else {
-			return Logger.error("Wrong parameter type!");
+			Logger.error("Wrong parameter type!");			
 		}
-		
-		return 0;
 	}
 	
 	/**

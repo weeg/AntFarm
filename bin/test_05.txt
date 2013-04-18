@@ -1,3 +1,5 @@
+# Hangyaszsun utkozese palyaszelevel
+
 create Glade glade
 create Field current glade
 create Field north glade
@@ -5,13 +7,12 @@ set current neighbour_N north
 
 create Anteater anteater
 set anteater direction N
-set anteater eatenAnts 0
 add anteater current
 
-create Ant ant north
-add ant north
+create DeadEnd deadend north
+add deadend north
 
 animate anteater
 
 list
-get anteater eatenAnts
+get anteater isResting

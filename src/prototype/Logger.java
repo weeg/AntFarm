@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
+
 public class Logger {
 	
 	/*
@@ -21,16 +23,15 @@ public class Logger {
 	 * @param log
 	 * @return hibakod
 	 */
-	public static int error(String log) {
-		add("\tError at line #"+Commands.currentCommandLine+" \""+Commands.currentCommand+"\". "+log);
-				
-		return 1;
+	public static void error(String log) throws Exception {
+		String error = "Error at line #"+Commands.currentCommandLine+
+				" \""+Commands.currentCommand+"\". "+log;
+		add("\t" + error);
+		throw new ParseException(error);
 	}
 	
-	public static int setTitle(String title) {
+	public static void setTitle(String title) {
 		Logger.title = title;
-		
-		return 0;
 	}
 	
 	public static String getTitle() {

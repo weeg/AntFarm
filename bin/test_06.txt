@@ -1,3 +1,4 @@
+# Ehes hangyaszsun utkozese hangyaval
 create Glade glade
 create Field current glade
 create Field north glade
@@ -5,12 +6,13 @@ set current neighbour_N north
 
 create Anteater anteater
 set anteater direction N
+set anteater eatenAnts 0
 add anteater current
 
-create Log log north
-add log north
+create Ant ant north
+add ant north
 
 animate anteater
 
 list
-get anteater direction
+get anteater eatenAnts
