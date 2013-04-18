@@ -1,4 +1,4 @@
-# Élelmet nem szállító hangya ütközése hangyabollyal
+# Elelmet nem szallito hangya utkozese hangyabollyal
 
 create Glade glade
 
