@@ -1,4 +1,4 @@
-# Hangyászsün ütközése hangyával, amikor éhes
+# Ehes hangyaszsun utkozese hangyaval
 create Glade glade
 create Field current glade
 create Field north glade
