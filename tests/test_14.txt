@@ -1,4 +1,4 @@
-# Hangya ütközése farönkkel
+# Hangya utkozese faronkkel
 
 create Glade glade
 
