@@ -1,4 +1,4 @@
-# Hangya ütközése méreggel
+# Hangya utkozese mereggel
 
 create Glade glade
 
