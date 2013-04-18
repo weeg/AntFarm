@@ -1,4 +1,4 @@
-# Hangya ütközése élelemmel
+# Hangya utkozese elelemmel
 
 create Glade glade
 
