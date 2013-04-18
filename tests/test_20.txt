@@ -1,4 +1,4 @@
-# Hangya létrehozása
+# Hangya letrehozasa
 
 create Glade glade
 
