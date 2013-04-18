@@ -1,4 +1,4 @@
-# Hangyaszagsemlegesítõ spray használata
+# Hangyaszagsemlegesito spray hasznalata
 
 create Glade glade
 
