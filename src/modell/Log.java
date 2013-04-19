@@ -14,5 +14,4 @@ public class Log extends Barricade {
 	public void collide(Anteater anteater) {
 		anteater.block();
 	}
-
 }

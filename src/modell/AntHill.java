@@ -19,6 +19,14 @@ public class AntHill extends Entity implements Active {
 	}
 	
 	/**
+	 * Utkozes egy kavicsot. Blokkolja a kavicsot.
+	 * @param s a ko, amivel utkozott.
+	 */
+	public void collide(Stone s) {
+		s.block();
+	}
+	
+	/**
 	 * A hangyaboly animalasa
 	 */
 	public void animate() {		

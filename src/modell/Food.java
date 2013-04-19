@@ -50,4 +50,11 @@ public class Food extends Entity {
 		ant.eat();
 		quantity--;
 	}
+	/**
+	 * Utkozes egy kavicsot. Blokkolja a kavicsot.
+	 * @param s a ko, amivel utkozott.
+	 */
+	public void collide(Stone s) {
+		s.block();
+	}
 }

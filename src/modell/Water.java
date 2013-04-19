@@ -10,5 +10,4 @@ public class Water extends Barricade {
 	public void collide(Anteater anteater) {
 		anteater.block();
 	}
-
 }

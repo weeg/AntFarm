@@ -1,8 +1,15 @@
 package modell;
 
+import java.util.ArrayList;
+
 public class Stone extends Barricade {
+	private int count;
+	private boolean blocked;
 	private Direction direction;
-	public Stone() {}
+	public Stone() {
+		count = 0;
+		blocked = false;
+	}
 	
 	/**
 	 * Visszadja a ko iranyat.
@@ -10,5 +17,60 @@ public class Stone extends Barricade {
 	 */
 	public Direction getDirection() {
 		return direction;
+	}
+	
+	/**
+	 * Ko blokkolasa.
+	 */
+	public void block() {
+		blocked = true;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	/**
+	 * Utkozes egy hangyaszsunnel. Eltolja a hangyaszsun.
+	 * @param ae A hangyassun, amivel utkozik.
+	 */
+	public void collide(Anteater ae) {
+		count = 1;
+		direction = ae.getDirection();
+		Field target = position.getNeighbour(direction);
+		ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
+		for(Entity e : copy) {
+			e.collide(this);
+		}
+		if (blocked) {
+			ae.block();
+		} else {
+			position.removeEntity(this);
+			target.addEntity(this);
+		}
+	}
+	/**
+	 * Utkozes egy kaviccsal.
+	 * @param stone A kavics, amivel utkozik.
+	 */
+	public void collide(Stone stone) {
+		count = stone.getCount() + 1;
+		if (count == 3) {
+			stone.block();
+			blocked = true;
+		} else {
+			direction = stone.getDirection();
+			Field target = position.getNeighbour(direction);
+			ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
+			for(Entity e : copy) {
+				e.collide(this);
+			}
+			if (blocked) {
+				stone.block();
+			} else {
+				position.removeEntity(this);
+				target.addEntity(this);
+			}
+		}
 	}
 }

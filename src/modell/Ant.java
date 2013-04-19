@@ -190,6 +190,14 @@ public class Ant extends Entity implements Active {
 	}
 	
 	/**
+	 * Utkozes egy kaviccsal.
+	 * @param s A kavics amivel utkozik a hangya.
+	 */
+	public void collide(Stone s) {
+		kill();
+	}
+	
+	/**
 	 * Beallitja a hangyanal a mergezest
 	 */
 	public void poison() {

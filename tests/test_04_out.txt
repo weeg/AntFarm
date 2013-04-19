@@ -20,9 +20,9 @@ stone3 has been added to field3.
 anteater has been animated.
 List all:
 	List glade: anteater
-	List current: -
-	List field1: stone1, anteater
+	List current: anteater
+	List field1: stone1
 	List field2: stone2
 	List field3: stone3
 	List field4: -
-anteater's direction parameter is N.
+anteater's direction parameter is NW.
