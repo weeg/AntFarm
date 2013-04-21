@@ -44,6 +44,7 @@ public class Glade {
 		for(Food f : foods) {
 			foodQuantity += f.getQuantity();
 		}	
+
 		if (foodQuantity == 0) {
 			gameOver();
 			return;
