@@ -279,4 +279,3 @@ list all
 
 get food0 quantity
 get food1 quantity
- 

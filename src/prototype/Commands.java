@@ -881,6 +881,18 @@ public class Commands {
 			// Ha nem talalhato a kulcs, akkor a tipusat adja vissza
 			if (key == null) {
 				key = getObjectType(entity);
+				
+				/*
+				// Esetleg ki lehetne iratni bizonyos parametereket
+				if (key.equals("FoodOdor")) {
+					int intensity = ((FoodOdor) entity).getIntensity();
+					key = key+"(intensity="+intensity+")";
+				
+				} else if (key.equals("AntOdor")) {
+					int intensity = ((AntOdor) entity).getIntensity();
+					key = key+"(intensity="+intensity+")";
+				}
+				*/
 			}
 			
 			// Vesszok betuzdelese
