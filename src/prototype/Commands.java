@@ -350,12 +350,24 @@ public class Commands {
 				return;
 			}
 			
-			// TODO: ezt lehet mashogy kene megoldani
+			// TODO: ezt lehet mashogy kene megoldani, pl letrehozaskor belso fuggveny.
 			// Entitas hozzaadasa a glade-hez.
 			if (getObject(object) instanceof Active) {
 				
 				Glade glade = getGlade();
 				glade.addActiveObject((Active) getObject(object));
+			
+			// Kaja hozzaadasa Glade-hez.
+			} else if (getObject(object) instanceof Food) {
+				
+				Glade glade = getGlade();
+				glade.addFood((Food) getObject(object));
+				
+			// Spray hozzaadasa Glade-hez.
+			} else if (getObject(object) instanceof Spray) {
+				
+				Glade glade = getGlade();
+				glade.addSpray((Spray) getObject(object));
 			}
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {

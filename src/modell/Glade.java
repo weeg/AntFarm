@@ -76,6 +76,36 @@ public class Glade {
 	}
 	
 	/**
+	 * Egy elelem hozzaadasa.
+	 * @param food Az elelem.
+	 */
+	public void addFood(Food food) {
+		foods.add(food);
+	}
+	
+	/**
+	 * Elelemek visszaadasa
+	 */
+	public ArrayList<Food> getFoods() {
+		return foods;
+	}
+	
+	/**
+	 * Egy spray hozzaadasa.
+	 * @param spray A spray.
+	 */
+	public void addSpray(Spray spray) {
+		sprays.add(spray);
+	}
+	
+	/**
+	 * Spray-k visszaadasa
+	 */
+	public ArrayList<Spray> getSprays() {
+		return sprays;
+	}
+	
+	/**
 	 * A jatek vege metodus.
 	 */
 	public void gameOver() {}
