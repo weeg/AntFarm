@@ -1,0 +1,43 @@
+Glade has been created with name glade.
+Field has been created with name center.
+Field has been created with name north.
+Field has been created with name northeast.
+Field has been created with name southeast.
+Field has been created with name south.
+Field has been created with name southwest.
+Field has been created with name northwest.
+center's neighbour_N parameter set to north.
+center's neighbour_NW parameter set to northwest.
+center's neighbour_NE parameter set to northeast.
+center's neighbour_S parameter set to south.
+center's neighbour_SW parameter set to southwest.
+center's neighbour_SE parameter set to southeast.
+north's neighbour_S parameter set to center.
+north's neighbour_SW parameter set to northwest.
+north's neighbour_SE parameter set to northeast.
+Ant has been created with name ant.
+ant's direction parameter set to N.
+ant has been added to center.
+Food has been created with name food.
+food's quantity parameter set to 1.
+food has been added to north.
+List all:
+	List glade: ant
+	List center: ant, FoodOdor
+	List north: food, FoodOdor
+	List northeast: FoodOdor
+	List southeast: -
+	List south: -
+	List southwest: -
+	List northwest: FoodOdor
+Tick.
+Game Over!
+List all:
+	List glade: ant, AntOdor
+	List center: AntOdor
+	List north: ant
+	List northeast: -
+	List southeast: -
+	List south: -
+	List southwest: -
+	List northwest: -
