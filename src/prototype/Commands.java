@@ -690,7 +690,7 @@ public class Commands {
 	 * Ido leptetese.
 	 * tick parancs megvalositasa.
 	 */
-	public static void tick() {
+	public static void tick() throws Exception{
 		
 		Glade glade = getGlade();
 		glade.tick();
@@ -829,7 +829,7 @@ public class Commands {
 	 * Kikeresi a palyat az objektum listabol.
 	 * @return
 	 */
-	private static Glade getGlade() {
+	private static Glade getGlade() throws Exception {
 		
 		for (Entry<String, Object> obj : objectsByKey.entrySet()) {
 			
@@ -839,6 +839,8 @@ public class Commands {
 				return (Glade) obj.getValue();
 			}
 		}
+		
+		Logger.error("You have to create a Glade first!");
 		
 		return null;
 	}
