@@ -89,6 +89,7 @@ public class Field {
 	 * @param odor A szagobjektum.
 	 */
 	public void addOdor(Odor odor) {
+		odor.setPosition(this);
 		odors.add(odor);
 	}
 	

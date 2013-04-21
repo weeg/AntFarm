@@ -401,6 +401,10 @@ public class Commands {
 			// Megevett hangyak szamanak novelese
 			} else if (parameter.equals("eatenAnts")) {
 				setVariable(obj, "eatenAnts", Integer.parseInt(value));
+				
+			// Pihen-e a hangyaszsun
+			} else if (parameter.equals("isResting")) {
+				setVariable(obj, "isResting", Boolean.parseBoolean(value));
 			
 			// Ismeretlen parameter
 			} else {
