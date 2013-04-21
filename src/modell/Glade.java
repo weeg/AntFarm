@@ -40,12 +40,8 @@ public class Glade {
 	 * Az ido leptetese
 	 */
 	public void tick() {
-		int foodQuantity = 0;
-		for(Food f : foods) {
-			foodQuantity += f.getQuantity();
-		}	
 
-		if (foodQuantity == 0) {
+		if (getFoodQuantity() == 0) {
 			gameOver();
 			return;
 		}
@@ -58,6 +54,19 @@ public class Glade {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * Visszaadja a palyan levo elelem mennyiseget.
+	 * @return Elelem mennyisege.
+	 */
+	public int getFoodQuantity() {
+		int foodQuantity = 0;
+		for(Food f : foods) {
+			foodQuantity += f.getQuantity();
+		}	
+
+		return foodQuantity;
 	}
 	
 	/**

@@ -705,17 +705,13 @@ public class Commands {
 	public static void tick() throws Exception{
 		
 		Glade glade = getGlade();
-		glade.tick();
 		
-		Logger.success("Tick.");
-		
-		int foodQuantity = 0;
-		for(Food f : glade.getFoods()) {
-			foodQuantity += f.getQuantity();
-		}	
-		
-		if (foodQuantity == 0) {
+		if (glade.getFoodQuantity() == 0) {
 			Logger.success("Game Over!");
+		} else {
+			glade.tick();
+			
+			Logger.success("Tick.");
 		}
 	}
 	
