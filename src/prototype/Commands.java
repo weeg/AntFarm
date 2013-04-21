@@ -350,12 +350,24 @@ public class Commands {
 				return;
 			}
 			
-			// TODO: ezt lehet mashogy kene megoldani
+			// TODO: ezt lehet mashogy kene megoldani, pl letrehozaskor belso fuggveny.
 			// Entitas hozzaadasa a glade-hez.
 			if (getObject(object) instanceof Active) {
 				
 				Glade glade = getGlade();
 				glade.addActiveObject((Active) getObject(object));
+			
+			// Kaja hozzaadasa Glade-hez.
+			} else if (getObject(object) instanceof Food) {
+				
+				Glade glade = getGlade();
+				glade.addFood((Food) getObject(object));
+				
+			// Spray hozzaadasa Glade-hez.
+			} else if (getObject(object) instanceof Spray) {
+				
+				Glade glade = getGlade();
+				glade.addSpray((Spray) getObject(object));
 			}
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {
@@ -389,6 +401,10 @@ public class Commands {
 			// Megevett hangyak szamanak novelese
 			} else if (parameter.equals("eatenAnts")) {
 				setVariable(obj, "eatenAnts", Integer.parseInt(value));
+				
+			// Pihen-e a hangyaszsun
+			} else if (parameter.equals("isResting")) {
+				setVariable(obj, "isResting", Boolean.parseBoolean(value));
 			
 			// Ismeretlen parameter
 			} else {
@@ -690,12 +706,17 @@ public class Commands {
 	 * Ido leptetese.
 	 * tick parancs megvalositasa.
 	 */
-	public static void tick() {
+	public static void tick() throws Exception{
 		
 		Glade glade = getGlade();
-		glade.tick();
 		
-		Logger.success("Tick.");
+		if (glade.getFoodQuantity() == 0) {
+			Logger.success("Game Over!");
+		} else {
+			glade.tick();
+			
+			Logger.success("Tick.");
+		}
 	}
 	
 	/**
@@ -829,7 +850,7 @@ public class Commands {
 	 * Kikeresi a palyat az objektum listabol.
 	 * @return
 	 */
-	private static Glade getGlade() {
+	private static Glade getGlade() throws Exception {
 		
 		for (Entry<String, Object> obj : objectsByKey.entrySet()) {
 			
@@ -839,6 +860,8 @@ public class Commands {
 				return (Glade) obj.getValue();
 			}
 		}
+		
+		Logger.error("You have to create a Glade first!");
 		
 		return null;
 	}
@@ -858,6 +881,18 @@ public class Commands {
 			// Ha nem talalhato a kulcs, akkor a tipusat adja vissza
 			if (key == null) {
 				key = getObjectType(entity);
+				
+				/*
+				// Esetleg ki lehetne iratni bizonyos parametereket
+				if (key.equals("FoodOdor")) {
+					int intensity = ((FoodOdor) entity).getIntensity();
+					key = key+"(intensity="+intensity+")";
+				
+				} else if (key.equals("AntOdor")) {
+					int intensity = ((AntOdor) entity).getIntensity();
+					key = key+"(intensity="+intensity+")";
+				}
+				*/
 			}
 			
 			// Vesszok betuzdelese

@@ -81,6 +81,9 @@ public class Ant extends Entity implements Active {
 		
 		// hangyaszag otthagyasa
 		leaveAntOdor();
+		
+		// Eltarolja a megtett utat.
+		addFieldToMemory(position);
 	}		
 	
 	/**
@@ -107,7 +110,7 @@ public class Ant extends Entity implements Active {
 				return;
 			}
 		}
-		
+
 		if (hasFood) {
 			target = popFieldFromMemory();
 		} else {
@@ -126,7 +129,7 @@ public class Ant extends Entity implements Active {
 				}
 			}
 		}
-		
+
 		// Uj lista, hogy torlesnel ne legyen gond.
 		ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
 		for (Entity e : copy) {

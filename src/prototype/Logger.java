@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
-
 public class Logger {
 	
 	/*
@@ -27,7 +25,7 @@ public class Logger {
 		String error = "Error at line #"+Commands.currentCommandLine+
 				" \""+Commands.currentCommand+"\". "+log;
 		add("\t" + error);
-		throw new ParseException(error);
+		throw new Exception(error);
 	}
 	
 	public static void setTitle(String title) {

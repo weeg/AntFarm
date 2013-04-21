@@ -45,6 +45,9 @@ public class Anteater extends Entity implements Active {
 	public void goRest() {
 		isResting = true;
 		timeToRest = restTime;
+		
+		// A hangyaszsun megfordul, igy ugyanarra megy vissza, ahonnan jott
+		direction = direction.turn(3);
 	}
 	
 	/**
@@ -78,20 +81,25 @@ public class Anteater extends Entity implements Active {
 	 */
 	public void animate() throws Exception{
 		
-		Field target = position.getNeighbour(direction);
-		
-		// Uj lista, hogy torlesnel ne legyen gond.
-		ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
-		for (Entity e : copy) {
-			e.collide(this);
-		}
-				
-		if (blocked) {
-			changeDirection();
+		if (!isResting)
+		{
+			Field target = position.getNeighbour(direction);
+			
+			// Uj lista, hogy torlesnel ne legyen gond.
+			ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
+			for (Entity e : copy) {
+				e.collide(this);
+			}
+					
+			if (blocked) {
+				changeDirection();
+			} else {
+				position.removeEntity(this);
+				target.addEntity(this);
+			}			
 		} else {
-			position.removeEntity(this);
-			target.addEntity(this);
-		}	
+			timeToRest--;			
+		}
 	}
 	
 	/**

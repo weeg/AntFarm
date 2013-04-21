@@ -21,7 +21,7 @@ public class DeadEnd extends Entity {
 	 * Utkozes hangyaszsunnel, pihenni kuldi a hangyaszt.
 	 * @param anteater A hangyaszsun, amivel utkozik,.
 	 */
-	public void collide(Anteater anteater) {		
+	public void collide(Anteater anteater) {
 		anteater.goRest();		
 	}
 }
