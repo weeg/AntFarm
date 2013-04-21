@@ -7,8 +7,8 @@ public class AntOdor extends Odor implements Active {
 	 * A hangyaszag default konstruktora
 	 */
 	public AntOdor() {
-		// Hangyaszag alapertelmezettkent 1
-		setIntensity(1);
+		// Hangyaszag alapertelmezettkent 3
+		setIntensity(3);
 	}
 	
 	/**
@@ -19,8 +19,8 @@ public class AntOdor extends Odor implements Active {
 		this();
 		this.position = position;
 		
-		// Hangyaszag alapertelmezettkent 1
-		setIntensity(1);
+		// Hangyaszag alapertelmezettkent 3
+		setIntensity(3);
 	}
 	
 	/**
