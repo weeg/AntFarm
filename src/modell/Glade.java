@@ -70,6 +70,22 @@ public class Glade {
 	}
 	
 	/**
+	 * Mezo hozzaadsa a palyahoz
+	 * @param field
+	 */
+	public void addField(Field field) {
+		fields.add(field);
+	}
+	
+	/**
+	 * Mezok visszaadasa.
+	 * @return Mezok
+	 */
+	public ArrayList<Field> getFields() {
+		return fields;
+	}
+	
+	/**
 	 * Egy aktiv elem hozzaadasa.
 	 * @param active Az aktiv elem.
 	 */

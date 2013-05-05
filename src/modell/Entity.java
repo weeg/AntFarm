@@ -1,5 +1,7 @@
 package modell;
 
+import view.View;
+
 /**
  * Az entitas objektum. 
  */
@@ -7,6 +9,8 @@ public abstract class Entity {
 	
 	/** A mezo, amin az entitas van */
 	protected Field position;
+	
+	public View view;
 	
 	/**
 	 * Visszadja az entitas poziciojat.
@@ -48,5 +52,13 @@ public abstract class Entity {
 	 */
 	public void collide(Stone stone) {
 		// A leszarmazottak fogjak implementalni szukseg eseten
+	}
+	
+	public void setView(View view) {
+		this.view = view;
+	}
+	
+	public View getView() {
+		return view;
 	}
 }
