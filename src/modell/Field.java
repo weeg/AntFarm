@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import prototype.Commands;
 import prototype.Logger;
+import view.View;
 
 public class Field {
 	
@@ -20,6 +21,9 @@ public class Field {
 	/** Az entitasokat tarolo lista */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
+	/** Renderelo nezet hozzaasa */
+	private View view;
+	
 	public Field() {}
 	
 	/**
@@ -29,6 +33,11 @@ public class Field {
 	public Field(Glade glade) {
 		this.glade = glade;
 	}
+	
+	public void setView(View view) {
+		this.view = view;
+	}
+	
 	
 	/**
 	 * Az adott iranyban levo szomszed megadasa.
