@@ -23,8 +23,6 @@ public class GladeView extends View {
 	public void redraw(Graphics2D g) {
 		
 		Glade glade = (Glade)modell;		
-		
-		g.clearRect(0, 0, 500, 500);
 
 		for (Field field : glade.getFields()) {
 			field.getView().redraw(g);

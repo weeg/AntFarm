@@ -1,5 +1,7 @@
 package modell;
 
+import view.AntView;
+
 public class AntHill extends Entity implements Active {
 	/**
 	 * A hangyaboly default konstruktora
@@ -30,8 +32,8 @@ public class AntHill extends Entity implements Active {
 	 * A hangyaboly animalasa
 	 */
 	public void animate() {		
-				
-		Ant ant = new Ant(position, Direction.SE);
+		Ant ant = new Ant(position, Direction.NW);
+		ant.setView(new AntView());
 		position.addEntity(ant);
 		position.getGlade().addActiveObject(ant);
 	}

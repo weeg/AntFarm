@@ -4,9 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import view.GladeView;
 import view.View;
@@ -37,10 +40,7 @@ public class Design {
         glade.start();
         glade.setView(new GladeView());
         
-        // TODO Timer 
-        // glade.tick();
-                   
-        JPanel canvas = new JPanel() {
+        final JPanel canvas = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 
@@ -48,6 +48,16 @@ public class Design {
                 glade.getView().redraw(g2);
              }
         };
+        
+        // Timer 
+        int delay = 1000;
+        ActionListener tickListener = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                glade.tick();
+                glade.getView().redraw((Graphics2D)canvas.getGraphics());
+            }
+        };
+        new Timer(delay, tickListener).start();
         
         //canvas.repaint();
         frame.add(canvas, BorderLayout.CENTER);

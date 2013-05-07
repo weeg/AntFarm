@@ -12,9 +12,12 @@ import modell.Field;
 
 public class FieldView extends View {
 
-	private Field modell;
 	private ArrayList<View> views = new ArrayList();
+	
+	/** A mezo koordinataja */
 	protected Point coord;
+	
+	/** A mezo pozicioja a tisztason */
 	protected Point position = new Point();
 	
 	// Egy mezo merete pixelben
@@ -27,8 +30,9 @@ public class FieldView extends View {
 	public void setCoord(Point point) {
 		this.coord = point;
 		
-		position.x = (int)(coord.x * size * 2);
-		position.y = (int)(coord.y * size * Math.sqrt(2));
+		double m = size * Math.sqrt(3) / 2.0;
+		position.x = (int)(size / 2 + coord.x * 3 * size / 2);
+		position.y = (int)(coord.y * 2 * m + (coord.x % 2) * m);
 	}
 	
 	public Point getCoord() {

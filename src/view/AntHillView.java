@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 
 import modell.AntHill;
 import modell.Field;
@@ -15,8 +16,9 @@ public class AntHillView extends View {
 		FieldView fieldView = (FieldView)field.getView();
 		
 		g.setColor(Color.BLACK);
-		g.fillRect(fieldView.position.x, fieldView.position.y, 10, 10);
-		System.out.println(fieldView.position.x + ", " + fieldView.position.y);
+		
+		double size = 10; 
+		g.fill(new Ellipse2D.Double(fieldView.position.x - size / 2, fieldView.position.y - size / 2, size, size));
 		
 		this.changed = false;
 	}

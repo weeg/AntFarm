@@ -46,9 +46,11 @@ public class Glade implements Drawable {
 		int height = 20;
 		int width  = 20;
 
+		Field[][] fieldArray = new Field[width][height];
+		
 		// Mezok letrehozasa
-		for (int row = 0; row < height; row++) {
-			for (int column = 0; column < width; column++) {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
 				
 				// Uj mezo letrehozasa
 				Field field = new Field(this);
@@ -56,73 +58,62 @@ public class Glade implements Drawable {
 				// Uj nezet letrehozasa
 				FieldView fieldView = new FieldView();
 				fieldView.setModell(field);
-				fieldView.setCoord(new Point(row, column));
+				fieldView.setCoord(new Point(i, j));
 
 				// Nezet hozzarendelese a mezohoz
 				field.setView(fieldView);
 
-				// Tarolasa gladeben				
-				fields.add(field);
+				fieldArray[i][j] = field;
 			}
 		}
 
-		// Szomszedok megadasa		
-		for (Field field : fields) {
-
-			// Aktualis mezo indexe
-			int index = fields.indexOf(field);
-
-			// Northwest
-			try {
-				Field nw = fields.get(index - width - 1);
-				field.setNeighbour(Direction.NW, nw);
-		    // Nem letezo index
-			} catch (IndexOutOfBoundsException e) {}
-
-			// North
-			try {
-				Field n = fields.get(index - width);
-				field.setNeighbour(Direction.N, n);
-			} catch (IndexOutOfBoundsException e) {}
-
-			// Northeast
-			try {
-				Field ne = fields.get(index - width + 1);
-				field.setNeighbour(Direction.NE, ne);
-			} catch (IndexOutOfBoundsException e) {}
-
-			// Southwest
-			try {
-				Field sw = fields.get(index - 1);
-				field.setNeighbour(Direction.SW, sw);
-			} catch (IndexOutOfBoundsException e) {}
-
-			// South
-			try {
-				Field s = fields.get(index + width);
-				field.setNeighbour(Direction.S, s);
-			} catch (IndexOutOfBoundsException e) {}
-
-			// Southeast
-			try {
-				Field se = fields.get(index + 1);
-				field.setNeighbour(Direction.SE, se);
-			} catch (IndexOutOfBoundsException e) {}
-		}
+		// Szomszedok megadasa
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				// North
+				try {
+					fieldArray[i][j].setNeighbour(Direction.N, fieldArray[i][j - 1]);
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				// Northeast
+				try {
+					fieldArray[i][j].setNeighbour(Direction.NE, fieldArray[i + 1][j - (i + 1) % 2]);
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				// Souteast
+				try {
+					fieldArray[i][j].setNeighbour(Direction.SE, fieldArray[i + 1][j + i % 2]);
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				// South
+				try {
+					fieldArray[i][j].setNeighbour(Direction.S, fieldArray[i][j + 1]);
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				// Southwest
+				try {
+					fieldArray[i][j].setNeighbour(Direction.SW, fieldArray[i - 1][j + i % 2]);
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				// Northwest
+				try {
+					fieldArray[i][j].setNeighbour(Direction.NW, fieldArray[i - 1][j - (i + 1) % 2]);
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				
+				// Hozzaadas a listahoz
+				fields.add(fieldArray[i][j]);
+			}
+		}		
 		
+		// Hangyaboly letrehozasa
 		AntHill antHill = new AntHill();
 		antHill.setView(new AntHillView());
-		fields.get(1).addEntity(antHill);
+		fieldArray[15][10].addEntity(antHill);
+		addActiveObject(antHill);
 	}
 	
 	/**
 	 * Az ido leptetese
 	 */
 	public void tick() {
-
 		if (getFoodQuantity() == 0) {
 			gameOver();
-			return;
+			// return;
 		}
 		ArrayList<Active> copy = new ArrayList<Active>(activeObjects);
 		for (Active a : copy) {
