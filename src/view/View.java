@@ -2,12 +2,13 @@ package view;
 
 import java.awt.Graphics2D;
 
+import modell.Drawable;
 import modell.Entity;
 
 public class View {
 	
 	protected boolean changed = true;
-	Entity modell;
+	protected Drawable modell;
 	
 	public void change() {
 		this.changed = true;
@@ -25,7 +26,7 @@ public class View {
 		this.changed = false;
 	}
 	
-	public void setModell(Entity modell) {
+	public void setModell(Drawable modell) {
 		this.modell = modell;
 	}
 }

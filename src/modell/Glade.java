@@ -1,7 +1,9 @@
 package modell;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
+import view.FieldView;
 import view.View;
 
 public class Glade implements Drawable {
@@ -38,7 +40,75 @@ public class Glade implements Drawable {
 	/**
 	 * A jatek inditasa.
 	 */
-	public void start() {	}
+	public void start() {
+		// Palya magassaga es szelessege
+		int height = 20;
+		int width  = 20;
+
+		// Mezok letrehozasa
+		for (int row = 0; row < height; row++) {
+			for (int column = 0; column < width; column++) {
+				
+				// Uj mezo letrehozasa
+				Field field = new Field(this);
+
+				// Uj nezet letrehozasa
+				FieldView fieldView = new FieldView();
+				fieldView.setModell(field);
+				fieldView.setPosition(new Point(row, column));
+
+				// Nezet hozzarendelese a mezohoz
+				field.setView(fieldView);
+
+				// Tarolasa gladeben				
+				fields.add(field);
+			}
+		}
+
+		// Szomszedok megadasa		
+		for (Field field : fields) {
+
+			// Aktualis mezo indexe
+			int index = fields.indexOf(field);
+
+			// Northwest
+			try {
+				Field nw = fields.get(index - width - 1);
+				field.setNeighbour(Direction.NW, nw);
+		    // Nem letezo index
+			} catch (IndexOutOfBoundsException e) {}
+
+			// North
+			try {
+				Field n = fields.get(index - width);
+				field.setNeighbour(Direction.N, n);
+			} catch (IndexOutOfBoundsException e) {}
+
+			// Northeast
+			try {
+				Field ne = fields.get(index - width + 1);
+				field.setNeighbour(Direction.NE, ne);
+			} catch (IndexOutOfBoundsException e) {}
+
+			// Southwest
+			try {
+				Field sw = fields.get(index - 1);
+				field.setNeighbour(Direction.SW, sw);
+			} catch (IndexOutOfBoundsException e) {}
+
+			// South
+			try {
+				Field s = fields.get(index + width);
+				field.setNeighbour(Direction.S, s);
+			} catch (IndexOutOfBoundsException e) {}
+
+			// Southeast
+			try {
+				Field se = fields.get(index + 1);
+				field.setNeighbour(Direction.SE, se);
+			} catch (IndexOutOfBoundsException e) {}
+		}
+	}
 	
 	/**
 	 * Az ido leptetese
@@ -58,6 +128,8 @@ public class Glade implements Drawable {
 				e.printStackTrace();
 			}
 		}
+		
+		view.change();
 	}
 	
 	/**
@@ -73,13 +145,6 @@ public class Glade implements Drawable {
 		return foodQuantity;
 	}
 	
-	/**
-	 * Mezo hozzaadsa a palyahoz
-	 * @param field
-	 */
-	public void addField(Field field) {
-		fields.add(field);
-	}
 	
 	/**
 	 * Mezok visszaadasa.
