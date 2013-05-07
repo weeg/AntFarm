@@ -30,7 +30,8 @@ public class Design {
         JFrame frame = new JFrame("Ant Farm");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        
+        Glade glade = new Glade();
+        glade.start();       
  
         //Display the window.
         frame.pack();
