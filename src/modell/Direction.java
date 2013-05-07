@@ -1,5 +1,7 @@
 package modell;
 
+import java.util.Random;
+
 /**
  * Az irány enum. Ez segit a koordinacioban.
  */
@@ -55,5 +57,25 @@ public enum Direction {
 			default:
 				return N;
 		}
+	}
+	
+	public static Direction random() {
+		Random random = new Random();
+		switch (random.nextInt(6)) {
+		case 0:
+			return N;			
+		case 1:
+			return NE;
+		case 2:
+			return SE;
+		case 3:
+			return S;
+		case 4:
+			return SW;
+		case 5:
+			return NW;
+		default:
+			return N;
+	}
 	}
 }

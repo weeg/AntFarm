@@ -13,7 +13,7 @@ public class DeadEnd extends Entity {
 	 * Utkozes hangyaval, megoli a hangyat.
 	 * @param ant A hangya, amivel utkozik.
 	 */
-	public void collide(Ant ant) {		
+	public void collide(Ant ant) {
 		ant.kill();		
 	}
 	

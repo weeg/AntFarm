@@ -73,7 +73,9 @@ public class FieldView extends View {
 //    
     	Field field = (Field)modell;
     	for (Entity entity : field.getEntities()) {
-    		entity.getView().redraw(g);
+    		if (entity.getView() != null) {
+    			entity.getView().redraw(g);
+    		}
     	}
 		
 		this.changed = false;

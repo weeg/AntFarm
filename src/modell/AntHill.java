@@ -1,5 +1,7 @@
 package modell;
 
+import java.util.Random;
+
 import view.AntView;
 
 public class AntHill extends Entity implements Active {
@@ -31,8 +33,9 @@ public class AntHill extends Entity implements Active {
 	/**
 	 * A hangyaboly animalasa
 	 */
-	public void animate() {		
-		Ant ant = new Ant(position, Direction.NW);
+	public void animate() {
+		
+		Ant ant = new Ant(position, Direction.random());
 		ant.setView(new AntView());
 		position.addEntity(ant);
 		position.getGlade().addActiveObject(ant);

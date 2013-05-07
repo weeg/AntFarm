@@ -3,9 +3,7 @@ package modell;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import view.AntHillView;
-import view.FieldView;
-import view.View;
+import view.*;
 
 public class Glade implements Drawable {
 
@@ -43,8 +41,8 @@ public class Glade implements Drawable {
 	 */
 	public void start() {
 		// Palya magassaga es szelessege
-		int height = 20;
-		int width  = 20;
+		int height = 30;
+		int width  = 30;
 
 		Field[][] fieldArray = new Field[width][height];
 		
@@ -58,7 +56,7 @@ public class Glade implements Drawable {
 				// Uj nezet letrehozasa
 				FieldView fieldView = new FieldView();
 				fieldView.setModell(field);
-				fieldView.setCoord(new Point(i, j));
+				fieldView.setCoord(new Point(i - 1, j - 1));
 
 				// Nezet hozzarendelese a mezohoz
 				field.setView(fieldView);
@@ -67,44 +65,68 @@ public class Glade implements Drawable {
 			}
 		}
 
-		// Szomszedok megadasa
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
+				
+				Field field = fieldArray[i][j];
+				
+				// Szomszedok megadasa
 				// North
 				try {
-					fieldArray[i][j].setNeighbour(Direction.N, fieldArray[i][j - 1]);
+					field.setNeighbour(Direction.N, fieldArray[i][j - 1]);
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				// Northeast
 				try {
-					fieldArray[i][j].setNeighbour(Direction.NE, fieldArray[i + 1][j - (i + 1) % 2]);
+					field.setNeighbour(Direction.NE, fieldArray[i + 1][j - i % 2]);
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				// Souteast
 				try {
-					fieldArray[i][j].setNeighbour(Direction.SE, fieldArray[i + 1][j + i % 2]);
+					field.setNeighbour(Direction.SE, fieldArray[i + 1][j + (i + 1) % 2]);
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				// South
 				try {
-					fieldArray[i][j].setNeighbour(Direction.S, fieldArray[i][j + 1]);
+					field.setNeighbour(Direction.S, fieldArray[i][j + 1]);
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				// Southwest
 				try {
-					fieldArray[i][j].setNeighbour(Direction.SW, fieldArray[i - 1][j + i % 2]);
+					field.setNeighbour(Direction.SW, fieldArray[i - 1][j + (i + 1) % 2]);
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				// Northwest
 				try {
-					fieldArray[i][j].setNeighbour(Direction.NW, fieldArray[i - 1][j - (i + 1) % 2]);
+					field.setNeighbour(Direction.NW, fieldArray[i - 1][j - i % 2]);
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				
+				// Palyaszelek hozzaadasa
+				if (i == 0 || j == 0 || i == width - 1 || j == height - 1) {
+					DeadEnd deadEnd = new DeadEnd();
+					field.addEntity(deadEnd);
+				}
+				
 				// Hozzaadas a listahoz
-				fields.add(fieldArray[i][j]);
+				fields.add(field);
 			}
 		}		
 		
 		// Hangyaboly letrehozasa
 		AntHill antHill = new AntHill();
 		antHill.setView(new AntHillView());
-		fieldArray[15][10].addEntity(antHill);
+		fieldArray[5][10].addEntity(antHill);
 		addActiveObject(antHill);
+		
+		// Viz hozzaadasa
+		for (int i = 0; i < 2; i++){
+			Water water  = new Water();
+			water.setView(new WaterView());
+			fieldArray[5 + i * 3][8 + i * 5].addEntity(water);
+		}
+		
+		// Kavicsok hozzaadasa
+		for (int i = 0; i < 6; i++){
+			Stone stone  = new Stone();
+			stone.setView(new StoneView());
+			fieldArray[2 + (i % 5) * 2 + i][1 + (i % 3) + i * 2].addEntity(stone);
+		}
+		
 	}
 	
 	/**
