@@ -153,6 +153,7 @@ public class Field implements Drawable {
 	}
 	
 	public void setView(View view) {
+		view.setModell(this);
 		this.view = view;
 	}
 	

@@ -55,6 +55,7 @@ public abstract class Entity implements Drawable {
 	}
 	
 	public void setView(View view) {
+		view.setModell(this);
 		this.view = view;
 	}
 	
