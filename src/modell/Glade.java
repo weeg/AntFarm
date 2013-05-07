@@ -3,6 +3,7 @@ package modell;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import view.AntHillView;
 import view.FieldView;
 import view.View;
 
@@ -55,7 +56,7 @@ public class Glade implements Drawable {
 				// Uj nezet letrehozasa
 				FieldView fieldView = new FieldView();
 				fieldView.setModell(field);
-				fieldView.setPosition(new Point(row, column));
+				fieldView.setCoord(new Point(row, column));
 
 				// Nezet hozzarendelese a mezohoz
 				field.setView(fieldView);
@@ -108,6 +109,10 @@ public class Glade implements Drawable {
 				field.setNeighbour(Direction.SE, se);
 			} catch (IndexOutOfBoundsException e) {}
 		}
+		
+		AntHill antHill = new AntHill();
+		antHill.setView(new AntHillView());
+		fields.get(1).addEntity(antHill);
 	}
 	
 	/**

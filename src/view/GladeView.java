@@ -24,12 +24,11 @@ public class GladeView extends View {
 		
 		Glade glade = (Glade)modell;		
 		
+		g.clearRect(0, 0, 500, 500);
+
 		for (Field field : glade.getFields()) {
 			field.getView().redraw(g);
 		}	
-		
-		g.setColor(Color.BLUE);
-		g.fillRect(50, 50, 250, 250);
 		
 		this.changed = false;
 	}

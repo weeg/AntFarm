@@ -1,6 +1,7 @@
 package design;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -29,7 +30,8 @@ public class Design {
 	private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("Ant Farm");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);           
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(500, 500));
         
         final Glade glade = new Glade();
         glade.start();
