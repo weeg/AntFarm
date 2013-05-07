@@ -6,15 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import modell.Glade;
 import modell.Field;
+import view.FieldView;
 import view.GladeView;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel {
 
 	private Glade glade;
@@ -30,13 +33,26 @@ public class GamePanel extends JPanel {
 			public void keyTyped(KeyEvent arg0) { }
 			public void keyReleased(KeyEvent arg0) { }
 			public void keyPressed(KeyEvent key) {
-				System.out.println("a");
 				if (key.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					timer.stop();
 					frame.showMenu(true);
 				}
 			}
 		});
+        
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                	System.out.println("LEFT");
+                } else if (e.getButton() == MouseEvent.BUTTON3) {
+                	System.out.println("RIGHT");
+                }
+                Field selected = ((GladeView)glade.getView()).getField(e.getX(), e.getY());
+                System.out.println(selected);
+                ((FieldView)selected.getView()).sel = true;
+                ((FieldView)selected.getView()).change();
+            }
+        });
         
         // Timer
         ActionListener tickListener = new ActionListener() {

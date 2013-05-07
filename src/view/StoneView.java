@@ -6,7 +6,6 @@ import java.awt.geom.Ellipse2D;
 
 import modell.Field;
 import modell.Stone;
-import modell.Water;
 
 public class StoneView extends View {
 	public void redraw(Graphics2D g) {

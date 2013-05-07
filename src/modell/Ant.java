@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-import prototype.Commands;
-import prototype.Logger;
-import view.View;
-
 public class Ant extends Entity implements Active, Drawable {
 
 	/** Az irany, amerre a hangya megy */

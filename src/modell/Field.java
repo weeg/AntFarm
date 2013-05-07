@@ -3,8 +3,6 @@ package modell;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import prototype.Commands;
-import prototype.Logger;
 import view.View;
 
 public class Field implements Drawable {

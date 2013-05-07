@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Frame extends JFrame {
 	
 	private GamePanel gamePanel;

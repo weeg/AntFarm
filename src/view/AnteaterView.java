@@ -3,7 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import modell.Ant;
 import modell.Anteater;
 import modell.Field;
 

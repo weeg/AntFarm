@@ -6,7 +6,6 @@ import java.awt.geom.Ellipse2D;
 
 import modell.Field;
 import modell.Food;
-import modell.Log;
 
 public class FoodView extends View {
 

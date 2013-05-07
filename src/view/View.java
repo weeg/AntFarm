@@ -3,7 +3,6 @@ package view;
 import java.awt.Graphics2D;
 
 import modell.Drawable;
-import modell.Entity;
 
 public class View {
 	

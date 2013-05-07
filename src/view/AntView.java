@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 import modell.Ant;
-import modell.AntHill;
 import modell.Field;
 
 public class AntView extends View {

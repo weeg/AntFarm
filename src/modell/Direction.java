@@ -58,24 +58,12 @@ public enum Direction {
 				return N;
 		}
 	}
-	
+	/**
+	 * Egy veletlenszeru iranyt ad vissza.
+	 * @return Egy veletlen irany.
+	 */
 	public static Direction random() {
 		Random random = new Random();
-		switch (random.nextInt(6)) {
-		case 0:
-			return N;			
-		case 1:
-			return NE;
-		case 2:
-			return SE;
-		case 3:
-			return S;
-		case 4:
-			return SW;
-		case 5:
-			return NW;
-		default:
-			return N;
-	}
+		return Direction.N.turn(random.nextInt(6));
 	}
 }
