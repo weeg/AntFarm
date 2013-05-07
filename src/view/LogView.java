@@ -16,8 +16,8 @@ public class LogView extends View {
 		
 		g.setColor(new Color(140, 70, 20));
 		
-		double size = 10; 
-		g.fill(new Ellipse2D.Double(fieldView.position.x - size / 2, fieldView.position.y - size / 2, size, size));
+		int size = 10; 
+		g.fillRect(fieldView.position.x - size / 2, fieldView.position.y - size / 2, size, size);
 		
 		this.changed = false;
 	}	

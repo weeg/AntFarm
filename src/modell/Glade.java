@@ -28,6 +28,11 @@ public class Glade implements Drawable {
 	private ArrayList<Active> activeObjects = new ArrayList<Active>();
 	
 	/**
+	 * Hogy vege van-e a jateknak
+	 */
+	private boolean gameIsOver = false;
+	
+	/**
 	 * Az eltelt ido.
 	 */
 	private int time;
@@ -60,6 +65,7 @@ public class Glade implements Drawable {
 
 				// Nezet hozzarendelese a mezohoz
 				field.setView(fieldView);
+				fieldView.change();
 
 				fieldArray[i][j] = field;
 			}
@@ -124,9 +130,34 @@ public class Glade implements Drawable {
 		for (int i = 0; i < 6; i++){
 			Stone stone  = new Stone();
 			stone.setView(new StoneView());
-			fieldArray[2 + (i % 5) * 2 + i][1 + (i % 3) + i * 2].addEntity(stone);
+			fieldArray[2 + (i % 5) * 3 + i][1 + (i % 3) + i * 4].addEntity(stone);
 		}
 		
+		// Faronk hozzaadasa
+		Log log = new Log();
+		log.setView(new LogView());
+		fieldArray[15][18].addEntity(log);
+		
+		// Elelem hozzaadasa
+		Food food = new Food();
+		food.setQuantity(5);
+		food.setView(new FoodView());
+		fieldArray[25][15].addEntity(food);
+		addFood(food);
+		
+		// Hangyalesok hozzaadasa
+		for (int i = 0; i < 6; i++){
+			AntLion antlion  = new AntLion();
+			antlion.setView(new AntLionView());
+			fieldArray[5 + (i % 5) * 3 + 2 * i][2 - (i % 3) + i * 4].addEntity(antlion);
+		}
+		
+		// Hangyaszsun hozzaadasa
+		Anteater anteater = new Anteater();
+		anteater.setView(new AnteaterView());
+		anteater.setDirection(Direction.S);
+		fieldArray[12][0].addEntity(anteater);
+		addActiveObject(anteater);
 	}
 	
 	/**
@@ -134,8 +165,8 @@ public class Glade implements Drawable {
 	 */
 	public void tick() {
 		if (getFoodQuantity() == 0) {
-			gameOver();
-			// return;
+			gameIsOver = true;
+			return;
 		}
 		ArrayList<Active> copy = new ArrayList<Active>(activeObjects);
 		for (Active a : copy) {
@@ -159,7 +190,7 @@ public class Glade implements Drawable {
 		for(Food f : foods) {
 			foodQuantity += f.getQuantity();
 		}	
-
+		
 		return foodQuantity;
 	}
 	
@@ -219,9 +250,11 @@ public class Glade implements Drawable {
 	}
 	
 	/**
-	 * A jatek vege metodus.
+	 * Vege van-e a jateknak
 	 */
-	public void gameOver() {}
+	public boolean IsGameOver() {
+		return gameIsOver;
+	}
 	
 	/**
 	 * Aktiv elemek visszaadasa.

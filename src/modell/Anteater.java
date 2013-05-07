@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Anteater extends Entity implements Active {
 	
 	/** A hangyaszsun iranya */
-	private Direction direction;
+	private Direction direction = Direction.N;
 
 	/** Az aktualis palyaralepes soran mar megevett hangyak szama */
 	private int eatenAnts = 0;
@@ -15,7 +15,7 @@ public class Anteater extends Entity implements Active {
 	private final static int restTime = 10;
 	
 	/** Pihen-e a hangyaszsun */
-	private boolean isResting;
+	private boolean isResting = false;
 	
 	/** Lekuzdhetetlen akadalyba utkozott-e */
 	private boolean blocked;	
@@ -94,11 +94,16 @@ public class Anteater extends Entity implements Active {
 			if (blocked) {
 				changeDirection();
 			} else {
+				getView().change();
 				position.removeEntity(this);
 				target.addEntity(this);
+				getView().change();
 			}			
 		} else {
-			timeToRest--;			
+			timeToRest--;		
+			if (timeToRest <= 0) {
+				isResting = false;
+			}
 		}
 	}
 	
@@ -115,5 +120,9 @@ public class Anteater extends Entity implements Active {
 	 */
 	public Direction getDirection() {
 		return direction;
+	}
+	
+	public void setDirection(Direction d) {
+		direction = d;
 	}
 }

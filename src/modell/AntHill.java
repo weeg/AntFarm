@@ -30,14 +30,27 @@ public class AntHill extends Entity implements Active {
 		s.block();
 	}
 	
+	private double probability = 0.3;
+	
 	/**
 	 * A hangyaboly animalasa
 	 */
-	public void animate() {
+	public void animate() {		
 		
-		Ant ant = new Ant(position, Direction.random());
-		ant.setView(new AntView());
-		position.addEntity(ant);
-		position.getGlade().addActiveObject(ant);
+		if (probability < 0.5) {
+			probability += 0.01;
+		} else if (probability < 0.8) {
+			probability += 0.005;
+		} else if (probability < 0.9) {
+			probability += 0.001;
+		}
+		
+		Random random = new Random();
+		if (random.nextDouble() < probability) {
+			Ant ant = new Ant(position, Direction.random());
+			ant.setView(new AntView());
+			position.addEntity(ant);
+			position.getGlade().addActiveObject(ant);
+		}
 	}
 }

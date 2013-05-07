@@ -1,6 +1,7 @@
 package modell;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 
 import prototype.Commands;
@@ -64,7 +65,8 @@ public class Ant extends Entity implements Active, Drawable {
 	public void kill() {
 		position.removeEntity(this);
 		position.getGlade().removeActiveObject(this);
-		killed = true;		
+		killed = true;	
+		getView().change();
 	}
 	
 	/**
@@ -124,9 +126,14 @@ public class Ant extends Entity implements Active, Drawable {
 				Field f = position.getNeighbour(direction.turn(i));
 				
 				// Ha a szomszedos szagok nagyobbak, akkor forduljon csak el.
-				if (f != null && f.getOdorIntensity() > intensity) {
-					target = f;
-					intensity = target.getOdorIntensity();
+				if (f != null) {
+					Random random = new Random();
+					double p = random.nextDouble();
+					if (f.getOdorIntensity() > intensity || p > 0.95) {
+						target = f;
+						intensity = target.getOdorIntensity();
+					}			
+					
 				}
 			}
 		}
@@ -151,10 +158,14 @@ public class Ant extends Entity implements Active, Drawable {
 					// Eltarolja a megtett utat.
 					addFieldToMemory(position);
 				}
+				// a jelenlegi mezot frissitjuk
+				getView().change();
 				position.removeEntity(this);
 				target.addEntity(this);
+				// az uj mezot is frissitjuk
+				getView().change();
 			}							
-		}				
+		}		
 	}
 	
 	/**
@@ -188,7 +199,7 @@ public class Ant extends Entity implements Active, Drawable {
 	 */
 	public void collide(Anteater anteater) {
 		if (anteater.isHungry()) {
-			kill();
+			kill();			
 			anteater.increaseEatenAnts(this);
 		}		
 	}

@@ -16,11 +16,22 @@ public class AntView extends View {
 		Field field = ant.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
 		
-		g.setColor(Color.BLACK);
+		if (ant.hasFood()) {
+			g.setColor(Color.RED);
+		} else {
+			g.setColor(Color.BLACK);
+		}
 		
 		double size = 5; 
 		g.fill(new Ellipse2D.Double(fieldView.position.x - size / 2, fieldView.position.y - size / 2, size, size));
 		
 		this.changed = false;
+	}
+	
+	public void change() {
+		Ant ant = (Ant)modell;
+		Field field = ant.getPosition();
+		FieldView fieldView = (FieldView)field.getView();
+		fieldView.change();
 	}
 }

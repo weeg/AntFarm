@@ -24,47 +24,10 @@ public class Design {
 		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI();
+                Frame frame = new Frame();
+                frame.showMenu(false);
             }
         });		
 		
 	}
-	
-	private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("Ant Farm");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(500, 500));
-        
-        final Glade glade = new Glade();
-        glade.start();
-        glade.setView(new GladeView());
-        
-        final JPanel canvas = new JPanel() {
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                
-                Graphics2D g2 = (Graphics2D)g;
-                glade.getView().redraw(g2);
-             }
-        };
-        
-        // Timer 
-        int delay = 1000;
-        ActionListener tickListener = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                glade.tick();
-                glade.getView().redraw((Graphics2D)canvas.getGraphics());
-            }
-        };
-        new Timer(delay, tickListener).start();
-        
-        //canvas.repaint();
-        frame.add(canvas, BorderLayout.CENTER);
- 
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
 }

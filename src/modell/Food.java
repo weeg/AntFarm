@@ -70,6 +70,14 @@ public class Food extends Entity {
 	}
 	
 	/**
+	 * Beallitja az elelem mennyiseget
+	 * @param quantity Az elelem mennyisege
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+	/**
 	 * Hozzaad a listahoz egy uj elelemszagot.
 	 * @param foodOdor Az elelemszag.
 	 */
