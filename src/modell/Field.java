@@ -7,7 +7,7 @@ import prototype.Commands;
 import prototype.Logger;
 import view.View;
 
-public class Field {
+public class Field implements Drawable {
 	
 	/** A tisztas, amin van a mezo */
 	private Glade glade;
@@ -22,7 +22,7 @@ public class Field {
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	/** Renderelo nezet hozzaasa */
-	private View view;
+	protected View view;
 	
 	public Field() {}
 	
@@ -33,11 +33,6 @@ public class Field {
 	public Field(Glade glade) {
 		this.glade = glade;
 	}
-	
-	public void setView(View view) {
-		this.view = view;
-	}
-	
 	
 	/**
 	 * Az adott iranyban levo szomszed megadasa.
@@ -155,5 +150,13 @@ public class Field {
 	 */
 	public Glade getGlade() {
 		return glade;
+	}
+	
+	public void setView(View view) {
+		this.view = view;
+	}
+	
+	public View getView() {
+		return view;
 	}
 }

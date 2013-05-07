@@ -5,12 +5,12 @@ import view.View;
 /**
  * Az entitas objektum. 
  */
-public abstract class Entity {
+public abstract class Entity implements Drawable {
 	
 	/** A mezo, amin az entitas van */
 	protected Field position;
 	
-	public View view;
+	protected View view;
 	
 	/**
 	 * Visszadja az entitas poziciojat.

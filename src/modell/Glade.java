@@ -2,7 +2,9 @@ package modell;
 
 import java.util.ArrayList;
 
-public class Glade {
+import view.View;
+
+public class Glade implements Drawable {
 
 	/**
 	 * A mezoket tarolo lista.
@@ -28,6 +30,8 @@ public class Glade {
 	 * Az eltelt ido.
 	 */
 	private int time;
+	
+	protected View view;
 	
 	public Glade() {}
 	
@@ -142,5 +146,13 @@ public class Glade {
 	 */
 	public ArrayList<Active> getActiveObjects() {
 		return activeObjects;
+	}
+	
+	public void setView(View view) {
+		this.view = view;
+	}
+	
+	public View getView() {
+		return view;
 	}
 }
