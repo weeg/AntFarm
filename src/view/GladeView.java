@@ -2,8 +2,6 @@ package view;
 
 import java.util.ArrayList;
 
-
-
 public class GladeView extends View {
 	
 	// TODO: Valszeg csak a mezoket kellene eltarolni, vagy azokat meg kulon
