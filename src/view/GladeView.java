@@ -1,6 +1,11 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
+
+import modell.Field;
+import modell.Glade;
 
 public class GladeView extends View {
 	
@@ -13,5 +18,19 @@ public class GladeView extends View {
 	
 	public ArrayList<View> getViews() {
 		return views;
+	}
+	
+	public void redraw(Graphics2D g) {
+		
+		Glade glade = (Glade)modell;		
+		
+		for (Field field : glade.getFields()) {
+			field.getView().redraw(g);
+		}	
+		
+		g.setColor(Color.BLUE);
+		g.fillRect(50, 50, 250, 250);
+		
+		this.changed = false;
 	}
 }
