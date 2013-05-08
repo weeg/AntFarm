@@ -31,6 +31,7 @@ public class AntKillerSpray extends Spray {
 				Poison poison = new Poison();
 				field.addEntity(poison);
 				glade.addActiveObject(poison);
+				poison.getView().change();
 			}		
 			
 			quantity--;

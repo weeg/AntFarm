@@ -367,7 +367,7 @@ public class Commands {
 			} else if (getObject(object) instanceof Spray) {
 				
 				Glade glade = getGlade();
-				glade.addSpray((Spray) getObject(object));
+				//glade.addSpray((Spray) getObject(object));
 			}
 		// Csak a mezohoz lehet elemet hozzarendelni
 		} else {

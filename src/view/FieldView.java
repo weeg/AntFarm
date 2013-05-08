@@ -23,9 +23,6 @@ public class FieldView extends View {
 	// Egy mezo merete pixelben
 	protected int size = 15;
 	
-	//TODO remove!!!
-	public boolean sel = false;
-	
 	/**
 	 * Mezo kozeppontjanak megadasa
 	 * @param point
@@ -65,12 +62,8 @@ public class FieldView extends View {
 	    					  (int)(ystart - m), 
 	    					  (int)(ystart - m), 
 	    					  (int)(ystart) };
-	    	//TODO: Remove!!!
-	    	if (!sel) {
-	    		g.setColor(new Color(34, 139, 34));
-	    	} else {
-	    		g.setColor(new Color(255, 139, 34));
-	    	}
+	    	
+    		g.setColor(new Color(34, 139, 34));
 	    	g.fillPolygon(xpoints, ypoints, 6);
 	    	
 	    	g.setColor(new Color(60, 179, 113));

@@ -1,5 +1,7 @@
 package modell;
 
+import view.PoisonView;
+
 /**
  * A mereg objektum.
  */
@@ -14,6 +16,7 @@ public class Poison extends Entity implements Active {
 	 * A mereg default konstruktora.
 	 */
 	public Poison() {
+		this.setView(new PoisonView());
 	}
 	
 	/**
@@ -33,6 +36,7 @@ public class Poison extends Entity implements Active {
 		if (TTL == 0) {
 			position.getGlade().removeActiveObject(this);
 			position.removeEntity(this);
+			this.getView().change();
 		}		
 	}
 	

@@ -48,8 +48,6 @@ public class GamePanel extends JPanel {
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     glade.aons.use(selected);
                 }
-                ((FieldView)selected.getView()).sel = true;
-                ((FieldView)selected.getView()).change();
             }
         });
         
