@@ -169,7 +169,10 @@ public class GamePanel extends JPanel {
     		killerSprayLabel.setText("Ant killer spray: " + 
         			glade.getAntKillerSpray().getQuantity());
     	}
-    	
+    	odorSprayLabel.repaint();
+    	killerSprayLabel.repaint();
+    	bestTimeLabel.repaint();
+    	timeLabel.repaint();
     }
     
     private void saveTime() {
