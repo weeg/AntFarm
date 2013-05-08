@@ -17,11 +17,8 @@ public class Glade implements Drawable {
 	 */
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	
-	/**
-	 * A spray-ket tarolo lista.
-	 */
-	private ArrayList<Spray> sprays = new ArrayList<Spray>();
-	
+	public AntKillerSpray aks = new AntKillerSpray(this);
+	public AntOdorNeutralizerSpray aons = new AntOdorNeutralizerSpray(this);
 	/**
 	 * Az aktiv elemek listaja.
 	 */
@@ -232,21 +229,6 @@ public class Glade implements Drawable {
 	 */
 	public ArrayList<Food> getFoods() {
 		return foods;
-	}
-	
-	/**
-	 * Egy spray hozzaadasa.
-	 * @param spray A spray.
-	 */
-	public void addSpray(Spray spray) {
-		sprays.add(spray);
-	}
-	
-	/**
-	 * Spray-k visszaadasa
-	 */
-	public ArrayList<Spray> getSprays() {
-		return sprays;
 	}
 	
 	/**

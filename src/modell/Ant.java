@@ -215,4 +215,12 @@ public class Ant extends Entity implements Active, Drawable {
 		poisened = true;
 		TTL = 3;
 	}
+	
+	/**
+	 * Visszaadja, hogy mergezett-e a hangya.
+	 * @return igaz ha a hangya mergezett.
+	 */
+	public boolean isPoisoned() {
+		return poisened;
+	}
 }

@@ -15,10 +15,12 @@ public class AntView extends View {
 		Field field = ant.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
 		
+		g.setColor(Color.BLACK);
 		if (ant.hasFood()) {
 			g.setColor(Color.RED);
-		} else {
-			g.setColor(Color.BLACK);
+		} 
+		if (ant.isPoisoned()) {
+			g.setColor(new Color(181,230,39));
 		}
 		
 		double size = 5; 

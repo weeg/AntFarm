@@ -42,13 +42,12 @@ public class GamePanel extends JPanel {
         
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                	System.out.println("LEFT");
+            	Field selected = ((GladeView)glade.getView()).getField(e.getX(), e.getY());
+            	if (e.getButton() == MouseEvent.BUTTON1) {
+                    glade.aks.use(selected);
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
-                	System.out.println("RIGHT");
+                    glade.aons.use(selected);
                 }
-                Field selected = ((GladeView)glade.getView()).getField(e.getX(), e.getY());
-                System.out.println(selected);
                 ((FieldView)selected.getView()).sel = true;
                 ((FieldView)selected.getView()).change();
             }

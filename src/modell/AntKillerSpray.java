@@ -1,6 +1,8 @@
 package modell;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AntKillerSpray extends Spray {
 	
@@ -24,14 +26,13 @@ public class AntKillerSpray extends Spray {
 	 * @param center Az a mezo, amire (es kore) fuj a felhasznalo a spray-el
 	 */
 	public void use(Field center) {				
-		
 		if (quantity > 0) {
-			ArrayList<Field> fields = center.getNeighbours(getRadius());
-			Poison poison = new Poison();
-			for (Field field : fields) {
+			Set<Field> fieldsSet = new HashSet<Field>(center.getNeighbours(getRadius()));
+			for (Field field : fieldsSet) {
+				Poison poison = new Poison();
 				field.addEntity(poison);
+				glade.addActiveObject(poison);
 			}		
-			glade.addActiveObject(poison);
 			
 			quantity--;
 		}

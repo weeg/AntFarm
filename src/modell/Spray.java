@@ -5,12 +5,12 @@ public abstract class Spray {
 	/**
 	 * A rendelekezesre allo fujasok szama.
 	 */
-	protected int quantity;
+	protected int quantity = 20;
 	
 	/**
 	 * A hatosugar merete.
 	 */
-	protected int radius;
+	protected int radius = 2;
 	
 	/**
 	 * A tisztas objektum.
