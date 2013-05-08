@@ -3,7 +3,6 @@ package view;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
 
 import modell.AntLion;
 import modell.Drawable;

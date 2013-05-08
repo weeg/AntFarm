@@ -10,6 +10,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -107,6 +113,9 @@ public class GamePanel extends JPanel {
                 if (glade.IsGameOver()) {
                 	JOptionPane.showMessageDialog(frame, "The game is over.");
                 	timer.stop();
+                	if (loadBestTime() < (int)time) {
+                		saveTime();
+                	}
                 	frame.showMenu(false);
                 }
             }
@@ -154,4 +163,28 @@ public class GamePanel extends JPanel {
     	
     }
     
+    private void saveTime() {
+    	FileWriter fw;
+		try {
+			fw = new FileWriter("time.txt");
+	    	BufferedWriter out = new BufferedWriter(fw);
+	    	out.write(new Integer((int) time).toString());
+	    	out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    private int loadBestTime() {
+    	int best = 0;
+    	Scanner scanner;
+		try {
+			scanner = new Scanner(new File("time.txt"));
+			best = scanner.nextInt();
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	return best;
+    }
 }
