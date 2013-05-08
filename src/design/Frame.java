@@ -33,20 +33,23 @@ public class Frame extends JFrame {
 	
 	public void showGame(boolean continueGame) {
 		if (menuPanel != null) {
-			remove(menuPanel);
+			remove(menuPanel);			
 		}
 		if (!continueGame) {
 			gamePanel = new GamePanel(this);
 		}
 	    add(gamePanel, BorderLayout.CENTER);
-	    gamePanel.setFocusable(true);
-	    gamePanel.requestFocusInWindow();
 	    validate();
+	    
+	    gamePanel.setFocusable(true);
+	    gamePanel.requestFocusInWindow();	    
+	    
 	    if (continueGame) {
 	    	gamePanel.resume();
 	    } else {
 	    	gamePanel.play();
 	    }
+
 	}
 
 }

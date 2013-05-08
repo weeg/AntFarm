@@ -133,7 +133,8 @@ public class Ant extends Entity implements Active, Drawable {
 				}
 			}
 		}
-
+		blocked = false;
+		
 		// Uj lista, hogy torlesnel ne legyen gond.
 		ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());
 		for (Entity e : copy) {

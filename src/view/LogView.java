@@ -3,21 +3,29 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import modell.Drawable;
 import modell.Field;
 import modell.Log;
 
-public class LogView extends View {
+public class LogView implements View {
+	
+	private Log log;
+	
 	public void redraw(Graphics2D g) {
 		
-		Log	log = (Log)modell;
+
 		Field field = log.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
 		
 		g.setColor(new Color(140, 70, 20));
 		
-		int size = 10; 
-		g.fillRect(fieldView.position.x - size / 2, fieldView.position.y - size / 2, size, size);
-		
-		this.changed = false;
+		Drawer.drawField(g, fieldView.getCoord().x, fieldView.getCoord().y, 
+				fieldView.getSize(), true);
+	}
+
+	public void change() { }
+
+	public void setModel(Drawable model) {
+		log = (Log)model;
 	}	
 }

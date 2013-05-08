@@ -3,12 +3,26 @@ package modell;
 import java.util.ArrayList;
 
 public class Stone extends Barricade {
+	
 	private int count;
+	
 	private boolean blocked;
+	private boolean killed;
+	
 	private Direction direction;
+	
 	public Stone() {
 		count = 0;
 		blocked = false;
+	}
+	
+	/**
+	 *  A kavics eltuntetese
+	 */
+	public void kill() {
+		position.removeEntity(this);
+		killed = true;	
+		getView().change();
 	}
 	
 	/**
@@ -42,12 +56,17 @@ public class Stone extends Barricade {
 		for(Entity e : copy) {
 			e.collide(this);
 		}
-		if (blocked) {
-			ae.block();
-		} else {
-			position.removeEntity(this);
-			target.addEntity(this);
-		}
+		
+		if (!killed) {
+			if (blocked) {
+				ae.block();
+			} else {
+				getView().change();
+				position.removeEntity(this);
+				target.addEntity(this);
+				getView().change();
+			}
+		}		
 	}
 	/**
 	 * Utkozes egy kaviccsal.

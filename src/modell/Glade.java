@@ -17,8 +17,9 @@ public class Glade implements Drawable {
 	 */
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	
-	public AntKillerSpray aks = new AntKillerSpray(this);
-	public AntOdorNeutralizerSpray aons = new AntOdorNeutralizerSpray(this);
+	private AntOdorNeutralizerSpray antOdorNeutralizerSpray;
+	private AntKillerSpray antKillerSpray;
+	
 	/**
 	 * Az aktiv elemek listaja.
 	 */
@@ -35,8 +36,6 @@ public class Glade implements Drawable {
 	private int time;
 	
 	protected View view;
-	
-	public Glade() {}
 	
 	/**
 	 * A jatek inditasa.
@@ -57,7 +56,7 @@ public class Glade implements Drawable {
 
 				// Uj nezet letrehozasa
 				FieldView fieldView = new FieldView();
-				fieldView.setModell(field);
+				fieldView.setModel(field);
 				fieldView.setCoord(new Point(i - 1, j - 1));
 
 				// Nezet hozzarendelese a mezohoz
@@ -118,26 +117,30 @@ public class Glade implements Drawable {
 		
 		// Viz hozzaadasa
 		for (int i = 0; i < 2; i++){
-			Water water  = new Water();
-			water.setView(new WaterView());
-			fieldArray[5 + i * 3][8 + i * 5].addEntity(water);
+			for (Field f : fieldArray[5 + (i * 2) * 7][5 + i * 5].getNeighbours(1)) {
+				Water water  = new Water();
+				water.setView(new WaterView());
+				f.addEntity(water);
+			}		
 		}
 		
 		// Kavicsok hozzaadasa
 		for (int i = 0; i < 6; i++){
 			Stone stone  = new Stone();
 			stone.setView(new StoneView());
-			fieldArray[2 + (i % 5) * 3 + i][1 + (i % 3) + i * 4].addEntity(stone);
+			fieldArray[7 + (i % 5) * 3 + i][3 + (i % 3) + i * 4].addEntity(stone);
 		}
 		
 		// Faronk hozzaadasa
-		Log log = new Log();
-		log.setView(new LogView());
-		fieldArray[15][18].addEntity(log);
+		for (Field f : fieldArray[20][23].getNeighbours(2)) {
+			Log log = new Log();
+			log.setView(new LogView());
+			f.addEntity(log);
+		}			
 		
 		// Elelem hozzaadasa
 		Food food = new Food();
-		food.setQuantity(5);
+		food.setQuantity(25);
 		food.setView(new FoodView());
 		fieldArray[25][15].addEntity(food);
 		addFood(food);
@@ -155,6 +158,18 @@ public class Glade implements Drawable {
 		anteater.setDirection(Direction.S);
 		fieldArray[12][0].addEntity(anteater);
 		addActiveObject(anteater);
+		
+		// Hangyaszagsemlegesito spray hozzaadasa
+		AntOdorNeutralizerSpray antOdorNeutralizerSpray = new AntOdorNeutralizerSpray(this);
+		antOdorNeutralizerSpray.setRadius(3);
+		antOdorNeutralizerSpray.setQuantity(20);
+		setAntOdorNeutralizerSpray(antOdorNeutralizerSpray);
+		
+		// Hangyairto spray hozzaadasa
+		AntKillerSpray antKillerSpray = new AntKillerSpray(this);
+		antKillerSpray.setRadius(3);
+		antKillerSpray.setQuantity(20);
+		setAntKillerSpray(antKillerSpray);
 	}
 	
 	/**
@@ -174,8 +189,6 @@ public class Glade implements Drawable {
 				e.printStackTrace();
 			}
 		}
-		
-		view.change();
 	}
 	
 	/**
@@ -231,6 +244,26 @@ public class Glade implements Drawable {
 		return foods;
 	}
 	
+	public View getView() {
+		return view;
+	}
+
+	public AntOdorNeutralizerSpray getAntOdorNeutralizerSpray() {
+		return antOdorNeutralizerSpray;
+	}
+
+	public void setAntOdorNeutralizerSpray(AntOdorNeutralizerSpray antOdorNeutralizerSpray) {
+		this.antOdorNeutralizerSpray = antOdorNeutralizerSpray;
+	}
+
+	public AntKillerSpray getAntKillerSpray() {
+		return antKillerSpray;
+	}
+
+	public void setAntKillerSpray(AntKillerSpray antKillerSpray) {
+		this.antKillerSpray = antKillerSpray;
+	}
+	
 	/**
 	 * Vege van-e a jateknak
 	 */
@@ -247,11 +280,8 @@ public class Glade implements Drawable {
 	}
 	
 	public void setView(View view) {
-		view.setModell(this);
+		view.setModel(this);
 		this.view = view;
 	}
-	
-	public View getView() {
-		return view;
-	}
+
 }

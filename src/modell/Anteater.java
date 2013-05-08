@@ -82,8 +82,10 @@ public class Anteater extends Entity implements Active {
 	public void animate() throws Exception{
 		
 		if (!isResting)
-		{
+		{			
 			Field target = position.getNeighbour(direction);
+			
+			blocked = false;
 			
 			// Uj lista, hogy torlesnel ne legyen gond.
 			ArrayList<Entity> copy = new ArrayList<Entity>(target.getEntities());

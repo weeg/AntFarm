@@ -8,7 +8,7 @@ public class AntOdor extends Odor implements Active {
 	 */
 	public AntOdor() {
 		// Hangyaszag alapertelmezettkent 3
-		setIntensity(3);
+		setIntensity(10);
 	}
 	
 	/**
@@ -20,7 +20,7 @@ public class AntOdor extends Odor implements Active {
 		this.position = position;
 		
 		// Hangyaszag alapertelmezettkent 3
-		setIntensity(3);
+		setIntensity(10);
 	}
 	
 	/**
@@ -33,6 +33,7 @@ public class AntOdor extends Odor implements Active {
 			position.removeOdor(this);
 			position.getGlade().removeActiveObject(this);
 		}
+		position.getView().change();
 	}
 	
 	/**

@@ -24,4 +24,11 @@ public class DeadEnd extends Entity {
 	public void collide(Anteater anteater) {
 		anteater.goRest();		
 	}
+	
+	/**
+	 * Utkozes kaviccsal, eltunteti a kavicsot
+	 */
+	public void collide(Stone stone) {
+		stone.kill();
+	}
 }

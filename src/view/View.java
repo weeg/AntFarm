@@ -4,28 +4,11 @@ import java.awt.Graphics2D;
 
 import modell.Drawable;
 
-public class View {
+public interface View {
 	
-	protected boolean changed = true;
-	protected Drawable modell;
+	public void change();	
 	
-	public void change() {
-		this.changed = true;
-	}
+	public void redraw(Graphics2D g);
 	
-	/**
-	 * TODO: lehet inkabb egy listaba kellene belerakni a valtozott elemeket
-	 * @return
-	 */
-	public boolean isChanged() {
-		return changed;
-	}
-	
-	public void redraw(Graphics2D g) {
-		this.changed = false;
-	}
-	
-	public void setModell(Drawable modell) {
-		this.modell = modell;
-	}
+	public void setModel(Drawable model);
 }

@@ -11,6 +11,7 @@ public class FoodOdor extends Odor {
 	 */
 	public void evaporate() {
 		position.removeOdor(this);
+		position.getView().change();
 	}
 	
 	/**

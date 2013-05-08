@@ -27,9 +27,9 @@ public class Food extends Entity {
 		this.position = position;
 		
 		// Kajaszagok szetszorasa
-		for (int radius = 0; radius <= quantity; radius++){
+		for (int radius = 0; radius <= (quantity / 5); radius++){
 			ArrayList<Field> neighbours = position.getNeighbours(radius);
-			int intensity               = quantity - radius + 1;
+			int intensity               = quantity - radius * 5 + 1;
 			
 			// Szomszedok vegigiteralasa
 			for (Field neighbour: neighbours) {

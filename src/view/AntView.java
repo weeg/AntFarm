@@ -5,13 +5,14 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 import modell.Ant;
+import modell.Drawable;
 import modell.Field;
 
-public class AntView extends View {
+public class AntView implements View {
 
+	private Ant ant;
+	
 	public void redraw(Graphics2D g) {
-		
-		Ant ant = (Ant)modell;
 		Field field = ant.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
 		
@@ -24,15 +25,17 @@ public class AntView extends View {
 		}
 		
 		double size = 5; 
-		g.fill(new Ellipse2D.Double(fieldView.position.x - size / 2, fieldView.position.y - size / 2, size, size));
-		
-		this.changed = false;
+		g.fill(new Ellipse2D.Double(fieldView.getPosition().x - size / 2, 
+				fieldView.getPosition().y - size / 2, size, size));
 	}
 	
-	public void change() {
-		Ant ant = (Ant)modell;
+	public void change() {		
 		Field field = ant.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
 		fieldView.change();
+	}
+
+	public void setModel(Drawable model) {
+		ant = (Ant)model;
 	}
 }

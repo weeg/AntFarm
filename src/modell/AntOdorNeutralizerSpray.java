@@ -31,9 +31,9 @@ public class AntOdorNeutralizerSpray extends Spray {
 			for (Field field : fields) {						
 				for (Odor odor : (ArrayList<Odor>)field.getOdors().clone()) {
 					odor.neutralize();
-				}			
-			}
-			
+				}
+				field.getView().change();
+			}			
 			quantity--;
 		}
 	}

@@ -3,30 +3,35 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.util.ArrayList;
 
+import modell.Drawable;
 import modell.Entity;
 import modell.Field;
+import modell.Glade;
 
 
 
-public class FieldView extends View {
-
-	private ArrayList<View> views = new ArrayList();
+public class FieldView implements View {
+    
+	private Field field;
 	
 	/** A mezo koordinataja */
-	protected Point coord;
+	private Point coord;
 	
 	/** A mezo pozicioja a tisztason */
-	protected Point position = new Point();
+	private Point position = new Point();
 	
-	// Egy mezo merete pixelben
-	protected int size = 15;
+	/** Egy mezo merete pixelben */
+	private int size = 15;
 	
-	/**
-	 * Mezo kozeppontjanak megadasa
-	 * @param point
-	 */
+	public int getSize() {
+		return size;
+	}
+	
+	public Point getPosition() {
+		return position;
+	}
+	
 	public void setCoord(Point point) {
 		this.coord = point;
 		
@@ -37,46 +42,28 @@ public class FieldView extends View {
 	
 	public Point getCoord() {
 		return coord;
-	}
-	
-	public void setModell(Field modell) {
-		this.modell = modell;
-	}
+	}	
 	
 	public void redraw(Graphics2D g) {
-		if (changed) {
-			double xstart = -size / 2 + coord.x * 3 * size / 2;    		
-			int xpoints[] = { (int)(xstart), 
-							  (int)(xstart + size / 2), 
-							  (int)(xstart + 3 * size / 2), 
-							  (int)(xstart + 2 * size), 
-							  (int)(xstart + 3 * size / 2), 
-							  (int)(xstart + size / 2), 
-							  (int)(xstart) };
-			double m = size * Math.sqrt(3) / 2.0;
-			double ystart = coord.y * 2 * m + (coord.x % 2) * m;
-	    	int ypoints[] = { (int)(ystart), 
-	    					  (int)(ystart + m), 
-	    					  (int)(ystart + m), 
-	    					  (int)(ystart), 
-	    					  (int)(ystart - m), 
-	    					  (int)(ystart - m), 
-	    					  (int)(ystart) };
-	    	
-    		g.setColor(new Color(34, 139, 34));
-	    	g.fillPolygon(xpoints, ypoints, 6);
-	    	
-	    	g.setColor(new Color(60, 179, 113));
-	    	g.drawPolygon(xpoints, ypoints, 6);
-	    	    
-	    	Field field = (Field)modell;
-	    	for (Entity entity : field.getEntities()) {
-	    		if (entity.getView() != null) {
-	    			entity.getView().redraw(g);
-	    		}
-	    	}
-		}
+		int green = 130 + (field.getOdorIntensity() * 4) % 126;
 		
-		changed = false;
+		g.setColor(new Color(34, green, 34));
+		Drawer.drawField(g, coord.x, coord.y, size, true);
+
+    	for (Entity entity : field.getEntities()) {
+    		if (entity.getView() != null) {
+    			entity.getView().redraw(g);
+    		}
+    	}
+	}
+
+	public void change() {
+		Glade glade = field.getGlade();
+		GladeView gladeView = (GladeView)glade.getView();
+		gladeView.addChangedFieldView(this);
+	}
+
+	public void setModel(Drawable model) {
+		field = (Field)model;
 	}
 }

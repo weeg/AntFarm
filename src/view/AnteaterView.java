@@ -4,29 +4,32 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import modell.Anteater;
+import modell.Drawable;
 import modell.Field;
 
-public class AnteaterView extends View {
+public class AnteaterView implements View {
+	
+	private Anteater anteater;
 	
 	public void redraw(Graphics2D g) {
 	
-		Anteater anteater = (Anteater)modell;
 		Field field = anteater.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
 		
-		g.setColor(Color.CYAN);
+		g.setColor(new Color(165, 42, 42));
 		
 		int size = 16; 
-		g.fillRect(fieldView.position.x - size / 2, fieldView.position.y - size / 2, size, size);
-		
-		this.changed = false;
+		g.fillRect(fieldView.getPosition().x - size / 2, 
+				fieldView.getPosition().y - size / 2, size, size);
 	}
 	
 	public void change() {
-
-		Anteater anteater = (Anteater)modell;
 		Field field = anteater.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
 		fieldView.change();
+	}
+
+	public void setModel(Drawable model) {
+		anteater = (Anteater)model;
 	}
 }
