@@ -156,7 +156,7 @@ public class Glade implements Drawable {
 		Anteater anteater = new Anteater();
 		anteater.setView(new AnteaterView());
 		anteater.setDirection(Direction.S);
-		fieldArray[12][0].addEntity(anteater);
+		fieldArray[1][0].addEntity(anteater);
 		addActiveObject(anteater);
 		
 		// Hangyaszagsemlegesito spray hozzaadasa

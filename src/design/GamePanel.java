@@ -39,8 +39,10 @@ public class GamePanel extends JPanel {
 	private Frame frame;
 	
 	private double time = 0;
+	private int bestTime = 0;
 	private static final int delay = 500;
 	private JLabel timeLabel;
+	private JLabel bestTimeLabel;
 	
 	private JLabel odorSprayLabel;
 	private JLabel killerSprayLabel;
@@ -50,10 +52,15 @@ public class GamePanel extends JPanel {
 		
 		setLayout(null);
 		
-		timeLabel = new JLabel("");
+		timeLabel = new JLabel("Time: " + time);
 		timeLabel.setBounds(5, 0, 300, 30);
 		timeLabel.setForeground(Color.WHITE);
 		add(timeLabel);
+		
+		bestTimeLabel = new JLabel("Best time: " + loadBestTime());
+		bestTimeLabel.setBounds(5, 20, 300, 30);
+		bestTimeLabel.setForeground(Color.WHITE);
+		add(bestTimeLabel);
 		
 		odorSprayLabel = new JLabel("");
 		odorSprayLabel.setBounds(frame.getWidth() - 160, frame.getHeight() - 90, 300, 30);
@@ -142,14 +149,16 @@ public class GamePanel extends JPanel {
     	timer.start();
     }  
     
-    protected void paintComponent(Graphics g) {    	
-        super.paintComponent(g);
+    protected void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+    	
         GladeView gladeView = (GladeView)glade.getView();
         gladeView.redrawAll((Graphics2D)g);
     } 
     
     private void setLabels() {
     	timeLabel.setText("Time: " + String.valueOf(time));
+    	bestTimeLabel.setText("Best time: " + bestTime);
     	
     	if (glade.getAntOdorNeutralizerSpray() != null) {
     		odorSprayLabel.setText("Odor neutralizer spray: " + 
@@ -183,8 +192,9 @@ public class GamePanel extends JPanel {
 			best = scanner.nextInt();
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			
 		}
+		bestTime = best;
     	return best;
     }
 }

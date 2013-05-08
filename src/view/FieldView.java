@@ -9,8 +9,6 @@ import modell.Entity;
 import modell.Field;
 import modell.Glade;
 
-
-
 public class FieldView implements View {
     
 	private Field field;
