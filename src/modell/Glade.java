@@ -139,12 +139,15 @@ public class Glade implements Drawable {
 		}			
 		
 		// Elelem hozzaadasa
-		Food food = new Food();
-		food.setQuantity(25);
-		food.setView(new FoodView());
-		fieldArray[25][15].addEntity(food);
-		addFood(food);
-		
+		for (int i = 0; i < 2; i++) {
+			Food food = new Food();
+			food.setQuantity(25 - (i % 2) * 10);
+			food.setView(new FoodView());
+			fieldArray[25 - (i % 2) * 15][15 + (i % 2) * 8].addEntity(food);
+			addFood(food);
+			
+		}
+
 		// Hangyalesok hozzaadasa
 		for (int i = 0; i < 6; i++){
 			AntLion antlion  = new AntLion();
@@ -156,7 +159,7 @@ public class Glade implements Drawable {
 		Anteater anteater = new Anteater();
 		anteater.setView(new AnteaterView());
 		anteater.setDirection(Direction.S);
-		fieldArray[1][0].addEntity(anteater);
+		fieldArray[12][0].addEntity(anteater);
 		addActiveObject(anteater);
 		
 		// Hangyaszagsemlegesito spray hozzaadasa
