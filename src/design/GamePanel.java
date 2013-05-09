@@ -40,8 +40,10 @@ public class GamePanel extends JPanel {
 	
 	private double time = 0;
 	private int bestTime = 0;
-	private static final int delay = 500;
+	private static int delay = 512;
+	private static int originalDelay = 512;
 	private JLabel timeLabel;
+	private JLabel speedLabel;
 	private JLabel bestTimeLabel;
 	
 	private JLabel odorSprayLabel;
@@ -56,6 +58,11 @@ public class GamePanel extends JPanel {
 		timeLabel.setBounds(5, 0, 300, 30);
 		timeLabel.setForeground(Color.WHITE);
 		add(timeLabel);
+		
+		speedLabel = new JLabel("");
+		speedLabel.setBounds(frame.getWidth() - 160, 0, 300, 30);
+		speedLabel.setForeground(Color.WHITE);
+		add(speedLabel);
 		
 		bestTimeLabel = new JLabel("Best time: " + loadBestTime());
 		bestTimeLabel.setBounds(5, 20, 300, 30);
@@ -77,6 +84,16 @@ public class GamePanel extends JPanel {
 				if (key.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					timer.stop();
 					frame.showMenu(true);
+				} else if (key.getKeyCode() == KeyEvent.VK_UP) {
+					if (delay > 2) {
+						delay /= 2;
+						timer.setDelay(delay);
+					}
+				} else if (key.getKeyCode() == KeyEvent.VK_DOWN) {
+					if (delay < 1024) {	
+						delay *= 2;
+						timer.setDelay(delay);
+					}
 				}
 			}
 		});
@@ -112,7 +129,7 @@ public class GamePanel extends JPanel {
         ActionListener tickListener = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	
-            	time = time + delay / 1000.0;
+            	time = time + delay * getSpeed() / 1000.0;
             	setLabels();
             	
                 glade.tick();
@@ -128,6 +145,7 @@ public class GamePanel extends JPanel {
             }
         };
         timer = new Timer(delay, tickListener);
+        
 	}
     
     public void play() {
@@ -157,7 +175,7 @@ public class GamePanel extends JPanel {
     } 
     
     private void setLabels() {
-    	timeLabel.setText("Time: " + String.valueOf(time));
+    	timeLabel.setText("Time: " + (int)time);
     	bestTimeLabel.setText("Best time: " + bestTime);
     	
     	if (glade.getAntOdorNeutralizerSpray() != null) {
@@ -169,10 +187,23 @@ public class GamePanel extends JPanel {
     		killerSprayLabel.setText("Ant killer spray: " + 
         			glade.getAntKillerSpray().getQuantity());
     	}
+    	
+    	int speed = getSpeed();	
+    	if (speed == 1) {
+    		speedLabel.setText("");
+    	} else {
+    		speedLabel.setText("Speed: "+speed+"x");
+    	}
+    	
     	odorSprayLabel.repaint();
     	killerSprayLabel.repaint();
     	bestTimeLabel.repaint();
     	timeLabel.repaint();
+    	speedLabel.repaint();
+    }
+    
+    private int getSpeed() {
+    	return delay > originalDelay ? (delay / originalDelay) * -1 : (originalDelay / delay);	
     }
     
     private void saveTime() {
