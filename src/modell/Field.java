@@ -93,6 +93,7 @@ public class Field implements Drawable {
 	public void addOdor(Odor odor) {
 		odor.setPosition(this);
 		odors.add(odor);
+		getView().change();
 	}
 	
 	/**
@@ -109,6 +110,7 @@ public class Field implements Drawable {
 	 */
 	public void removeOdor(Odor odor) {
 		odors.remove(odor);
+		getView().change();
 	}
 
 	/**

@@ -15,8 +15,8 @@ public class FoodView implements View {
 	public void redraw(Graphics2D g) {
 		Field field = food.getPosition();
 		FieldView fieldView = (FieldView)field.getView();
-		
-		g.setColor(new Color(255, 125, 0));
+
+		g.setColor(new Color(255, 255, 0));
 		
 		double size = 15; 
 		g.fill(new Ellipse2D.Double(fieldView.getPosition().x - size / 2,

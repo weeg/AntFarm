@@ -12,6 +12,8 @@ public class Food extends Entity {
 	 */
 	private int quantity;
 	
+	private int foodOdorRadius = 0;
+	
 	/**
 	 * Az elelemhez tartozo szagok.
 	 */
@@ -25,30 +27,47 @@ public class Food extends Entity {
 	 */
 	public void setPosition(Field position) {
 		this.position = position;
-		
+		createFoodOdors();
+	}
+	
+	public void createFoodOdors() {
 		// Kajaszagok szetszorasa
-		for (int radius = 0; radius <= (quantity / 5); radius++){
-			ArrayList<Field> neighbours = position.getNeighbours(radius);
-			int intensity               = quantity - radius * 5 + 1;
+		if (foodOdorRadius != quantity / 5) {
 			
-			// Szomszedok vegigiteralasa
-			for (Field neighbour: neighbours) {
-				boolean hasFoodOdor = false;
-				// Egy szagot egy mezohoz csak 1x adjon hozza
-				for (FoodOdor fo: foodOdors) {
-					if (fo.getPosition() == neighbour) {
-						hasFoodOdor = true;
-					}
-				}
+			// Regi kajaszaok torlese
+			for (FoodOdor fo: foodOdors) {
+				Field f = fo.getPosition();
+				f.removeOdor(fo);
+			}
+			foodOdors.clear();
+			
+			// Uj hatosugar
+			foodOdorRadius = quantity / 5;
+			
+			// Uj kajaszagok lerakasa
+			for (int radius = 0; radius <= foodOdorRadius; radius++){
+				ArrayList<Field> neighbours = position.getNeighbours(radius);
+				int intensity               = quantity - radius * 5 + 1;
 				
-				// Uj kajaszag letrehozasa
-				if (!hasFoodOdor) {
-					FoodOdor foodOdor = new FoodOdor();
-					foodOdor.setPosition(neighbour);
-					foodOdor.setIntensity(intensity);
+				// Szomszedok vegigiteralasa
+				for (Field neighbour: neighbours) {
+					boolean hasFoodOdor = false;
+					// Egy szagot egy mezohoz csak 1x adjon hozza
+					for (FoodOdor fo: foodOdors) {
+						if (fo.getPosition() == neighbour) {
+							hasFoodOdor = true;
+						}
+					}
 					
-					neighbour.addOdor(foodOdor);
-					foodOdors.add(foodOdor);
+					// Uj kajaszag letrehozasa
+					if (!hasFoodOdor) {
+						FoodOdor foodOdor = new FoodOdor();
+						foodOdor.setPosition(neighbour);
+						foodOdor.setIntensity(intensity);
+						
+						neighbour.addOdor(foodOdor);
+						foodOdors.add(foodOdor);
+					}
 				}
 			}
 		}
@@ -59,7 +78,7 @@ public class Food extends Entity {
 	 * @return A meglévõ mennyiség.
 	 */
 	public int getQuantity() {
-		if (quantity == 0) {
+		if (quantity == 0 && !foodOdors.isEmpty()) {
 			for (FoodOdor fo : foodOdors) {
 				fo.evaporate();
 			}
@@ -93,6 +112,8 @@ public class Food extends Entity {
 	public void collide(Ant ant) {
 		ant.eat();
 		quantity--;
+		getView().change();
+		createFoodOdors();
 	}
 	/**
 	 * Utkozes egy kavicsot. Blokkolja a kavicsot.
