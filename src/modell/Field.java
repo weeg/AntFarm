@@ -64,8 +64,15 @@ public class Field implements Drawable {
 				Field neighbour = neighbours.get(dir.turn(i));
 				if (neighbour != null) {
 					ArrayList<Field> neighbour_list = neighbour.getNeighbours(radius-1);
-					list.addAll(neighbour_list);
-					list.add(neighbour);
+					// Egy szomszedot csak 1x adjon hozza
+					for (Field n : neighbour_list) {
+						if (!list.contains(n)) {
+							list.add(n);
+						}
+					}
+					if (!list.contains(neighbour)) {
+						list.add(neighbour);
+					}
 				}
 			}
 		}

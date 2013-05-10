@@ -14,7 +14,9 @@ public class GladeView implements View {
 	private ArrayList<FieldView> changedFields = new ArrayList<FieldView>();
 	
 	public void addChangedFieldView(FieldView fieldView) {
-		changedFields.add(fieldView);
+		if (!changedFields.contains(fieldView)) {
+			changedFields.add(fieldView);
+		}
 	}
 	
 	public void redrawAll(Graphics2D g) {
