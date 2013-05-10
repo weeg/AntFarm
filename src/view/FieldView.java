@@ -43,7 +43,10 @@ public class FieldView implements View {
 	}	
 	
 	public void redraw(Graphics2D g) {
-		int green = 130 + (field.getOdorIntensity() * 4) % 126;
+		int green = 130 + (field.getOdorIntensity() * 2);
+		if (green > 255) { 
+			green = 255; 
+		}
 		
 		g.setColor(new Color(34, green, 34));
 		Drawer.drawField(g, coord.x, coord.y, size, true);

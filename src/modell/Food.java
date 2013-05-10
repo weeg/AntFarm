@@ -47,7 +47,7 @@ public class Food extends Entity {
 			// Uj kajaszagok lerakasa
 			for (int radius = 0; radius <= foodOdorRadius; radius++){
 				ArrayList<Field> neighbours = position.getNeighbours(radius);
-				int intensity               = quantity - radius * 5 + 1;
+				int intensity = (quantity - radius * 5) * 3;
 				
 				// Szomszedok vegigiteralasa
 				for (Field neighbour: neighbours) {

@@ -18,9 +18,6 @@ public class AntOdor extends Odor implements Active {
 	public AntOdor(Field position) {
 		this();
 		this.position = position;
-		
-		// Hangyaszag alapertelmezettkent 3
-		setIntensity(10);
 	}
 	
 	/**
