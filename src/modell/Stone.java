@@ -4,11 +4,22 @@ import java.util.ArrayList;
 
 public class Stone extends Barricade {
 	
+	/**
+	 * Az utkozott kovek szama.
+	 */
 	private int count;
-	
+	/**
+	 * Blokkolva van-e a kavics.
+	 */
 	private boolean blocked;
+	/**
+	 * A kavics eltuntetesehez szukseges.
+	 */
 	private boolean killed;
 	
+	/**
+	 * A ko iranya.
+	 */
 	private Direction direction;
 	
 	public Stone() {
@@ -40,6 +51,10 @@ public class Stone extends Barricade {
 		blocked = true;
 	}
 	
+	/**
+	 * Visszaadja az utkozott kovek szamat.
+	 * @return az utkozott kovek szama
+	 */
 	public int getCount() {
 		return count;
 	}

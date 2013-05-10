@@ -2,12 +2,11 @@ package modell;
 
 public class AntOdor extends Odor implements Active {
 	
-	
 	/**
 	 * A hangyaszag default konstruktora
 	 */
 	public AntOdor() {
-		// Hangyaszag alapertelmezettkent 3
+		// Hangyaszag alapertelmezettkent 10
 		setIntensity(10);
 	}
 	

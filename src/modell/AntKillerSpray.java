@@ -1,6 +1,5 @@
 package modell;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,12 +32,8 @@ public class AntKillerSpray extends Spray {
 				field.addEntity(poison);
 				glade.addActiveObject(poison);
 				poison.getView().change();
-			}
-			
-			
+			}		
 			quantity--;
-		}
-		
+		}	
 	}
-
 }

@@ -124,6 +124,10 @@ public class Anteater extends Entity implements Active {
 		return direction;
 	}
 	
+	/**
+	 * Irany beallitasa.
+	 * @param d Az uj irany.
+	 */
 	public void setDirection(Direction d) {
 		direction = d;
 	}

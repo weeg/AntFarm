@@ -10,6 +10,7 @@ public abstract class Entity implements Drawable {
 	/** A mezo, amin az entitas van */
 	protected Field position;
 	
+	/** Renderelo nezet hozzaasa */
 	protected View view;
 	
 	/**
@@ -54,11 +55,19 @@ public abstract class Entity implements Drawable {
 		// A leszarmazottak fogjak implementalni szukseg eseten
 	}
 	
+	/**
+	 * Beallitja a renderelo nezetet.
+	 * @param view A kirajzolashoz hasznalt renderelo nezet.
+	 */
 	public void setView(View view) {
 		view.setModel(this);
 		this.view = view;
 	}
 	
+	/**
+	 * Visszaadja a renderelo nezetet.
+	 * @return a renderelo nezet. 
+	 */
 	public View getView() {
 		return view;
 	}

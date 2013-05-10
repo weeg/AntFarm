@@ -29,19 +29,35 @@ import modell.Spray;
 import view.FieldView;
 import view.GladeView;
 
+/**
+ *  A jatekter megjelenitesert feleleos panel.
+ */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel {
-
+	
+	/**
+	 * A glade objektum.
+	 */
 	private Glade glade;
-	
+	/**
+	 * Idozito.
+	 */
 	private Timer timer;
-	
+	/**
+	 * A fokeret.
+	 */
 	private Frame frame;
-	
+	/**
+	 * Az eddig eltelt ido.
+	 */
 	private double time = 0;
+	/**
+	 * A legjobb ido.
+	 */
 	private int bestTime = 0;
 	private static int delay = 512;
 	private static int originalDelay = 512;
+
 	private JLabel timeLabel;
 	private JLabel speedLabel;
 	private JLabel bestTimeLabel;
@@ -54,6 +70,7 @@ public class GamePanel extends JPanel {
 		
 		setLayout(null);
 		
+		// Cimkek elhelyezese.
 		timeLabel = new JLabel("Time: " + time);
 		timeLabel.setBounds(5, 0, 300, 30);
 		timeLabel.setForeground(Color.WHITE);
@@ -79,6 +96,7 @@ public class GamePanel extends JPanel {
 		killerSprayLabel.setForeground(Color.WHITE);
 		add(killerSprayLabel);
 		
+		// Billentyuk kezelese.
         addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent key) {
 				if (key.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -98,11 +116,13 @@ public class GamePanel extends JPanel {
 			}
 		});
         
+        // Az eger kezelese
         addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent click) {
 				Point p = click.getPoint();
 				Field center = null;
 				for (Field field : glade.getFields()) {
+					// A mezo kivalasztasa, amelyikre kattintottak.
 					FieldView fieldView = (FieldView)field.getView();
 					if (fieldView.getPosition().distance(p) < fieldView.getSize()) {
 						center = field;
@@ -110,6 +130,7 @@ public class GamePanel extends JPanel {
 					}
 				}
 				if (center != null) {
+					// Spray kivalasztasa, es alkalmazasa.
 					Spray spray = null;
 					if (click.getButton() == MouseEvent.BUTTON1) {
 						spray = glade.getAntKillerSpray();
@@ -148,6 +169,9 @@ public class GamePanel extends JPanel {
         
 	}
     
+	/**
+	 * A jatek elinditasa.
+	 */
     public void play() {
     	glade = new Glade();
     	GladeView gladeView = new GladeView();
@@ -160,6 +184,9 @@ public class GamePanel extends JPanel {
         
     }  
     
+    /**
+     * A jatek folytatasa.
+     */
     public void resume() {
     	GladeView gladeView = (GladeView)glade.getView();
     	gladeView.redrawAll((Graphics2D)getGraphics());    
@@ -174,6 +201,9 @@ public class GamePanel extends JPanel {
         gladeView.redrawAll((Graphics2D)g);
     } 
     
+    /**
+     * A cimkek szovegeinek beallitasa.
+     */
     private void setLabels() {
     	timeLabel.setText("Time: " + (int)time);
     	bestTimeLabel.setText("Best time: " + bestTime);
@@ -206,6 +236,9 @@ public class GamePanel extends JPanel {
     	return delay > originalDelay ? (delay / originalDelay) * -1 : (originalDelay / delay);	
     }
     
+    /**
+     * Az ido kimentese egy szoveg fajlba.
+     */
     private void saveTime() {
     	FileWriter fw;
 		try {
@@ -218,6 +251,10 @@ public class GamePanel extends JPanel {
 		}
     }
     
+    /**
+     * A legjobb ido betoltese a szoveg fajlbol.
+     * @return A legjobb ido.
+     */
     private int loadBestTime() {
     	int best = 0;
     	Scanner scanner;

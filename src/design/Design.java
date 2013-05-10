@@ -3,7 +3,8 @@ package design;
 public class Design {
 
 	/**
-	 * @param args
+	 * A grafikus felulet main fuggvenye.
+	 * @param args a szokasos argumentumok.
 	 */
 	public static void main(String[] args) {
 		

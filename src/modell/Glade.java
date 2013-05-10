@@ -17,7 +17,14 @@ public class Glade implements Drawable {
 	 */
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	
+	/**
+	 * A hangyaszagsemelegesito spray.
+	 */
 	private AntOdorNeutralizerSpray antOdorNeutralizerSpray;
+	
+	/**
+	 * A hangyairto spray.
+	 */
 	private AntKillerSpray antKillerSpray;
 	
 	/**
@@ -31,10 +38,8 @@ public class Glade implements Drawable {
 	private boolean gameIsOver = false;
 	
 	/**
-	 * Az eltelt ido.
+	 * A rendelelo nezet.
 	 */
-	private int time;
-	
 	protected View view;
 	
 	/**
@@ -247,22 +252,42 @@ public class Glade implements Drawable {
 		return foods;
 	}
 	
+	/**
+	 * Visszaadja a renderelo nezetet.
+	 * @return a renderelo nezet. 
+	 */
 	public View getView() {
 		return view;
 	}
-
+	
+	/**
+	 * Visszaadja a hangyaszagsemlegesito sprayt.
+	 * @return a hangyaszagsemlegesito spray.
+	 */
 	public AntOdorNeutralizerSpray getAntOdorNeutralizerSpray() {
 		return antOdorNeutralizerSpray;
 	}
-
+	
+	/**
+	 * Beallitja a hangyaszagsemlegesito sprayt.
+	 * @param antOdorNeutralizerSpray a hangyaszagsemlegesito spray.
+	 */
 	public void setAntOdorNeutralizerSpray(AntOdorNeutralizerSpray antOdorNeutralizerSpray) {
 		this.antOdorNeutralizerSpray = antOdorNeutralizerSpray;
 	}
-
+	
+	/**
+	 * Visszaadja a hangyairto sprayt.
+	 * @return a hangyairto spray.
+	 */
 	public AntKillerSpray getAntKillerSpray() {
 		return antKillerSpray;
 	}
-
+	
+	/**
+	 * Beallitja a hangyairto sprayt.
+	 * @param antKillerSpray a hangyairto spray.
+	 */
 	public void setAntKillerSpray(AntKillerSpray antKillerSpray) {
 		this.antKillerSpray = antKillerSpray;
 	}
@@ -282,6 +307,10 @@ public class Glade implements Drawable {
 		return activeObjects;
 	}
 	
+	/**
+	 * Beallitja a renderelo nezetet.
+	 * @param view A kirajzolashoz hasznalt renderelo nezet.
+	 */
 	public void setView(View view) {
 		view.setModel(this);
 		this.view = view;

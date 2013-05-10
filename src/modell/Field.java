@@ -159,11 +159,19 @@ public class Field implements Drawable {
 		return glade;
 	}
 	
+	/**
+	 * Beallitja a renderelo nezetet.
+	 * @param view A kirajzolashoz hasznalt renderelo nezet.
+	 */
 	public void setView(View view) {
 		view.setModel(this);
 		this.view = view;
 	}
 	
+	/**
+	 * Visszaadja a renderelo nezetet.
+	 * @return a renderelo nezet. 
+	 */
 	public View getView() {
 		return view;
 	}

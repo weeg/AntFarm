@@ -23,13 +23,12 @@ public class AntOdorNeutralizerSpray extends Spray {
 	 * A hangyaszag semlegesito spray hasznalata
 	 * @param center Az a mezo, amire (es kore) fuj a felhasznalo a spray-el
 	 */
-	@SuppressWarnings("unchecked")
 	public void use(Field center) {
-		
 		if (quantity > 0) {
 			ArrayList<Field> fields = center.getNeighbours(radius);
-			for (Field field : fields) {						
-				for (Odor odor : (ArrayList<Odor>)field.getOdors().clone()) {
+			for (Field field : fields) {
+				ArrayList<Odor> copy = new ArrayList<Odor>(field.getOdors());
+				for (Odor odor : copy) {
 					odor.neutralize();
 				}
 				field.getView().change();

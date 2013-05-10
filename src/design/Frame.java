@@ -5,6 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+/**
+ * Az alap frame a grafikus felulethez.
+ */
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
 	
@@ -22,6 +25,10 @@ public class Frame extends JFrame {
 	    setVisible(true);
 	}
 	
+	/**
+	 * A menu megjelentitese.
+	 * @param fromGame A menu mar jatek kozben jelenik meg, vagy nem.
+	 */
 	public void showMenu(boolean fromGame) {
 		if (gamePanel != null) {
 			remove(gamePanel);
@@ -31,6 +38,10 @@ public class Frame extends JFrame {
 		validate();
 	}
 	
+	/**
+	 * A jatekter megjelenítese.
+	 * @param continueGame A jatek koraban el volt inditva, vagy sem.
+	 */
 	public void showGame(boolean continueGame) {
 		if (menuPanel != null) {
 			remove(menuPanel);			
@@ -51,5 +62,4 @@ public class Frame extends JFrame {
 	    }
 
 	}
-
 }
