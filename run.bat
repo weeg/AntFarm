@@ -1,4 +1,4 @@
 @echo off
 cd bin
-java prototype.Prototype
+java design.Design
 cd ..
