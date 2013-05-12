@@ -18,7 +18,7 @@ public class PoisonView implements View {
 		
 		g.setColor(new Color(20,20,20,50));
 		
-		double size = 26; 
+		double size = 24; 
 		g.fill(new Ellipse2D.Double(fieldView.getPosition().x - size / 2, 
 				fieldView.getPosition().y - size / 2, size, size));
 	}
