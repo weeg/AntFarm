@@ -32,7 +32,7 @@ public class MenuPanel extends JPanel {
 	/**
 	 * Hatterkep
 	 */
-	private Image bg = new ImageIcon("src/resources/hatter.jpg").getImage();
+	private Image bg = new ImageIcon("resources/hatter.jpg").getImage();
 	
 	/**
 	 * Szines gombok letrehozasa
